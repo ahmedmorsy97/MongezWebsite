@@ -1,10 +1,5 @@
-/* 
-Name: Saleh Mohamed
-Date Created : 13/3/2018
-*/
-
 var mongoose = require('mongoose');
-
+//Payement info and suppier wallet
 var supplierSchema = mongoose.Schema({
     username: {
         type: String,

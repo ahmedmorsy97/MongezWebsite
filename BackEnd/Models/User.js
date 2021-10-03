@@ -1,5 +1,5 @@
 var mongoose = require('mongoose');
-
+// Payement info and user wallet
 var userSchema = mongoose.Schema({
     username: {
         type: String,

@@ -1,8 +1,3 @@
-/* 
-Name: Saleh Mohamed
-Date Created : 13/3/2018
-*/
-
 var mongoose = require('mongoose');
 
 var orderSchema = mongoose.Schema({
