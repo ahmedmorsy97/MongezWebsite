@@ -26,7 +26,7 @@ var userSchema = mongoose.Schema({
         lowercase: true
     },
     dateOfBirth: {
-        type: String,
+        type: Date,
         required: false,
     },
     firstname: {
