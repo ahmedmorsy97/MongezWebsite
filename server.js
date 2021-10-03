@@ -163,7 +163,6 @@ router.route('/supplier')
         newsupplier.blocked = false;
         newsupplier.imageURL = req.body.imageURL;
         newsupplier.nationalID = req.body.nationalID;
-        newsupplier.listOfProducts = req.body.listOfProducts;
 
 
         newsupplier.save(function(err) {

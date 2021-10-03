@@ -3,6 +3,7 @@
 //Register
 //View my Info
 //Edit my Info 
+//Add products 
 //View my products 
 //Edit my products info (Price,Photos,name,description,etc..)
 //View orders sent to me from users and view their status 
