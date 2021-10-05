@@ -29,7 +29,7 @@ db.once('open', function() {
 
 var Users = require('./BackEnd/Models/User');
 var Suppliers = require('./BackEnd/Models/Supplier');
-// const Supplier = require('./BackEnd/Models/Supplier');
+var Companys = require('./BackEnd/Models/Company');
 
 // ROUTES FOR OUR API
 // =============================================================================
@@ -58,7 +58,6 @@ router.route('/user')
         var newuser = new Users(); // create a new instance of the User model
         newuser.username = req.body.username;
         newuser.email = req.body.email;
-        newuser.address = req.body.address;
         newuser.mobileNumber = req.body.mobileNumber;
         newuser.dateOfBirth = req.body.dateOfBirth;
         newuser.firstname = req.body.firstname;
@@ -148,7 +147,7 @@ router.route('/supplier')
     // create a User (accessed at POST http://localhost:8080/supplier)
     .post(function(req, res) {
 
-        var newsupplier = new Suppliers(); // create a new instance of the User model
+        var newsupplier = new Suppliers(); // create a new instance of the Supplier model
         newsupplier.username = req.body.username;
         newsupplier.email = req.body.email;
         newsupplier.address = req.body.address;
@@ -206,13 +205,43 @@ router.route('/editSupplierInfo/:supplier_id')
 
                     console.log(err)
                 } else {
-                    res.json({ message: 'Username updated!' });
+                    res.json({ message: 'Supplier info updated!' });
 
                 }
             })
     });
+router.route('/company')
+    // create a User (accessed at POST http://localhost:8080/company)
+    .post(function(req, res) {
+
+        var newcompany = new Companys(); // create a new instance of the Company model
+        newuser.name = req.body.name;
+        newuser.email = req.body.email;
+        newuser.companyNumber = req.body.companyNumber;
 
 
+        newuser.save(function(err) {
+            if (err)
+                res.send(err);
+
+            res.json({ message: 'Company created!' });
+        });
+    })
+router.route('/editCompanyInfo/:company_id')
+    .patch(function(req, res) {
+
+        Companys.findByIdAndUpdate(req.params.user_id,
+            function(err, updatedcompany) {
+
+                if (err) {
+
+                    console.log(err)
+                } else {
+                    res.json({ message: 'Company info updated!' });
+
+                }
+            })
+    });
 
 // REGISTER OUR ROUTES -------------------------------
 app.use('/api', router);

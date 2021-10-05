@@ -1,5 +1,5 @@
 var mongoose = require('mongoose');
-// Payement info and user wallet
+// Payement info 
 var userSchema = mongoose.Schema({
     username: {
         type: String,
@@ -13,11 +13,9 @@ var userSchema = mongoose.Schema({
         trim: true,
         lowercase: true
     },
-    address: {
-        type: String,
-        required: true,
-        trim: true,
-        lowercase: true
+    company: {
+        type: mongoose.Types.ObjectId,
+        ref: "Company"
     },
     mobileNumber: {
         type: String,
@@ -41,16 +39,21 @@ var userSchema = mongoose.Schema({
         trim: true,
         lowercase: true
     },
-
     password: {
         type: String,
         required: true,
         trim: true,
     },
-    levelOfPurchase: {
+    employeeLevel: {
         type: String,
         required: true,
         trim: true,
+    },
+    wallet: {
+        type: Number,
+    },
+    limit: {
+        type: Number,
     },
     rating: {
         type: Number,
@@ -69,7 +72,7 @@ var userSchema = mongoose.Schema({
     },
     active: {
         type: Boolean,
-        default: false
+        default: true
     },
     imageURL: {
         type: String,
@@ -84,9 +87,6 @@ var userSchema = mongoose.Schema({
         ref: "Product"
     }],
 
-
-    // The customer sends the order to the supplier , the supplier gives a final price for the whole order and sends the price
-    // back to the customer if the customer agrees then the customer pays otehrwise the transaction is terminated.
 });
 
 module.exports = mongoose.model('User', userSchema);

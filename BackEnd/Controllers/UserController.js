@@ -8,5 +8,8 @@
 //View Supplier Info
 //Cancel Order if possible 
 //Send order to supplier 
-// View Order info and status
-// Rate supplier
+//View Order info and status
+//Rate supplier
+//Manager adds employees
+//Manager sets employee wallet money
+//Manager sets limit for each employee

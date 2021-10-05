@@ -1,5 +1,5 @@
 var mongoose = require('mongoose');
-//Payement info and suppier wallet
+//Payement info 
 var supplierSchema = mongoose.Schema({
     username: {
         type: String,
@@ -55,6 +55,10 @@ var supplierSchema = mongoose.Schema({
     blocked: {
         type: Boolean,
         default: false
+    },
+    active: {
+        type: Boolean,
+        default: true
     },
     imageURL: {
         type: String,

@@ -2,5 +2,6 @@
 //Block suppliers and users
 //Unblock supplier and users
 //Cancel user's orders
-//Add/Dedcut money from user's wallet
-//Add/Deduct moeny from supllier's wallet
+//Add money from user's wallet
+//Creates Company
+//Sets Manager
