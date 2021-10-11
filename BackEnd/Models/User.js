@@ -6,18 +6,20 @@ import jwt from "jsonwebtoken";
 import _ from "lodash";
 import { secretOrPrivateKey } from "../config";
 
-// Payement info 
+// Payement info missing 
 const AutoIncrement = mongoose_sequence(mongoose);
 const userSchema = mongoose.Schema({
     username: {
         type: String,
         required: true,
+        unique: true,
         trim: true,
         lowercase: true
     },
     email: {
         type: String,
         required: true,
+        unique: true,
         trim: true,
         lowercase: true
     },
@@ -94,29 +96,44 @@ const userSchema = mongoose.Schema({
         type: mongoose.Types.ObjectId,
         ref: "Product"
     }],
+    tokens: [{
+        access: {
+            type: String,
+            required: true,
+        },
+        token: {
+            type: String,
+            required: true,
+        },
+    }, ],
+    userId: {
+        type: Number,
+        index: true,
+        unique: true
+    },
 
 });
 
-userSchema.plugin(AutoIncrement, { inc_field: "userId" });
-userSchema.plugin(mongooseautopopulate);
+userSchema.plugin(AutoIncrement, { inc_field: "userId" }); // AutoIncrement Userid
+userSchema.plugin(mongooseautopopulate); // Return object when searching by ID
 
-userSchema.pre("save", async function () {
+userSchema.pre("save", async function() { //Before saving when creating user the password is hashed 
     if (this.isModified("password"))
         this.password = await hash(this.password, 10);
 });
-userSchema.pre("findOneAndUpdate", async function () {
+userSchema.pre("findOneAndUpdate", async function() { // Hashing password when updating it 
     if (this._update && this._update.password)
         this._update.password = await hash(this._update.password, 10);
 });
 
-userSchema.methods.toJSON = function () {
+userSchema.methods.toJSON = function() { // Return the user info as JASON without unwanted fields
     const user = this;
     const userObject = user.toObject();
 
     return _.omit(userObject, ["isBanned", "password", "tokens", "__v"]);
 };
 
-userSchema.methods.generateAuthToken = function () {
+userSchema.methods.generateAuthToken = function() { // Generated the user token to access the website when registering and login
     const user = this;
     const access = "auth";
     const token = jwt.sign({
@@ -125,7 +142,7 @@ userSchema.methods.generateAuthToken = function () {
         },
         secretOrPrivateKey
     );
-    user.tokens.push({
+    user.tokens.push({ // Array to be able to be used on multiple devices
         access,
         token,
     });
@@ -135,7 +152,7 @@ userSchema.methods.generateAuthToken = function () {
     });
 };
 
-userSchema.methods.removeToken = function (token) {
+userSchema.methods.removeToken = function(token) { // Remove token after the user logs out
     const user = this;
 
     return user.updateOne({
@@ -147,12 +164,12 @@ userSchema.methods.removeToken = function (token) {
     });
 };
 
-userSchema.statics.findByToken = function (token) {
+userSchema.statics.findByToken = function(token) {
     const User = this;
     let decoded;
 
     try {
-        decoded = jwt.verify(token, secretOrPrivateKey);
+        decoded = jwt.verify(token, secretOrPrivateKey); //verifies that the token is valid
     } catch (err) {
         return Promise.reject({
             message: err,
@@ -166,7 +183,7 @@ userSchema.statics.findByToken = function (token) {
     });
 };
 
-userSchema.statics.findByCredentials = function (email, password) {
+userSchema.statics.findByCredentials = function(email, password) { // Find using email
     const User = this;
 
     return User.findOne({
@@ -179,7 +196,7 @@ userSchema.statics.findByCredentials = function (email, password) {
         }
 
         return new Promise((resolve, reject) => {
-            bcrypt.compare(password, user.password, (err, res) => {
+            bcrypt.compare(password, user.password, (err, res) => { // Compares the two passwords both hashed 
                 if (res) {
                     resolve(user);
                 } else {
@@ -193,4 +210,4 @@ userSchema.statics.findByCredentials = function (email, password) {
     });
 };
 
-export const user = mongoose.model('User', userSchema);
+export const User = mongoose.model('User', userSchema);
