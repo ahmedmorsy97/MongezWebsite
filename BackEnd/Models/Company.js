@@ -1,6 +1,6 @@
-var mongoose = require('mongoose');
+import mongoose from "mongoose";
 
-var orderSchema = mongoose.Schema({
+const companySchema = mongoose.Schema({
     name: {
         type: String,
         required: true,
@@ -40,4 +40,4 @@ var orderSchema = mongoose.Schema({
 
 });
 
-module.exports = mongoose.model('Company', companySchema);
+export const company  = mongoose.model('Company', companySchema);

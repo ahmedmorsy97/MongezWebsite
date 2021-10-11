@@ -1,6 +1,6 @@
-var mongoose = require('mongoose');
+import mongoose from "mongoose";
 //Payement info 
-var supplierSchema = mongoose.Schema({
+const supplierSchema = mongoose.Schema({
     username: {
         type: String,
         required: true,
@@ -74,4 +74,4 @@ var supplierSchema = mongoose.Schema({
     // }]
 });
 
-module.exports = mongoose.model('Supplier', supplierSchema);
+export const supplier = mongoose.model('Supplier', supplierSchema);
