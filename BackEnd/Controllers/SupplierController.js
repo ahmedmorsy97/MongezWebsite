@@ -1,4 +1,6 @@
-import { Supplier } from "../Models/Supplier";
+import {
+    Supplier
+} from "../Models/Supplier";
 
 const router = Router();
 
@@ -21,9 +23,12 @@ router.post("/login", (req, res) => { // If email or password fields are not ent
 
     Supplier.findByCredentials(supplierData.email, supplierData.password) // Checks the username and password of supplier
         .then((supplier) => {
-            return supplier.generateAuthToken().then((token) => {
-                // res.header("x-auth", token).status(200).send(supplier);
-                res.status(200).send({ supplier: newsupplier, token: token });
+            return supplier.generateAuthToken();
+        }).then((token) => {
+            // res.header("x-auth", token).status(200).send(supplier);
+            res.status(200).send({
+                supplier: newsupplier,
+                token: token
             });
         })
         .catch((err) => {
@@ -34,7 +39,7 @@ router.post("/login", (req, res) => { // If email or password fields are not ent
 });
 //Register
 router.route('/register')
-    .post(function(req, res) {
+    .post(function (req, res) {
 
         var newsupplier = new Supplier(); // create a new instance of the Supplier model
         newsupplier.username = req.body.username;
@@ -53,7 +58,10 @@ router.route('/register')
         newsupplier.nationalID = req.body.nationalID;
 
         newsupplier.save().then(res => (newsupplier.generateAuthToken())).then(token => {
-                res.status(200).send({ supplier: newsupplier, token: token });
+                res.status(200).send({
+                    supplier: newsupplier,
+                    token: token
+                });
             })
             .catch((err) => {
                 res.status(400).send({
