@@ -113,7 +113,7 @@ const userSchema = mongoose.Schema({
     },
 
 });
-
+userSchema.index({ "$**": "text" }); // Add this for the search to work
 userSchema.plugin(AutoIncrement, { inc_field: "userId" }); // AutoIncrement Userid
 userSchema.plugin(mongooseautopopulate); // Return object when searching by ID
 
@@ -130,7 +130,8 @@ userSchema.methods.toJSON = function() { // Return the user info as JASON withou
     const user = this;
     const userObject = user.toObject();
 
-    return _.omit(userObject, ["isBanned", "password", "tokens", "__v"]);
+    // return _.omit(userObject, ["isBanned", "password", "tokens", "__v"]);
+    return _.omit(userObject, ["isBanned", "password", "__v"]);
 };
 
 userSchema.methods.generateAuthToken = function() { // Generated the user token to access the website when registering and login
@@ -209,5 +210,6 @@ userSchema.statics.findByCredentials = function(email, password) { // Find using
         });
     });
 };
+
 
 export const User = mongoose.model('User', userSchema);

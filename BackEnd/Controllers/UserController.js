@@ -1,4 +1,5 @@
 import { Router } from "express";
+import { authenticateuser } from "../../MiddleWare";
 import { User } from "../Models/User";
 
 const router = Router();
@@ -23,7 +24,7 @@ router.post("/login", (req, res) => { // If email or password fields are not ent
         .then((user) => {
             return user.generateAuthToken().then((token) => {
                 // res.header("x-auth", token).status(200).send(user);
-                res.status(200).send({ user: newuser, token: token });
+                res.status(200).send({ user: user, token: token });
             });
         })
         .catch((err) => {
@@ -56,18 +57,42 @@ router.post("/register", (req, res) => {
             res.status(400).send({
                 err: err.message ? err.message : err,
             });
-        });;
+        });
 })
 
-// router.post("/logout",)
+router.post("/logout", authenticateuser, (req, res) => {
+    req.user.removeToken(req.token).then(logoutres => res.status(200).send({ msg: "User logged out successfully" })).catch((err) => {
+        res.status(400).send({
+            err: err.message ? err.message : err,
+        });
+    });
+})
 
-//Logout
+router.get('/allusers', function(req, res) {
+    User.find(function(err, User) {
+        if (err)
+            res.send(err);
+        res.json(User);
+    });
+})
+
+router.get('/info', authenticateuser, (req, res) => {
+    res.status(200).send(req.user)
+})
+
+router.patch('/update', authenticateuser, (req, res) => {
+    User.findOneAndUpdate({ _id: req.user._id }, { $set: req.body }, { new: true }).then(updateduser => res.status(200).send({ user: updateduser }))
+})
+
+
+
+//Logout done 
 //Register done
 //login done
-//View my Info
-//Edit my Info 
-//View Products and sort or filter them according to price or location
-//Add to cart
+//View my Info done
+//Edit my Info done 
+//View Products and sort or filter them according to price or location 
+//Add to cart 
 //View Supplier Info
 //Cancel Order if possible 
 //Send order to supplier 

@@ -1,5 +1,6 @@
+import { authenticatesupplier } from "../../MiddleWare";
 import { Supplier } from "../Models/Supplier";
-
+import { Router } from "express";
 const router = Router();
 
 //Login 
@@ -63,12 +64,28 @@ router.route('/register')
 
     })
 
-//Login
-//Logout
-//Register
+router.post("/logout", authenticatesupplier, (req, res) => {
+    req.supplier.removeToken(req.token).then(logoutres => res.status(200).send({ msg: "Supplier logged out successfully" })).catch((err) => {
+        res.status(400).send({
+            err: err.message ? err.message : err,
+        });
+    });
+})
+router.get('/info', authenticatesupplier, (req, res) => {
+    res.status(200).send(req.supplier)
+})
+
+router.patch('/update', authenticatesupplier, (req, res) => {
+    Supplier.findOneAndUpdate({ _id: req.user._id }, { $set: req.body }, { new: true }).then(updatedsupplier => res.status(200).send({ supplier: updatedsupplier }))
+})
+
+
+//Login done
+//Logout done
+//Register done
 //View my Info
-//Edit my Info 
-//Add products 
+//Edit my Info done
+//Add products //done
 //View my products 
 //Edit my products info (Price,Photos,name,description,etc..)
 //View orders sent to me from users and view their status 

@@ -28,13 +28,13 @@ db.once('open', function() {
 //Models lives here
 
 // var Users = require('./BackEnd/Models/User');
-//var Suppliers = require('./BackEnd/Models/Supplier');
+// var Suppliers = require('./BackEnd/Models/Supplier');
 var Companys = require('./BackEnd/Models/Company');
 
 //Controllers lives here
 import { userController } from "./Backend/Controllers/UserController"
 import { supplierController } from "./Backend/Controllers/SupplierController"
-
+import { productController } from "./Backend/Controllers/ProductController"
 
 // ROUTES FOR OUR API
 // =============================================================================
@@ -72,51 +72,51 @@ router.use(function(req, res, next) {
 
 // // // on routes that end in /Users/:User_id
 // // // ----------------------------------------------------
-router.route('/user/:user_id')
+// router.route('/user/:user_id')
 
-.get(function(req, res) {
-    Users.findById(req.params.user_id, function(err, Users) {
-        if (err)
-            res.send(err);
-        res.json(Users);
-    });
-})
+// .get(function(req, res) {
+//     Users.findById(req.params.user_id, function(err, Users) {
+//         if (err)
+//             res.send(err);
+//         res.json(User);
+//     });
+// })
 
-router.route('/usercart/:user_id')
+// router.route('/usercart/:user_id')
 
-.get(function(req, res) {
-    Users.findById(req.params.user_id, function(err, Users) {
-        if (err)
-            res.send(err);
-        res.json(Users.cart);
-    });
-})
+// .get(function(req, res) {
+//     Users.findById(req.params.user_id, function(err, Users) {
+//         if (err)
+//             res.send(err);
+//         res.json(Users.cart);
+//     });
+// })
 
-router.route('/userorders/:user_id')
+// router.route('/userorders/:user_id')
 
-.get(function(req, res) {
-    Users.findById(req.params.user_id, function(err, Users) {
-        if (err)
-            res.send(err);
-        res.json(Users.orders);
-    });
-})
+// .get(function(req, res) {
+//     Users.findById(req.params.user_id, function(err, Users) {
+//         if (err)
+//             res.send(err);
+//         res.json(Users.orders);
+//     });
+// })
 
-router.route('/editUserInfo/:user_id')
-    .patch(function(req, res) {
+// router.route('/editUserInfo/:user_id')
+//     .patch(function(req, res) {
 
-        Users.findByIdAndUpdate(req.params.user_id, req.body,
-            function(err, updateduser) {
+//         Users.findByIdAndUpdate(req.params.user_id, req.body,
+//             function(err, updateduser) {
 
-                if (err) {
+//                 if (err) {
 
-                    console.log(err)
-                } else {
-                    res.json({ message: 'User info updated!' });
+//                     console.log(err)
+//                 } else {
+//                     res.json({ message: 'User info updated!' });
 
-                }
-            })
-    });
+//                 }
+//             })
+//     });
 
 
 
@@ -126,31 +126,31 @@ router.route('/editUserInfo/:user_id')
 
 // // // on routes that end in /Suppliers/:Supplier_id
 // // // ----------------------------------------------------
-router.route('/supplier/:supplier_id')
+// router.route('/supplier/:supplier_id')
 
-.get(function(req, res) {
-    Suppliers.findById(req.params.supplier_id, function(err, Suppliers) {
-        if (err)
-            res.send(err);
-        res.json(Suppliers);
-    });
-})
+// .get(function(req, res) {
+//     Suppliers.findById(req.params.supplier_id, function(err, Suppliers) {
+//         if (err)
+//             res.send(err);
+//         res.json(Suppliers);
+//     });
+// })
 
-router.route('/editSupplierInfo/:supplier_id')
-    .patch(function(req, res) {
+// router.route('/editSupplierInfo/:supplier_id')
+//     .patch(function(req, res) {
 
-        Suppliers.findByIdAndUpdate(req.params.user_id,
-            function(err, updatedsupplier) {
+//         Suppliers.findByIdAndUpdate(req.params.user_id,
+//             function(err, updatedsupplier) {
 
-                if (err) {
+//                 if (err) {
 
-                    console.log(err)
-                } else {
-                    res.json({ message: 'Supplier info updated!' });
+//                     console.log(err)
+//                 } else {
+//                     res.json({ message: 'Supplier info updated!' });
 
-                }
-            })
-    });
+//                 }
+//             })
+//     });
 router.route('/company')
     // create a User (accessed at POST http://localhost:8080/company)
     .post(function(req, res) {
@@ -188,6 +188,7 @@ router.route('/editCompanyInfo/:company_id')
 app.use('/api', router);
 app.use('/api/user', userController)
 app.use('/api/supplier', supplierController)
+app.use('/api/product', productController)
     // START THE SERVER
     // =============================================================================
 app.listen(port);

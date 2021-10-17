@@ -32,8 +32,13 @@ const productSchema = mongoose.Schema({
         type: Number,
 
     },
+    isremoved: {
+        type: Boolean,
+        default: false
+    }
 
 
 });
+productSchema.index({ "$**": "text" }); // Add this for the search to work
 
-export const product = mongoose.model('Product', productSchema);
+export const Product = mongoose.model('Product', productSchema);

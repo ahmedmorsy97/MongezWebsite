@@ -80,12 +80,23 @@ const supplierSchema = mongoose.Schema({
         index: true,
         unique: true
 
-    }
+    },
+    tokens: [{
+        access: {
+            type: String,
+            required: true,
+        },
+        token: {
+            type: String,
+            required: true,
+        },
+    }, ],
     // listOfProducts: [{
     //     type: mongoose.Types.ObjectId,
     //     ref: "Product"
     // }]
 });
+supplierSchema.index({ "$**": "text" }); // Add this for the search to work
 
 supplierSchema.plugin(AutoIncrement, { inc_field: "supplierId" }); // AutoIncrement supplierid
 supplierSchema.plugin(mongooseautopopulate); // Return object when searching by ID
