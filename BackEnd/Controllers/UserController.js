@@ -1,4 +1,4 @@
-import { Router } from "express";
+import { response, Router } from "express";
 import { authenticateuser } from "../../MiddleWare";
 import { User } from "../Models/User";
 
@@ -84,20 +84,34 @@ router.patch('/update', authenticateuser, (req, res) => {
     User.findOneAndUpdate({ _id: req.user._id }, { $set: req.body }, { new: true }).then(updateduser => res.status(200).send({ user: updateduser }))
 })
 
+router.patch('/addtocart', authenticateuser, (req, res) => {
+    User.findOneAndUpdate({ _id: req.user._id }, { $push: { cart: { product: req.body.productid, quantity: req.body.quantity } } }, { new: true }).then(updatedcart => res.status(200).send({ user: updatedcart }))
+})
+router.patch('/addexistingtocart', authenticateuser, (req, res) => {
+    User.findOneAndUpdate({ _id: req.user._id, "cart.product": req.body.productid }, { $inc: { "cart.$.quantity": req.body.quantity } }, { new: true }).then(updatedcart => res.status(200).send({ user: updatedcart }))
+})
 
+
+router.patch('/removefromcart/:product_id', authenticateuser, (req, res) => {
+    User.findOneAndUpdate({ _id: req.user._id }, { $pull: { cart: { _id: req.params.product_id } } }, { new: true }).then(updatedcart => res.status(200).send({ user: updatedcart }))
+})
+router.patch('/clearcart', authenticateuser, (req, res) => {
+    User.findOneAndUpdate({ _id: req.user._id }, { $set: { cart: [] } }, { new: true }).then(updatedcart => res.status(200).send({ user: updatedcart }))
+
+})
 
 //Logout done 
 //Register done
 //login done
 //View my Info done
 //Edit my Info done 
-//View Products and sort or filter them according to price or location 
-//Add to cart 
-//View Supplier Info
+//View Products and sort or filter them according to price or location done
+//Add to cart  done 
+//View Supplier Info done not tested
 //Cancel Order if possible 
 //Send order to supplier 
 //View Order info and status
-//Rate supplier
+//Rate supplier 
 //Manager adds employees
 //Manager sets employee wallet money
 //Manager sets limit for each employee

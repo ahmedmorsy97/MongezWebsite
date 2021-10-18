@@ -33,7 +33,7 @@ router.post("/create", authenticatesupplier, (req, res) => {
     newproduct.percentageDiscount = req.body.percentageDiscount;
     newproduct.priceDiscount = req.body.priceDiscount;
     newproduct.rating = req.body.rating;
-    newproduct.supplier = req.supplier._id;
+    newproduct.supplier = req.supplier._id; // HOW??
     newproduct.quantity = req.body.quantity;
     newproduct.save().then(product => {
             res.status(200).send({ product: newproduct });
@@ -44,5 +44,26 @@ router.post("/create", authenticatesupplier, (req, res) => {
             });
         });
 })
+router.get("/myproducts", authenticatesupplier, (req, res) => {
+    Product.find({ supplier: req.supplier._id }).then((products) => {
+            res.status(200).send(products)
+        })
+        .catch((err) => {
+            res.status(400).send({
+                err: err.message ? err.message : err,
+            });
+        });
+})
+router.patch("/editmyproduct", authenticatesupplier, (req, res) => {
+    Product.findOneAndUpdate({ _id: req.body._id, supplier: req.supplier._id }, { $set: req.body }, { new: true }).then(updatedproduct => res.status(200).send({ supplier: updatedproducts }))
+        .catch((err) => {
+            res.status(400).send({
+                err: err.message ? err.message : err,
+            });
+        });
+
+
+})
+
 
 export const productController = router;

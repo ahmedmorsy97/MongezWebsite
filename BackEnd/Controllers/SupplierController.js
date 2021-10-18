@@ -85,15 +85,30 @@ router.patch('/update', authenticatesupplier, (req, res) => {
     Supplier.findOneAndUpdate({ _id: req.user._id }, { $set: req.body }, { new: true }).then(updatedsupplier => res.status(200).send({ supplier: updatedsupplier }))
 })
 
+router.get('/viewsupplier/:supplier_id', (req, res) => {
+    Supplier.findById(req.params.supplier_id).then(supplier => {
+            if (!supplier) {
+                throw { err: "No supplier with this id" }
+            }
+            res.status(200).send(supplier);
+
+        })
+        .catch((err) => {
+            res.status(400).send({
+                err: err.message ? err.message : err,
+            });
+        });;
+})
+
 
 //Login done
 //Logout done
 //Register done
-//View my Info
+//View my Info done
 //Edit my Info done
-//Add products //done
-//View my products 
-//Edit my products info (Price,Photos,name,description,etc..)
+//Add products done
+//View my products done not tested
+//Edit my products info (Price,Photos,name,description,etc..) done not tested
 //View orders sent to me from users and view their status 
 //Send final price to user based on his order
 //Rate customer
