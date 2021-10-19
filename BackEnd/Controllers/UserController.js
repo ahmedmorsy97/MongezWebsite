@@ -108,9 +108,9 @@ router.patch('/clearcart', authenticateuser, (req, res) => {
 //View Products and sort or filter them according to price or location done
 //Add to cart  done 
 //View Supplier Info done not tested
-//Cancel Order if possible 
+//Cancel Order if possible done not tested
 //Send order to supplier 
-//View Order info and status
+//View Order info and status done not tested
 //Rate supplier 
 //Manager adds employees
 //Manager sets employee wallet money

@@ -54,8 +54,23 @@ router.get("/myproducts", authenticatesupplier, (req, res) => {
             });
         });
 })
+
+router.get('/viewproduct/:product_id', (req, res) => {
+    Product.findById(req.params.product_id).then(product => {
+            if (!product) {
+                throw { err: "No product with this id" }
+            }
+            res.status(200).send(product);
+
+        })
+        .catch((err) => {
+            res.status(400).send({
+                err: err.message ? err.message : err,
+            });
+        });;
+})
 router.patch("/editmyproduct", authenticatesupplier, (req, res) => {
-    Product.findOneAndUpdate({ _id: req.body._id, supplier: req.supplier._id }, { $set: req.body }, { new: true }).then(updatedproduct => res.status(200).send({ supplier: updatedproducts }))
+    Product.findOneAndUpdate({ _id: req.body._id, supplier: req.supplier._id }, { $set: req.body }, { new: true }).then(updatedproduct => res.status(200).send({ updatedproduct: updatedproduct }))
         .catch((err) => {
             res.status(400).send({
                 err: err.message ? err.message : err,
