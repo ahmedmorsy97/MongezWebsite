@@ -9,7 +9,7 @@ router.post("/createorder", authenticateuser, (req, res) => {
     neworder.products = req.body.products;
     neworder.status = "pending";
     neworder.price = req.body.price;
-    neworder.user = req.user; //WHYY??
+    neworder.user = req.user; //Not working but WHYY??
 
     neworder.save().then(res => {
             res.status(200).send({ user: neworder });
@@ -60,7 +60,8 @@ router.get('/vieworder/:order_id', (req, res) => {
 //create order done not tested
 //change order status done not tested
 //cancel order done not tested
-// view 
+
+
 
 //If order if from multiple sources some of order is delivered some not, part cancelled? 
 // How will the supplier view orders sent to him?
