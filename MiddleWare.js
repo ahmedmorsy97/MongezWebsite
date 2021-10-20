@@ -22,6 +22,58 @@ export const authenticateuser = (req, res, next) => {
         });
 };
 
+export const authenticateadmin = (req, res, next) => {
+    const token = req.headers.authorization.split("Bearer ")[1];
+
+    User.findByToken(token)
+        .then((user) => {
+            if (!user) {
+                throw {
+                    message: "No admin with this id !",
+                };
+            }
+            if (user.admin == false) {
+                throw {
+                    message: "Access Denied, Not and admin!",
+                };
+            }
+            req.user = user;
+            req.token = token;
+            next(); // to execute the coming instruction
+        })
+        .catch((err) => {
+            res.status(401).send({
+                err: err.message ? err.message : err,
+            });
+        });
+};
+export const authenticatemanager = (req, res, next) => {
+    const token = req.headers.authorization.split("Bearer ")[1];
+
+    User.findByToken(token)
+        .then((user) => {
+            if (!user) {
+                throw {
+                    message: "No admin with this id !",
+                };
+            }
+            if (user.employeeLevel == "Manager") {
+                throw {
+                    message: "Access Denied, Not and manager!",
+                };
+            }
+            req.user = user;
+            req.token = token;
+            next(); // to execute the coming instruction
+        })
+        .catch((err) => {
+            res.status(401).send({
+                err: err.message ? err.message : err,
+            });
+        });
+};
+
+
 export const authenticatesupplier = (req, res, next) => {
     const token = req.headers.authorization.split("Bearer ")[1];
 
@@ -42,3 +94,5 @@ export const authenticatesupplier = (req, res, next) => {
             });
         });
 };
+// Authenticate admin done not tested
+//Authenticate manager

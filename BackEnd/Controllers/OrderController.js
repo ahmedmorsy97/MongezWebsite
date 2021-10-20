@@ -12,7 +12,7 @@ router.post("/createorder", authenticateuser, (req, res) => {
     neworder.user = req.user; //Not working but WHYY??
 
     neworder.save().then(res => {
-            res.status(200).send({ user: neworder });
+            res.status(200).send({ order: neworder });
         })
         .catch((err) => {
             res.status(400).send({

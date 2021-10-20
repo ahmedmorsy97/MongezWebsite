@@ -112,4 +112,5 @@ router.get('/viewsupplier/:supplier_id', (req, res) => {
 //View orders sent to me from users and view their status 
 //Send final price to user based on his order
 //Rate customer
+
 export const supplierController = router;

@@ -85,7 +85,7 @@ router.patch('/update', authenticateuser, (req, res) => {
 })
 
 router.patch('/addtocart', authenticateuser, (req, res) => {
-    User.findOneAndUpdate({ _id: req.user._id }, { $push: { cart: { product: req.body.productid, quantity: req.body.quantity } } }, { new: true }).then(updatedcart => res.status(200).send({ user: updatedcart }))
+    User.findOneAndUpdate({ _id: req.user._id }, { $push: { cart: { product: req.body.productid, quantity: req.body.quantity } } }, { new: true }).then(updatedcart => res.status(200).send({ cart: updatedcart }))
 })
 router.patch('/addexistingtocart', authenticateuser, (req, res) => {
     User.findOneAndUpdate({ _id: req.user._id, "cart.product": req.body.productid }, { $inc: { "cart.$.quantity": req.body.quantity } }, { new: true }).then(updatedcart => res.status(200).send({ user: updatedcart }))
