@@ -1,10 +1,17 @@
 import mongoose from "mongoose";
+import { Product } from "./Product";
 
 const orderSchema = mongoose.Schema({
     products: [{
-        type: mongoose.Types.ObjectId,
-        ref: "Product"
-    }],
+        product: {
+            type: mongoose.Types.ObjectId,
+            ref: "Product"
+        },
+        status: {
+            type: String,
+            default: "Pending"
+        }
+    }, ],
     status: {
         type: String,
         required: true,

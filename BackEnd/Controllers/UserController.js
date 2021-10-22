@@ -99,6 +99,10 @@ router.patch('/clearcart', authenticateuser, (req, res) => {
     User.findOneAndUpdate({ _id: req.user._id }, { $set: { cart: [] } }, { new: true }).then(updatedcart => res.status(200).send({ user: updatedcart }))
 
 })
+router.patch('/rateuser/:user_id', authenticateuser, (req, res) => {
+    User.findOneAndUpdate({ _id: req.params.user_id }, { $inc: { rating: req.body.rating, numberOfRatings: 1 } }, { new: true }).then(updateduser => res.status(200).send({ updateduser: updateduser }))
+
+})
 
 //Logout done 
 //Register done
@@ -111,7 +115,7 @@ router.patch('/clearcart', authenticateuser, (req, res) => {
 //Cancel Order if possible done not tested
 //Send order to supplier 
 //View Order info and status done not tested
-//Rate supplier 
+//Rate supplier done not tested
 //Manager adds employees
 //Manager sets employee wallet money
 //Manager sets limit for each employee

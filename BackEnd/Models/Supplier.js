@@ -91,10 +91,11 @@ const supplierSchema = mongoose.Schema({
             required: true,
         },
     }, ],
-    // listOfProducts: [{
-    //     type: mongoose.Types.ObjectId,
-    //     ref: "Product"
-    // }]
+    listOfPendingOrders: [{
+        type: mongoose.Types.ObjectId,
+        ref: "Order"
+    }],
+
 });
 supplierSchema.index({ "$**": "text" }); // Add this for the search to work
 

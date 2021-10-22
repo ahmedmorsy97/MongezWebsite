@@ -1,4 +1,4 @@
-import { authenticatesupplier } from "../../MiddleWare";
+import { authenticatesupplier, authenticateuser } from "../../MiddleWare";
 import { Supplier } from "../Models/Supplier";
 import { Router } from "express";
 const router = Router();
@@ -100,6 +100,11 @@ router.get('/viewsupplier/:supplier_id', (req, res) => {
         });;
 })
 
+router.patch('/ratesupplier/:supplier_id', authenticateuser, (req, res) => {
+    Supplier.findOneAndUpdate({ _id: req.params.supplier_id }, { $inc: { rating: req.body.rating, numberOfRatings: 1 } }, { new: true }).then(updatedsupplier => res.status(200).send({ supplier: updatedsupplier }))
+
+})
+
 
 //Login done
 //Logout done
@@ -111,6 +116,6 @@ router.get('/viewsupplier/:supplier_id', (req, res) => {
 //Edit my products info (Price,Photos,name,description,etc..) done not tested
 //View orders sent to me from users and view their status 
 //Send final price to user based on his order
-//Rate customer
+//Rate customer //done not tested
 
 export const supplierController = router;

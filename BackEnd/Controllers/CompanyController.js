@@ -3,7 +3,7 @@ import { Company } from "../Models/Company";
 const router = Router();
 
 
-router.post("/creatcompany", authenticateadmin, (req, res) => {
+router.post("/createcompany", authenticateadmin, (req, res) => {
 
     var newcompany = new Company(); // create a new instance of the User model
     newcompany.name = req.body.name;
@@ -26,20 +26,6 @@ router.patch('/update', authenticateadmin, (req, res) => {
     Company.findOneAndUpdate({ _id: req.user._id }, { $set: req.body }, { new: true }).then(updatedcompany => res.status(200).send({ company: updatedcompany }))
 })
 
-router.patch('/addmanager', authenticateadmin, (req, res) => {
-    Company.findOneAndUpdate({ _id: req.user._id }, { $push: { employees: { employee: req.body.userid } } }, { new: true }).then(updatedlist => res.status(200).send({ list: updatedlist }))
-})
-
-router.patch('/addemployee', authenticatemanager, (req, res) => {
-    Company.findOneAndUpdate({ _id: req.user._id }, { $push: { employees: { employee: req.body.userid } } }, { new: true }).then(updatedlist => res.status(200).send({ list: updatedlist }))
-})
-router.patch('/removeemployee/:employee_id', authenticatemanager, (req, res) => {
-    User.findOneAndUpdate({ _id: req.employee_id }, { $pull: { employees: { _id: req.params.employee_id } } }, { new: true }).then(updatedlist => res.status(200).send({ list: updatedlist }))
-})
-
-router.patch('/removemanager/:manager_id', authenticateadmin, (req, res) => {
-    User.findOneAndUpdate({ _id: req.manager_id }, { $pull: { employees: { _id: req.params.manager_id } } }, { new: true }).then(updatedlist => res.status(200).send({ list: updatedlist }))
-})
 
 
 //Create company done not tested

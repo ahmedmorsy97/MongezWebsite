@@ -4,4 +4,4 @@
 //Cancel user's orders
 //Add money from user's wallet
 //Creates Company
-//Sets Manager
+//Sets Company Admin

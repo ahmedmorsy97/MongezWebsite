@@ -25,6 +25,14 @@ const companySchema = mongoose.Schema({
         trim: true,
         lowercase: true
     },
+    admins: [{
+        type: mongoose.Types.ObjectId,
+        ref: "User"
+    }],
+    managers: [{
+        type: mongoose.Types.ObjectId,
+        ref: "User"
+    }],
     employees: [{
         type: mongoose.Types.ObjectId,
         ref: "User"
@@ -40,4 +48,4 @@ const companySchema = mongoose.Schema({
 
 });
 
-export const company  = mongoose.model('Company', companySchema);
+export const company = mongoose.model('Company', companySchema);
