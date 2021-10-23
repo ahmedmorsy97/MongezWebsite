@@ -35,6 +35,7 @@ var Companys = require('./BackEnd/Models/Company');
 import { userController } from "./Backend/Controllers/UserController"
 import { supplierController } from "./Backend/Controllers/SupplierController"
 import { productController } from "./Backend/Controllers/ProductController"
+import { companyController } from "./BackEnd/Controllers/CompanyController";
 
 // ROUTES FOR OUR API
 // =============================================================================
@@ -189,6 +190,7 @@ app.use('/api', router);
 app.use('/api/user', userController)
 app.use('/api/supplier', supplierController)
 app.use('/api/product', productController)
+app.use('/api/company', companyController)
     // START THE SERVER
     // =============================================================================
 app.listen(port);

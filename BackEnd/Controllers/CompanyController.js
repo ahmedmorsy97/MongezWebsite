@@ -1,5 +1,7 @@
-const { authenticateadmin, authenticatemanager } = require("../../MiddleWare");
+import { authenticateadmin, authenticatemanager } from "../../MiddleWare";
 import { Company } from "../Models/Company";
+import { Router } from "express";
+// import { createCompanyAdmin } from "./UserController";
 const router = Router();
 
 
@@ -10,9 +12,9 @@ router.post("/createcompany", authenticateadmin, (req, res) => {
     newcompany.email = req.body.email;
     newcompany.address = req.body.address;
     newcompany.companyNumber = req.body.companyNumber;
-    newcompany.address = req.body.address;
 
-    newcompany.save().then(res => {
+
+    newcompany.save().then(companyres => {
             res.status(200).send({ company: newcompany });
         })
         .catch((err) => {
@@ -26,7 +28,17 @@ router.patch('/update', authenticateadmin, (req, res) => {
     Company.findOneAndUpdate({ _id: req.user._id }, { $set: req.body }, { new: true }).then(updatedcompany => res.status(200).send({ company: updatedcompany }))
 })
 
+router.post('/addCompanyAdmin/:company_id', authenticateadmin, (req, res) => {
 
+    Company.findOneAndUpdate({ _id: req.params.company_id }, { $push: { admins: req.userres._id } }, { new: true })
+        .then(updatedcompany => res.status(200).send({ company: updatedcompany }))
+
+    .catch((err) => {
+        res.status(400).send({
+            err: err.message ? err.message : err,
+        });
+    });
+})
 
 //Create company done not tested
 //Edit company done not tested

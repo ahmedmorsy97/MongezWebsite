@@ -32,6 +32,7 @@ export const authenticateadmin = (req, res, next) => {
                     message: "No admin with this id !",
                 };
             }
+
             if (user.admin == false) {
                 throw {
                     message: "Access Denied, Not and admin!",
