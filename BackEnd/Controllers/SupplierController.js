@@ -99,6 +99,13 @@ router.get('/viewsupplier/:supplier_id', (req, res) => {
             });
         });;
 })
+router.get('/allsuppliers', function(req, res) {
+    Supplier.find(function(err, Supplier) {
+        if (err)
+            res.send(err);
+        res.json(Supplier);
+    });
+})
 
 router.patch('/ratesupplier/:supplier_id', authenticateuser, (req, res) => {
     Supplier.findOneAndUpdate({ _id: req.params.supplier_id }, { $inc: { rating: req.body.rating, numberOfRatings: 1 } }, { new: true }).then(updatedsupplier => res.status(200).send({ supplier: updatedsupplier }))
@@ -116,6 +123,6 @@ router.patch('/ratesupplier/:supplier_id', authenticateuser, (req, res) => {
 //Edit my products info (Price,Photos,name,description,etc..) done not tested
 //View orders sent to me from users and view their status 
 //Send final price to user based on his order
-//Rate customer //done not tested
+//Rate customer done tested
 
 export const supplierController = router;

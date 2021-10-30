@@ -85,7 +85,7 @@ export const authenticateCompanyadmin = (req, res, next) => {
             }
             if (user.employeeLevel != "CompanyAdmin") {
                 throw {
-                    message: "Access Denied, Not a manager!",
+                    message: "Access Denied, Not a Company Admin!",
                 };
             }
             req.user = user;

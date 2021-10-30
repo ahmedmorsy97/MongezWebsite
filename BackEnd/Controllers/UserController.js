@@ -1,5 +1,5 @@
 import { response, Router } from "express";
-import { authenticateuser } from "../../MiddleWare";
+import { authenticateadmin, authenticateuser } from "../../MiddleWare";
 import { User } from "../Models/User";
 
 const router = Router();
@@ -103,43 +103,42 @@ router.patch('/rateuser/:user_id', authenticateuser, (req, res) => {
     User.findOneAndUpdate({ _id: req.params.user_id }, { $inc: { rating: req.body.rating, numberOfRatings: 1 } }, { new: true }).then(updateduser => res.status(200).send({ updateduser: updateduser }))
 
 })
-export const createCompanyAdmin = (req, res, next) => {
 
-        var newuser = new User(); // create a new instance of the User model
-        newuser.username = req.body.username;
-        newuser.email = req.body.email;
-        newuser.mobileNumber = req.body.mobileNumber;
-        newuser.firstname = req.body.firstname;
-        newuser.lastname = req.body.lastname;
-        newuser.password = req.body.password;
-        newuser.employeeLevel = "CompanyAdmin";
+//Logout done 
+//Register done
+//login done
+//View my Info done
+//Edit my Info done 
+//View Products and sort or filter them according to price or location done
+//Add to cart  done 
+//View Supplier Info done tested
+//View Order info and status done tested
+//Rate supplier done tested
 
-        newuser.save().then(userres => {
-                req.userres = userres;
-                next(userres);
-            })
-            .catch((err) => {
-                res.status(400).send({
-                    err: err.message ? err.message : err,
-                });
-            });
 
-    }
-    //Logout done 
-    //Register done
-    //login done
-    //View my Info done
-    //Edit my Info done 
-    //View Products and sort or filter them according to price or location done
-    //Add to cart  done 
-    //View Supplier Info done not tested
-    //Cancel Order if possible done not tested
-    //Send order to supplier 
-    //View Order info and status done not tested
-    //Rate supplier done not tested
-    //Manager adds employees
-    //Manager sets employee wallet money
-    //Manager sets limit for each employee
+//Manager sets employee wallet money
+//Manager sets limit for each employee
+//Send order to supplier
+//Cancel Order if possible done not tested
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 export const userController = router;
