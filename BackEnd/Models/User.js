@@ -23,6 +23,10 @@ const userSchema = mongoose.Schema({
         trim: true,
         lowercase: true
     },
+    createdBy: {
+        type: mongoose.Types.ObjectId,
+        ref: "User"
+    },
     company: {
         type: mongoose.Types.ObjectId,
         ref: "Company"

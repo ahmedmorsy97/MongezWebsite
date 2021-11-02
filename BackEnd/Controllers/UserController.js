@@ -1,5 +1,5 @@
 import { response, Router } from "express";
-import { authenticateadmin, authenticateuser } from "../../MiddleWare";
+import { authenticateadmin, authenticatemanager, authenticateuser } from "../../MiddleWare";
 import { User } from "../Models/User";
 
 const router = Router();
@@ -34,7 +34,7 @@ router.post("/login", (req, res) => { // If email or password fields are not ent
         });
 });
 
-router.post("/register", (req, res) => {
+router.post("/register", authenticatemanager, (req, res) => {
 
     var newuser = new User(); // create a new instance of the User model
     newuser.username = req.body.username;
@@ -50,6 +50,7 @@ router.post("/register", (req, res) => {
     newuser.imageURL = req.body.imageURL;
     newuser.nationalID = req.body.nationalID;
     newuser.employeeLevel = req.body.employeeLevel;
+    newuser.createdBy = req.user._id;
     newuser.save().then(res => (newuser.generateAuthToken())).then(token => {
             res.status(200).send({ user: newuser, token: token });
         })
@@ -103,6 +104,14 @@ router.patch('/rateuser/:user_id', authenticateuser, (req, res) => {
     User.findOneAndUpdate({ _id: req.params.user_id }, { $inc: { rating: req.body.rating, numberOfRatings: 1 } }, { new: true }).then(updateduser => res.status(200).send({ updateduser: updateduser }))
 
 })
+router.patch('setemployeewallet/:employee_id', authenticatemanager, (req, res) => {
+    User.findOneAndUpdate({ _id: req.params.employee_id }, { $inc: { wallet: req.body.wallet } }, { new: true }).then(updateduser => res.status(200).send({ updateduser: updateduser }))
+})
+
+router.patch('setemployeelimit/:employee_id', authenticatemanager, (req, res) => {
+    User.findOneAndUpdate({ _id: req.params.employee_id }, { $set: { limit: req.body.limit } }, { new: true }).then(updateduser => res.status(200).send({ updateduser: updateduser }))
+})
+
 
 //Logout done 
 //Register done
@@ -114,25 +123,15 @@ router.patch('/rateuser/:user_id', authenticateuser, (req, res) => {
 //View Supplier Info done tested
 //View Order info and status done tested
 //Rate supplier done tested
+//Manager sets employee wallet money done not tested
+//Manager sets limit for each employee done not tested
 
-
-//Manager sets employee wallet money
-//Manager sets limit for each employee
-//Send order to supplier
+//Send order to supplier done not tested
 //Cancel Order if possible done not tested
 
 
 
-
-
-
-
-
-
-
-
-
-
+//Does the manager create the employee account or the Company Admin?
 
 
 

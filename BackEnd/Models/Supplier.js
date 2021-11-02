@@ -75,6 +75,14 @@ const supplierSchema = mongoose.Schema({
         type: String,
         required: false
     },
+    taxNumber: {
+        type: String,
+        required: false
+    },
+    officialDocuments: {
+        type: String,
+        required: false
+    },
     supplierId: {
         type: Number,
         index: true,

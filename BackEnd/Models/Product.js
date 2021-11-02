@@ -9,16 +9,16 @@ const productSchema = mongoose.Schema({
         type: String,
         required: false
     }],
-    price: {
-        type: Number,
+    priceRange: [{
+        type: String,
         required: false
-    },
-    percentageDiscount: {
-        type: Number,
-    },
-    priceDiscount: {
-        type: Number,
-    },
+    }],
+    // percentageDiscount: { //Edit this
+    //     type: Number,
+    // },
+    // priceDiscount: {
+    //     type: Number,
+    // },
     rating: {
         type: Number,
         required: false

@@ -45,6 +45,14 @@ const companySchema = new mongoose.Schema({
         type: Boolean,
         default: true
     },
+    TaxNumber: {
+        type: String,
+        required: false
+    },
+    OfficialDocuments: {
+        type: String,
+        required: false
+    }
 
 });
 

@@ -10,6 +10,9 @@ const orderSchema = mongoose.Schema({
         status: {
             type: String,
             default: "Pending"
+        },
+        expectedDelivery: {
+            type: Date
         }
     }, ],
     status: {

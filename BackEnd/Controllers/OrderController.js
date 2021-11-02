@@ -3,23 +3,23 @@ import { authenticateuser } from "../../MiddleWare";
 import { Order } from "../Models/Order";
 const router = Router();
 
-router.post("/createbulkorder", authenticateuser, (req, res) => {
+// router.post("/createbulkorder", authenticateuser, (req, res) => {
 
-    var neworder = new Order(); // create a new instance of the User model
-    neworder.products = req.body.products;
-    neworder.status = "pending";
-    neworder.price = req.body.price;
-    neworder.user = req.user._id;
-    //SEND TO REQUEST SUPPLIER 
-    neworder.save().then(res => {
-            res.status(200).send({ order: neworder });
-        })
-        .catch((err) => {
-            res.status(400).send({
-                err: err.message ? err.message : err,
-            });
-        });
-})
+//     var neworder = new Order(); // create a new instance of the User model
+//     neworder.products = req.body.products;
+//     neworder.status = "pending";
+//     neworder.price = req.body.price;
+//     neworder.user = req.user._id;
+//     //SEND TO REQUEST SUPPLIER 
+//     neworder.save().then(res => {
+//             res.status(200).send({ order: neworder });
+//         })
+//         .catch((err) => {
+//             res.status(400).send({
+//                 err: err.message ? err.message : err,
+//             });
+//         });
+// })  
 
 router.post("/createorder", authenticateuser, (req, res) => {
 
@@ -57,7 +57,7 @@ router.patch("/cancelorder", authenticateuser, (req, res) => {
 
 })
 
-router.get("/myorders", authenticateuser, (req, res) => {
+router.get("/myordersemployee", authenticateuser, (req, res) => {
     Order.find({ user: req.user._id }).then((orders) => {
             res.status(200).send(orders)
         })
@@ -67,6 +67,7 @@ router.get("/myorders", authenticateuser, (req, res) => {
             });
         });
 })
+
 
 router.get('/vieworder/:order_id', (req, res) => {
     Order.findById(req.params.order_id).then(order => {

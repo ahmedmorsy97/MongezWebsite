@@ -1,4 +1,4 @@
-import { authenticatesupplier, authenticateuser } from "../../MiddleWare";
+import { authenticateadmin, authenticatesupplier, authenticateuser } from "../../MiddleWare";
 import { Supplier } from "../Models/Supplier";
 import { Router } from "express";
 const router = Router();
@@ -37,38 +37,39 @@ router.post("/login", (req, res) => { // If email or password fields are not ent
         });
 });
 //Register
-router.route('/register')
-    .post(function(req, res) {
+router.post("/register", authenticateadmin, (req, res) => {
 
-        var newsupplier = new Supplier(); // create a new instance of the Supplier model
-        newsupplier.username = req.body.username;
-        newsupplier.email = req.body.email;
-        newsupplier.address = req.body.address;
-        newsupplier.mobileNumber = req.body.mobileNumber;
-        newsupplier.dateOfBirth = req.body.dateOfBirth;
-        newsupplier.firstname = req.body.firstname;
-        newsupplier.lastname = req.body.lastname;
-        newsupplier.password = req.body.password;
-        newsupplier.companyName = req.body.companyName;
-        newsupplier.rating = req.body.rating;
-        newsupplier.numberOfRatings = req.body.numberOfRatings;
-        newsupplier.blocked = false;
-        newsupplier.imageURL = req.body.imageURL;
-        newsupplier.nationalID = req.body.nationalID;
+    var newsupplier = new Supplier(); // create a new instance of the Supplier model
+    newsupplier.username = req.body.username;
+    newsupplier.email = req.body.email;
+    newsupplier.address = req.body.address;
+    newsupplier.mobileNumber = req.body.mobileNumber;
+    newsupplier.dateOfBirth = req.body.dateOfBirth;
+    newsupplier.firstname = req.body.firstname;
+    newsupplier.lastname = req.body.lastname;
+    newsupplier.password = req.body.password;
+    newsupplier.companyName = req.body.companyName;
+    newsupplier.rating = req.body.rating;
+    newsupplier.numberOfRatings = req.body.numberOfRatings;
+    newsupplier.blocked = false;
+    newsupplier.imageURL = req.body.imageURL;
+    newsupplier.nationalID = req.body.nationalID;
+    newsupplier.taxNumber = req.body.taxNumber;
+    newsupplier.officialDocuments = req.body.officialDocuments;
 
-        newsupplier.save().then(res => (newsupplier.generateAuthToken())).then(token => {
-                res.status(200).send({
-                    supplier: newsupplier,
-                    token: token
-                });
-            })
-            .catch((err) => {
-                res.status(400).send({
-                    err: err.message ? err.message : err,
-                });
-            });;
+    newsupplier.save().then(res => (newsupplier.generateAuthToken())).then(token => {
+            res.status(200).send({
+                supplier: newsupplier,
+                token: token
+            });
+        })
+        .catch((err) => {
+            res.status(400).send({
+                err: err.message ? err.message : err,
+            });
+        });;
 
-    })
+})
 
 router.post("/logout", authenticatesupplier, (req, res) => {
     req.supplier.removeToken(req.token).then(logoutres => res.status(200).send({ msg: "Supplier logged out successfully" })).catch((err) => {
@@ -107,9 +108,15 @@ router.get('/allsuppliers', function(req, res) {
     });
 })
 
+
+
 router.patch('/ratesupplier/:supplier_id', authenticateuser, (req, res) => {
     Supplier.findOneAndUpdate({ _id: req.params.supplier_id }, { $inc: { rating: req.body.rating, numberOfRatings: 1 } }, { new: true }).then(updatedsupplier => res.status(200).send({ supplier: updatedsupplier }))
 
+})
+
+router.patch('sendorder/:supplier_id', authenticateuser, (req, res) => {
+    Supplier.findOneAndUpdate({ _id: req.params.supplier_id }, { $push: { listOfPendingOrders: req.body.order } }, { new: true }).then(updateduser => res.status(200).send({ updateduser: updateduser }))
 })
 
 
@@ -121,8 +128,8 @@ router.patch('/ratesupplier/:supplier_id', authenticateuser, (req, res) => {
 //Add products done
 //View my products done not tested
 //Edit my products info (Price,Photos,name,description,etc..) done not tested
-//View orders sent to me from users and view their status 
-//Send final price to user based on his order
 //Rate customer done tested
+//View orders sent to me from users and view their status  (How will this be done? Order is not linked to supplier)
+//Send final price to user based on his order cancelled 
 
 export const supplierController = router;

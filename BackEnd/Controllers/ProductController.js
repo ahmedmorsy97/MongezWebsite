@@ -29,11 +29,11 @@ router.post("/create", authenticatesupplier, (req, res) => {
     var newproduct = new Product(); // create a new instance of the Product model
     newproduct.productName = req.body.productName;
     newproduct.photoLinks = req.body.photoLinks;
-    newproduct.price = req.body.price;
+    newproduct.priceRange = req.body.priceRange;
     newproduct.percentageDiscount = req.body.percentageDiscount;
     newproduct.priceDiscount = req.body.priceDiscount;
     newproduct.rating = req.body.rating;
-    newproduct.supplier = req.supplier._id; // HOW??
+    newproduct.supplier = req.supplier._id;
     newproduct.quantity = req.body.quantity;
     newproduct.save().then(product => {
             res.status(200).send({ product: newproduct });
