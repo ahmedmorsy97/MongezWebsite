@@ -92,8 +92,7 @@ router.get('/vieworder/:order_id', (req, res) => {
 
 //If order if from multiple sources some of order is delivered some not, part cancelled? 
 // How will the supplier view orders sent to him?
-//Part of Order that concerns the supplier is sent to supplier to be able to give discount
-
-//2 order types: 1-Bulk Order can have a diffrent price 2- Normal Order immediate purchase
+//The order can be sent to the supplier and only view the products that concerns him
+//2 order types: 1-Bulk Order can have a diffrent price 2- Normal Order immediate purchase cancelled 
 
 export const orderController = router;
