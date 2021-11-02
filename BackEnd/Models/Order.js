@@ -13,6 +13,10 @@ const orderSchema = mongoose.Schema({
         },
         expectedDelivery: {
             type: Date
+        },
+        supplier: {
+            type: mongoose.Types.ObjectId,
+            ref: "User"
         }
     }, ],
     status: {

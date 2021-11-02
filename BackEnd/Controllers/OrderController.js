@@ -23,7 +23,7 @@ const router = Router();
 
 router.post("/createorder", authenticateuser, (req, res) => {
 
-    var neworder = new Order(); // create a new instance of the User model
+    var neworder = new Order();
     neworder.products = req.body.products;
     neworder.status = "pending";
     neworder.price = req.body.price;
@@ -68,6 +68,7 @@ router.get("/myordersemployee", authenticateuser, (req, res) => {
         });
 })
 
+// router.get("/vieworderssupplier")
 
 router.get('/vieworder/:order_id', (req, res) => {
     Order.findById(req.params.order_id).then(order => {
