@@ -20,9 +20,10 @@ router.patch('/removeemployee/:employee_id', authenticateCompanyadmin, (req, res
 router.patch('/removemanager/:manager_id', authenticateCompanyadmin, (req, res) => {
     Company.findOneAndUpdate({ admins: { $in: req.user._id } }, { $pull: { managers: req.params.manager_id } }, { new: true }).then(updatedlist => res.status(200).send({ list: updatedlist }))
 })
-router.patch('/removeadmin/:admin_id', authenticateCompanyadmin, (req, res) => {
+router.patch('/removecompanyadmin/:admin_id', authenticateCompanyadmin, (req, res) => {
     Company.findOneAndUpdate({ admins: { $in: req.user._id } }, { $pull: { admins: req.params.admin_id } }, { new: true }).then(updatedlist => res.status(200).send({ list: updatedlist }))
 })
+
 
 
 
@@ -39,3 +40,4 @@ export const companyAdminController = router;
 //Remove Employees done tested
 //Add admin done tested
 //Remove admin done tested
+//View all employees of the company orders

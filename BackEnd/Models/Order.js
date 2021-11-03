@@ -14,6 +14,9 @@ const orderSchema = mongoose.Schema({
         expectedDelivery: {
             type: Date
         },
+        priceatPurchase: {
+            type: Number
+        },
         supplier: {
             type: mongoose.Types.ObjectId,
             ref: "User"

@@ -34,7 +34,12 @@ router.get('/allcompanys', function(req, res) {
 router.patch('/updatebyCompanyadmin', authenticateCompanyadmin, (req, res) => {
     Company.findOneAndUpdate({ admins: { $in: req.user._id } }, { $set: req.body }, { new: true }).then(updatedcompany => res.status(200).send({ company: updatedcompany }))
 })
-
+router.patch('blockcompany/:company_id', authenticateadmin, (req, res) => {
+    Company.findOneAndUpdate({ _id: req.params.company_id }, { $set: { blocked: true } }, { new: true }).then(updateduser => res.status(200).send({ updateduser: updateduser }))
+})
+router.patch('unblockcompany/:company_id', authenticateadmin, (req, res) => {
+    User.findOneAndUpdate({ _id: req.params.company_id }, { $set: { blocked: false } }, { new: true }).then(updateduser => res.status(200).send({ updateduser: updateduser }))
+})
 
 
 
@@ -43,7 +48,7 @@ router.patch('/updatebyCompanyadmin', authenticateCompanyadmin, (req, res) => {
 //Add employees done by manager and admin (first manager is added by the admin) done tested
 //Remove employees done tested
 //Remove manager done tested
-//Delete company and employees (done by the admin) done not tested by the update method
+//Delete company and employees (done by the admin) (HOW DELETE ALL COMPANY USERS?) done not tested by the update method
 
 
 export const companyController = router;

@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { authenticatesupplier } from "../../MiddleWare";
+import { authenticateadmin, authenticatesupplier } from "../../MiddleWare";
 import { Product } from "../Models/Product";
 const router = Router();
 
@@ -29,6 +29,7 @@ router.post("/create", authenticatesupplier, (req, res) => {
     var newproduct = new Product(); // create a new instance of the Product model
     newproduct.productName = req.body.productName;
     newproduct.photoLinks = req.body.photoLinks;
+    newproduct.description = req.body.description;
     newproduct.priceRange = req.body.priceRange;
     newproduct.percentageDiscount = req.body.percentageDiscount;
     newproduct.priceDiscount = req.body.priceDiscount;
@@ -71,6 +72,16 @@ router.get('/viewproduct/:product_id', (req, res) => {
 })
 router.patch("/editmyproduct", authenticatesupplier, (req, res) => {
     Product.findOneAndUpdate({ _id: req.body._id, supplier: req.supplier._id }, { $set: req.body }, { new: true }).then(updatedproduct => res.status(200).send({ updatedproduct: updatedproduct }))
+        .catch((err) => {
+            res.status(400).send({
+                err: err.message ? err.message : err,
+            });
+        });
+
+
+})
+router.patch("/editsupplierproduct/:product_id", authenticateadmin, (req, res) => {
+    Product.findOneAndUpdate({ _id: req.params }, { $set: req.body }, { new: true }).then(updatedproduct => res.status(200).send({ updatedproduct: updatedproduct }))
         .catch((err) => {
             res.status(400).send({
                 err: err.message ? err.message : err,

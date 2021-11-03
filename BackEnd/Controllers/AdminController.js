@@ -29,12 +29,14 @@ router.post("/createcompanyadmin/:company_id", authenticateadmin, (req, res) => 
 
 
 
+
 export const AdminController = router;
 
-//View All user's order history
-//Block suppliers and users
-//Unblock supplier and users
-//Cancel user's orders
-//Add money to user's wallet
+//View All user's order history done not tested
+//Block suppliers and users done not tested
+//Unblock supplier and users done not tested
+//Block and Unblock company done not tested ( HOW WILL WE BLOCK AND UNBLOCK ALL COMPANY USERS WHEN COMPANY IS BLCOKED OR UNBLOCKED)
+//Cancel user's orders 
 //Creates Company done tested
 //Sets Company Admin done tested
+//Edit any product price done not tested

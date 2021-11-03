@@ -119,17 +119,19 @@ router.patch('sendorder/:supplier_id', authenticateuser, (req, res) => {
     Supplier.findOneAndUpdate({ _id: req.params.supplier_id }, { $push: { listOfPendingOrders: req.body.order } }, { new: true }).then(updateduser => res.status(200).send({ updateduser: updateduser }))
 })
 
-
-//Login done
-//Logout done
-//Register done
-//View my Info done
-//Edit my Info done
-//Add products done
-//View my products done not tested
-//Edit my products info (Price,Photos,name,description,etc..) done not tested
-//Rate customer done tested
-//View orders sent to me from users and view their status  (How will this be done? Order is not linked to supplier)
-//Send final price to user based on his order cancelled 
+router.get('/viewmypendingOrders', authenticatesupplier, (req, res) => {
+        res.status(200).send(req.supplier.listOfPendingOrders)
+    })
+    //Login done
+    //Logout done
+    //Register done
+    //View my Info done
+    //Edit my Info done
+    //Add products done
+    //View my products done not tested
+    //Edit my products info (Price,Photos,name,description,etc..) done not tested
+    //Rate customer done tested
+    //View orders sent to me from users and view their status done not tested (How will this be done? Order is not linked to supplier)
+    //Send final price to user based on his order (cancelled by them) 
 
 export const supplierController = router;

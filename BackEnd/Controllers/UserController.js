@@ -112,6 +112,13 @@ router.patch('setemployeelimit/:employee_id', authenticatemanager, (req, res) =>
     User.findOneAndUpdate({ _id: req.params.employee_id }, { $set: { limit: req.body.limit } }, { new: true }).then(updateduser => res.status(200).send({ updateduser: updateduser }))
 })
 
+router.patch('blockemployee/:employee_id', authenticateadmin, (req, res) => {
+    User.findOneAndUpdate({ _id: req.params.employee_id }, { $set: { blocked: true } }, { new: true }).then(updateduser => res.status(200).send({ updateduser: updateduser }))
+})
+router.patch('unblockemployee/:employee_id', authenticateadmin, (req, res) => {
+    User.findOneAndUpdate({ _id: req.params.employee_id }, { $set: { blocked: false } }, { new: true }).then(updateduser => res.status(200).send({ updateduser: updateduser }))
+})
+
 
 //Logout done 
 //Register done

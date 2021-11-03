@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { authenticateuser } from "../../MiddleWare";
+import { authenticateadmin, authenticatemanager, authenticateuser } from "../../MiddleWare";
 import { Order } from "../Models/Order";
 const router = Router();
 
@@ -38,7 +38,7 @@ router.post("/createorder", authenticateuser, (req, res) => {
         });
 })
 
-router.patch("/changeorderinfo", authenticatesupplier, (req, res) => { //Automatic by system? Or admin? Or supplier?
+router.patch("/changeorderinfo", authenticatesupplier, (req, res) => {
     Order.findOneAndUpdate({ _id: req.body._id, supplier: req.supplier._id }, { $set: req.body }, { new: true }).then(updatedorder => res.status(200).send({ updatedorder: updatedorder }))
         .catch((err) => {
             res.status(400).send({
@@ -47,18 +47,21 @@ router.patch("/changeorderinfo", authenticatesupplier, (req, res) => { //Automat
         });
 })
 
-router.patch("/cancelorder", authenticateuser, (req, res) => {
-    Order.findOneAndUpdate({ _id: req.body._id, user: req.user._id }, { $set: req.body }, { new: true }).then(updatedorder => res.status(200).send({ updatedorder: updatedorder }))
+
+
+router.get("/myordersemployee", authenticateuser, (req, res) => {
+    Order.find({ user: req.user._id }).then((orders) => {
+            res.status(200).send(orders)
+        })
         .catch((err) => {
             res.status(400).send({
                 err: err.message ? err.message : err,
             });
         });
-
 })
 
-router.get("/myordersemployee", authenticateuser, (req, res) => {
-    Order.find({ user: req.user._id }).then((orders) => {
+router.get("/myemployeeorders/:employee_id", authenticatemanager, (req, res) => { // Missing checking if this is my direct manager
+    Order.find({ user: req.params.employee_id }).then((orders) => {
             res.status(200).send(orders)
         })
         .catch((err) => {
@@ -85,15 +88,27 @@ router.get('/vieworder/:order_id', (req, res) => {
         });;
 })
 
+router.get('/viewallorders', authenticateadmin, function(req, res) {
+    Order.find(function(err, Order) {
+        if (err)
+            res.send(err);
+        res.json(Order);
+    });
+})
+
+
+
 //create order done not tested
 //change order status done not tested
-//cancel order done not tested
+//cancel order by employee(CHECK STATUS BEFORE CANCELLING  NOT DONE) done not tested
+//How to cancel just part of the order?
+//cancel order by manager(CHECK STATUS BEFORE CANCELLING NOT DONE ) done not tested
+//cancel order by admin done not tested
+//When order is done if product price is altered it shoudn't be altered in the order view so i added priceatpurchase
 
 
-
-//If order if from multiple sources some of order is delivered some not, part cancelled? 
-// How will the supplier view orders sent to him?
 //The order can be sent to the supplier and only view the products that concerns him
-//2 order types: 1-Bulk Order can have a diffrent price 2- Normal Order immediate purchase cancelled 
+//When order is created it should be pushed in the pending list of the supplier concerned
+//How will the supplier view the orders he has done before?
 
 export const orderController = router;
