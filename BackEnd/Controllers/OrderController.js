@@ -30,6 +30,8 @@ router.post("/createorder", authenticateuser, (req, res) => {
     neworder.user = req.user._id;
     neworder.manager = req.user.createdBy;
     neworder.company = req.user.company;
+    neworder.category = req.body.category;
+    neworder.type = req.body.type;
     neworder.save().then(res => {
             res.status(200).send({ order: neworder });
         })
