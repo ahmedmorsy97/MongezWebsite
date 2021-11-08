@@ -84,10 +84,6 @@ const userSchema = mongoose.Schema({
         type: Boolean,
         default: false
     },
-    active: {
-        type: Boolean,
-        default: true
-    },
     imageURL: {
         type: String,
         required: false
@@ -198,14 +194,21 @@ userSchema.statics.findByCredentials = function(email, password) { // Find using
     const User = this;
 
     return User.findOne({
-        email
+        email,
+
+
     }).then((user) => {
         if (!user) {
             return Promise.reject({
                 message: "email is incorrect !!",
             });
-        }
 
+        }
+        if (user.blocked == true) {
+            return Promise.reject({
+                message: "This is user is blocked from the system",
+            });
+        }
         return new Promise((resolve, reject) => {
 
             bcrypt.compare(password, user.password, (err, res) => { // Compares the two passwords both hashed 

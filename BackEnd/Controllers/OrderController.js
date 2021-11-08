@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { authenticateadmin, authenticatemanager, authenticateuser } from "../../MiddleWare";
+import { authenticateadmin, authenticatemanager, authenticatesupplier, authenticateuser } from "../../MiddleWare";
 import { Order } from "../Models/Order";
 const router = Router();
 
@@ -28,6 +28,8 @@ router.post("/createorder", authenticateuser, (req, res) => {
     neworder.status = "pending";
     neworder.price = req.body.price;
     neworder.user = req.user._id;
+    neworder.manager = req.user.createdBy;
+    neworder.company = req.user.company;
     neworder.save().then(res => {
             res.status(200).send({ order: neworder });
         })
@@ -59,9 +61,30 @@ router.get("/myordersemployee", authenticateuser, (req, res) => {
             });
         });
 })
+router.get("/myorderssupplier", authenticatesupplier, (req, res) => { //NOT TESTED
+    Order.find({ "products.supplier": req.user._id }).then((products) => {
+            res.status(200).send(products)
+        })
+        .catch((err) => {
+            res.status(400).send({
+                err: err.message ? err.message : err,
+            });
+        });
+})
 
-router.get("/myemployeeorders/:employee_id", authenticatemanager, (req, res) => { // Missing checking if this is my direct manager
-    Order.find({ user: req.params.employee_id }).then((orders) => {
+router.get("/viewmyemployeeorders", authenticatemanager, (req, res) => {
+    Order.find({ manager: req.user._id }).then((orders) => {
+            res.status(200).send(orders)
+        })
+        .catch((err) => {
+            res.status(400).send({
+                err: err.message ? err.message : err,
+            });
+        });
+})
+
+router.get("/myemployeeorders/:employee_id", authenticatemanager, (req, res) => {
+    Order.find({ user: req.params.employee_id, manager: req.user._id }).then((orders) => {
             res.status(200).send(orders)
         })
         .catch((err) => {
@@ -73,8 +96,8 @@ router.get("/myemployeeorders/:employee_id", authenticatemanager, (req, res) => 
 
 // router.get("/vieworderssupplier")
 
-router.get('/vieworder/:order_id', (req, res) => {
-    Order.findById(req.params.order_id).then(order => {
+router.get('/vieworder/:order_id', authenticateuser, (req, res) => {
+    Order.findOne({ _id: req.params.order_id, $or: { user: req.user._id, manager: req.user._id } }).then(order => {
             if (!order) {
                 throw { err: "No order with this id" }
             }
@@ -88,6 +111,8 @@ router.get('/vieworder/:order_id', (req, res) => {
         });;
 })
 
+
+
 router.get('/viewallorders', authenticateadmin, function(req, res) {
     Order.find(function(err, Order) {
         if (err)
@@ -95,6 +120,32 @@ router.get('/viewallorders', authenticateadmin, function(req, res) {
         res.json(Order);
     });
 })
+router.get('/viewallordersofcompany', authenticateadmin, function(req, res) {
+    Order.find(function(err, Order) {
+        if (err)
+            res.send(err);
+        res.json(Order);
+    });
+})
+router.patch("/cancelallorder/:order_id", authenticateuser, (req, res) => { //NOT TESTED
+    Order.findOneAndUpdate({ _id: req.params.order_id, $or: { user: req.user._id, manager: req.user._id }, "products.status": "pending" }, { $set: { "products.status": "cancelled" } }, { new: true }).then(updatedorder => res.status(200).send({ updatedorder: updatedorder }))
+        .catch((err) => {
+            res.status(400).send({
+                err: err.message ? err.message : err,
+            });
+        });
+})
+
+router.patch("/changeorderstatus/:order_id", authenticatesupplier, (req, res) => {
+    Order.findOneAndUpdate({ _id: req.params.order_id, "products.supplier": req.user._id, status: "pending" }, { $set: { status: "cancelled" } }, { new: true }).then(updatedorder => res.status(200).send({ updatedorder: updatedorder }))
+        .catch((err) => {
+            res.status(400).send({
+                err: err.message ? err.message : err,
+            });
+        });
+})
+
+
 
 
 

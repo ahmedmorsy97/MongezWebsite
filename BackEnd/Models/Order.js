@@ -35,8 +35,15 @@ const orderSchema = mongoose.Schema({
     user: {
         type: mongoose.Types.ObjectId,
         ref: "User"
-    }
+    },
 
+    manager: {
+        type: mongoose.Types.ObjectId,
+        ref: "User"
+    },
+    paid: {
+        type: boolean
+    }
 });
 
 export const order = mongoose.model('Order', orderSchema);

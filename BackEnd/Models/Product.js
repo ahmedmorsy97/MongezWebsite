@@ -14,8 +14,18 @@ const productSchema = mongoose.Schema({
         required: false
     }],
     priceRange: [{
-        type: String,
-        required: false
+        minquantity: {
+            type: Number,
+            required: true
+        },
+        maxquantity: {
+            type: Number,
+            required: true
+        },
+        priceofRange: {
+            type: Number,
+            required: true
+        }
     }],
     // percentageDiscount: { //Edit this
     //     type: Number,

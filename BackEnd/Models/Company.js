@@ -34,9 +34,20 @@ const companySchema = new mongoose.Schema({
         ref: "User"
     }],
     employees: [{
-        type: mongoose.Types.ObjectId,
-        ref: "User"
+        createdBy: {
+            type: mongoose.Types.ObjectId,
+            ref: "User"
+        },
+
+        id: {
+            type: mongoose.Types.ObjectId,
+            ref: "User"
+        }
     }],
+    company: {
+        type: mongoose.Types.ObjectId,
+        ref: "Company"
+    },
     blocked: {
         type: Boolean,
         default: false

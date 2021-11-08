@@ -1,5 +1,5 @@
 import { response, Router } from "express";
-import { authenticateadmin, authenticatemanager, authenticateuser } from "../../MiddleWare";
+import { authenticateadmin, authenticateCompanyadmin, authenticatemanager, authenticateuser } from "../../MiddleWare";
 import { User } from "../Models/User";
 
 const router = Router();
@@ -34,7 +34,7 @@ router.post("/login", (req, res) => { // If email or password fields are not ent
         });
 });
 
-router.post("/register", authenticatemanager, (req, res) => {
+router.post("/registercompanyadmin", authenticateCompanyadmin, (req, res) => {
 
     var newuser = new User(); // create a new instance of the User model
     newuser.username = req.body.username;
@@ -51,9 +51,34 @@ router.post("/register", authenticatemanager, (req, res) => {
     newuser.nationalID = req.body.nationalID;
     newuser.employeeLevel = req.body.employeeLevel;
     newuser.createdBy = req.user._id;
-    newuser.save().then(res => (newuser.generateAuthToken())).then(token => {
-            res.status(200).send({ user: newuser, token: token });
-        })
+    newuser.company = req.user.company;
+    newuser.save().then(user => res.status(200).send(user))
+        .catch((err) => {
+            res.status(400).send({
+                err: err.message ? err.message : err,
+            });
+        });
+})
+
+router.post("/registerCompanyAdmin", authenticateadmin, (req, res) => {
+
+    var newuser = new User(); // create a new instance of the User model
+    newuser.username = req.body.username;
+    newuser.email = req.body.email;
+    newuser.mobileNumber = req.body.mobileNumber;
+    newuser.dateOfBirth = req.body.dateOfBirth;
+    newuser.firstname = req.body.firstname;
+    newuser.lastname = req.body.lastname;
+    newuser.password = req.body.password;
+    newuser.levelOfPurchase = req.body.levelOfPurchase;
+    newuser.rating = req.body.rating;
+    newuser.numberOfRatings = req.body.numberOfRatings;
+    newuser.imageURL = req.body.imageURL;
+    newuser.nationalID = req.body.nationalID;
+    newuser.employeeLevel = "CompanyAdmin";
+    newuser.createdBy = req.user._id;
+    newuser.company = req.body.company;
+    newuser.save().then(user => res.status(200).send(user))
         .catch((err) => {
             res.status(400).send({
                 err: err.message ? err.message : err,
@@ -105,11 +130,11 @@ router.patch('/rateuser/:user_id', authenticateuser, (req, res) => {
 
 })
 router.patch('setemployeewallet/:employee_id', authenticatemanager, (req, res) => {
-    User.findOneAndUpdate({ _id: req.params.employee_id }, { $inc: { wallet: req.body.wallet } }, { new: true }).then(updateduser => res.status(200).send({ updateduser: updateduser }))
+    User.findOneAndUpdate({ _id: req.params.employee_id, createdBy: req.user._id }, { $inc: { wallet: req.body.wallet } }, { new: true }).then(updateduser => res.status(200).send({ updateduser: updateduser }))
 })
 
 router.patch('setemployeelimit/:employee_id', authenticatemanager, (req, res) => {
-    User.findOneAndUpdate({ _id: req.params.employee_id }, { $set: { limit: req.body.limit } }, { new: true }).then(updateduser => res.status(200).send({ updateduser: updateduser }))
+    User.findOneAndUpdate({ _id: req.params.employee_id, createdBy: req.user._id }, { $set: { limit: req.body.limit } }, { new: true }).then(updateduser => res.status(200).send({ updateduser: updateduser }))
 })
 
 router.patch('blockemployee/:employee_id', authenticateadmin, (req, res) => {

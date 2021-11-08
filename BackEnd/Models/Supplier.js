@@ -63,10 +63,7 @@ const supplierSchema = mongoose.Schema({
         type: Boolean,
         default: false
     },
-    active: {
-        type: Boolean,
-        default: true
-    },
+
     imageURL: {
         type: String,
         required: false
