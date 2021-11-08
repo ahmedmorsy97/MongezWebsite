@@ -36,6 +36,8 @@ router.post("/create", authenticatesupplier, (req, res) => {
     newproduct.rating = req.body.rating;
     newproduct.supplier = req.supplier._id;
     newproduct.quantity = req.body.quantity;
+    newproduct.category = req.body.category;
+    newproduct.type = req.body.type;
     newproduct.save().then(product => {
             res.status(200).send({ product: newproduct });
         })
