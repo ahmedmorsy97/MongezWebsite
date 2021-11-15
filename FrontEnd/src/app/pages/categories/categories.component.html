@@ -1,0 +1,8 @@
+<div class="row categories">
+    <div (click)="NavigatetoSubCategory(category)" *ngFor="let category of categories" class="category_holder col-md-4 col-6">
+        <div class="category" [ngStyle]="{backgroundImage: 'url(' + category.img + ')'}">
+            <div class="overlay"></div>
+            <p>{{category.label}}</p>
+        </div>
+    </div>
+</div>
