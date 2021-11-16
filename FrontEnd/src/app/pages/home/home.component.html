@@ -1,56 +1,56 @@
-<div class="container">
-    <div class=" row bgimg">
-        <div class="col-md-7 mt-5 mb-5">
+<!-- <div class="container"> -->
+<div class=" row bgimg">
+    <div class="col-md-7 mt-5 mb-5 ml-5">
+        <h1>
+            Building Materials, Exactly When You Need Them Save time and money with Mongez’s online store and fast delivery
+        </h1>
+        <h5>
+            Save time and money with Mongez’s online store and fast delivery
+        </h5>
+        <div class="mt-5 mb-5">
+            <button (click)="GoToProducts()" class="btn btn-primary btn-lg">Shop Now</button>
+        </div>
+    </div>
+    <div class="col-md-5">
+        <!-- <img src="/assets/images/truck.jpg" /> -->
+
+    </div>
+</div>
+<div class="categories mt-5 text-center">
+    <h3>
+        Order in Minutes & Get Same-Day Delivery
+    </h3>
+    <h4>
+        Over 17,000+ products from brands you know and trust
+    </h4>
+    <div class="logos">
+        <!-- TODO -->
+    </div>
+    <p>
+        & hundreds more
+    </p>
+    <app-categories [categories]="categories"></app-categories>
+    <div class="mb-5">
+        <button (click)="GoToProducts()" class=" btn btn-primary btn-lg">Shop Now</button>
+    </div>
+</div>
+<div class=" row bigdeals">
+    <div class="col-md-7">
+        <div class="mt-5 ml-5">
             <h1>
-                Building Materials, Exactly When You Need Them Save time and money with Mongez’s online store and fast delivery
+                Big Orders? No Problem.
             </h1>
+
             <h5>
-                Save time and money with Mongez’s online store and fast delivery
+                No matter the size of your projects, our expert team has you covered, without the expensive price tag.
             </h5>
-            <div class="mt-5 mb-5">
-                <button (click)="GoToProducts()" class="btn btn-primary btn-lg">Shop Now</button>
-            </div>
-        </div>
-        <div class="col-md-5">
-            <!-- <img src="/assets/images/truck.jpg" /> -->
-
+            <button class="btn btn-primary btn-lg mt-5">Create Bid</button>
         </div>
     </div>
-    <div class="categories mt-5 text-center">
-        <h3>
-            Order in Minutes & Get Same-Day Delivery
-        </h3>
-        <h4>
-            Over 17,000+ products from brands you know and trust
-        </h4>
-        <div class="logos">
-            <!-- TODO -->
-        </div>
-        <p>
-            & hundreds more
-        </p>
-        <app-categories [categories]="categories"></app-categories>
-        <div class="mb-5">
-            <button (click)="GoToProducts()" class=" btn btn-primary btn-lg">Shop Now</button>
-        </div>
-    </div>
-    <div class=" row bigdeals">
-        <div class="col-md-7">
-            <div class="mt-5">
-                <h1>
-                    Big Orders? No Problem.
-                </h1>
-
-                <h5>
-                    No matter the size of your projects, our expert team has you covered, without the expensive price tag.
-                </h5>
-                <button class="btn btn-primary btn-lg">Create Bid</button>
-            </div>
-        </div>
-        <div class="col-md-5 ">
-            <div class="img-container">
-                <img src="/assets/images/bigorder.jpg" />
-            </div>
+    <div class="col-md-5 ">
+        <div class="img-container mt-5 mr-5">
+            <img src="/assets/images/bigorder.jpg" />
         </div>
     </div>
 </div>
+<!-- </div> -->
