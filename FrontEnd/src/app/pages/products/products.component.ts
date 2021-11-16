@@ -7,12 +7,9 @@ import { Component, Input, OnInit } from '@angular/core';
 })
 export class ProductsComponent implements OnInit {
   categories: any[] = [
-    { img: "/assets/images/HVAC.png", label: "HVAC" },
-    { img: "/assets/images/plumbing.jpg", label: "Plumbing" },
-    { img: "/assets/images/HVAC.png", label: "Dry Wall" },
-    { img: "/assets/images/HVAC.png", label: "Insulation" },
-    { img: "/assets/images/hardware.jpg", label: "HardWare" },
-    { img: "/assets/images/HVAC.png", label: "Paint" }
+    { img: "/assets/images/mechanical.jpg", label: "Mechanical" },
+    { img: "/assets/images/electrical.jpg", label: "Electrical" },
+    { img: "/assets/images/hardware.jpg", label: "Hardware and Tools" },
   ]
   constructor() { }
 

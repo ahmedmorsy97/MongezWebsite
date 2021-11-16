@@ -20,4 +20,7 @@ export class NavbarComponent implements OnInit {
   GoToProducts(){
     this.router.navigateByUrl('/products')
    }
+   GoToHome(){
+    this.router.navigateByUrl('/')
+   }
 }

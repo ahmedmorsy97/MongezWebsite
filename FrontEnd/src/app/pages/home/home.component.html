@@ -1,16 +1,19 @@
 <div class="container">
-    <div class=" row ">
-        <div class="col-md-7">
+    <div class=" row bgimg">
+        <div class="col-md-7 mt-5 mb-5">
             <h1>
                 Building Materials, Exactly When You Need Them Save time and money with Mongez’s online store and fast delivery
             </h1>
             <h5>
                 Save time and money with Mongez’s online store and fast delivery
             </h5>
-            <button (click)="GoToProducts()" class="btn btn-primary btn-lg">Shop Now</button>
+            <div class="mt-5 mb-5">
+                <button (click)="GoToProducts()" class="btn btn-primary btn-lg">Shop Now</button>
+            </div>
         </div>
         <div class="col-md-5">
-            <!-- TODO IMAGE -->
+            <!-- <img src="/assets/images/truck.jpg" /> -->
+
         </div>
     </div>
     <div class="categories mt-5 text-center">
@@ -27,20 +30,27 @@
             & hundreds more
         </p>
         <app-categories [categories]="categories"></app-categories>
-        <button (click)="GoToProducts()" class=" btn btn-primary btn-lg">Shop Now</button>
+        <div class="mb-5">
+            <button (click)="GoToProducts()" class=" btn btn-primary btn-lg">Shop Now</button>
+        </div>
     </div>
     <div class=" row bigdeals">
         <div class="col-md-7">
-            <h1>
-                Big Orders? No Problem.
-            </h1>
-            <h5>
-                No matter the size of your projects, our expert team has you covered, without the expensive price tag.
-            </h5>
-            <button class="btn btn-primary btn-lg">Create Bid</button>
+            <div class="mt-5">
+                <h1>
+                    Big Orders? No Problem.
+                </h1>
+
+                <h5>
+                    No matter the size of your projects, our expert team has you covered, without the expensive price tag.
+                </h5>
+                <button class="btn btn-primary btn-lg">Create Bid</button>
+            </div>
         </div>
-        <div class="col-md-5">
-            <!-- TODO IMAGE -->
+        <div class="col-md-5 ">
+            <div class="img-container">
+                <img src="/assets/images/bigorder.jpg" />
+            </div>
         </div>
     </div>
 </div>
