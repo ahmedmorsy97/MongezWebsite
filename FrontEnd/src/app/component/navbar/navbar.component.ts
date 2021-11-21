@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { faSearch, faCartPlus } from '@fortawesome/free-solid-svg-icons';
-
+import { LoginComponent } from '../login/login.component';
+import { BsModalRef,BsModalService } from 'ngx-bootstrap/modal';
 
 @Component({
   selector: 'app-navbar',
@@ -11,8 +12,10 @@ import { faSearch, faCartPlus } from '@fortawesome/free-solid-svg-icons';
 export class NavbarComponent implements OnInit {
   faSearch = faSearch;
   faCartPlus = faCartPlus;
-  
-  constructor(private router:Router) { 
+  modalRef?: BsModalRef;
+  constructor(private router:Router,private modalService: BsModalService
+    ) { 
+   
 
   }
   ngOnInit(): void {
@@ -22,5 +25,13 @@ export class NavbarComponent implements OnInit {
    }
    GoToHome(){
     this.router.navigateByUrl('/')
+   }
+   Login(){
+    const initialState = {
+    }
+    this.modalService.show(LoginComponent, {
+      animated: true,
+      initialState
+    })
    }
 }

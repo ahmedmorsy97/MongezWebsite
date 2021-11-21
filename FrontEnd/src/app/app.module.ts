@@ -18,6 +18,8 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { ProductsComponent } from './pages/products/products.component';
 import { CategoriesComponent } from './pages/categories/categories.component';
 import { ViewproductComponent } from './pages/viewproduct/viewproduct.component';
+import { LoginComponent } from './component/login/login.component';
+import { ModalModule } from 'ngx-bootstrap/modal';
 
 // export function createTranslateLoader(http: HttpClient) {
 
@@ -33,7 +35,8 @@ import { ViewproductComponent } from './pages/viewproduct/viewproduct.component'
     NavbarComponent,
     ProductsComponent,
     CategoriesComponent,
-    ViewproductComponent
+    ViewproductComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
@@ -41,7 +44,8 @@ import { ViewproductComponent } from './pages/viewproduct/viewproduct.component'
     AppRoutingModule,
     NgbModule,
     HttpClientModule,
-    FontAwesomeModule
+    FontAwesomeModule,
+    ModalModule.forRoot(),
   //   TranslateModule.forRoot({
   //     defaultLanguage: 'en',
   //     loader: {
