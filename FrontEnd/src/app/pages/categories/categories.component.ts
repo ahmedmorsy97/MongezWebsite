@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-categories',
@@ -7,12 +8,16 @@ import { Component, Input, OnInit } from '@angular/core';
 })
 export class CategoriesComponent implements OnInit {
 @Input() categories = []
-  constructor() { }
+@Input() Mechanicalsubcategories = []
+@Input() ELectricalsubcategories = []
+constructor(private router:Router) { 
 
+}
   ngOnInit(): void {
   }
   NavigatetoSubCategory(category){
-    console.log(category);
+    this.router.navigateByUrl(category.route || "/products");
+  
   }
 
 }

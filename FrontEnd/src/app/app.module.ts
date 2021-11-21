@@ -17,6 +17,7 @@ import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { ProductsComponent } from './pages/products/products.component';
 import { CategoriesComponent } from './pages/categories/categories.component';
+import { ViewproductComponent } from './pages/viewproduct/viewproduct.component';
 
 // export function createTranslateLoader(http: HttpClient) {
 
@@ -31,7 +32,8 @@ import { CategoriesComponent } from './pages/categories/categories.component';
     HomeComponent,
     NavbarComponent,
     ProductsComponent,
-    CategoriesComponent
+    CategoriesComponent,
+    ViewproductComponent
   ],
   imports: [
     BrowserModule,
