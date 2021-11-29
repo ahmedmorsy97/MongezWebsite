@@ -30,6 +30,7 @@ router.post("/create", authenticatesupplier, (req, res) => {
     newproduct.productName = req.body.productName;
     newproduct.photoLinks = req.body.photoLinks;
     newproduct.description = req.body.description;
+    newproduct.specs = req.body.specs;
     newproduct.priceRange = req.body.priceRange;
     newproduct.percentageDiscount = req.body.percentageDiscount;
     newproduct.priceDiscount = req.body.priceDiscount;
@@ -37,7 +38,7 @@ router.post("/create", authenticatesupplier, (req, res) => {
     newproduct.supplier = req.supplier._id;
     newproduct.quantity = req.body.quantity;
     newproduct.category = req.body.category;
-    newproduct.type = req.body.type;
+    newproduct.Subcategory = req.body.Subcategory;
     newproduct.save().then(product => {
             res.status(200).send({ product: newproduct });
         })

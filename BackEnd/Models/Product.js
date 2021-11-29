@@ -9,6 +9,10 @@ const productSchema = mongoose.Schema({
         type: String,
         required: false
     },
+    specs: {
+        type: String,
+        required: false
+    },
     photoLinks: [{
         type: String,
         required: false
@@ -54,7 +58,7 @@ const productSchema = mongoose.Schema({
         type: String,
         required: true
     },
-    type: {
+    Subcategory: {
         type: String,
         required: true
     }

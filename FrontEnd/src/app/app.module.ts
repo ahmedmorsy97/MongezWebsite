@@ -20,6 +20,10 @@ import { CategoriesComponent } from './pages/categories/categories.component';
 import { ViewproductComponent } from './pages/viewproduct/viewproduct.component';
 import { LoginComponent } from './component/login/login.component';
 import { ModalModule } from 'ngx-bootstrap/modal';
+import { CreatecompanyComponent } from './pages/createcompany/createcompany.component';
+import { CreateuserComponent } from './pages/createuser/createuser.component';
+import { CreatesupplierComponent } from './pages/createsupplier/createsupplier.component';
+import { CreateproductComponent } from './pages/createproduct/createproduct.component';
 
 // export function createTranslateLoader(http: HttpClient) {
 
@@ -36,7 +40,11 @@ import { ModalModule } from 'ngx-bootstrap/modal';
     ProductsComponent,
     CategoriesComponent,
     ViewproductComponent,
-    LoginComponent
+    LoginComponent,
+    CreatecompanyComponent,
+    CreateuserComponent,
+    CreatesupplierComponent,
+    CreateproductComponent
   ],
   imports: [
     BrowserModule,
