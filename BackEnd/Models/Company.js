@@ -63,6 +63,10 @@ const companySchema = new mongoose.Schema({
     OfficialDocuments: {
         type: String,
         required: false
+    },
+    companylogo: {
+        type: String,
+        required: false
     }
 
 });

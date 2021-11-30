@@ -14,6 +14,7 @@ router.post("/createcompany", authenticateadmin, (req, res) => {
     newcompany.companyNumber = req.body.companyNumber;
     newcompany.taxNumber = req.body.taxNumber;
     newcompany.officialDocuments = req.body.officialDocuments;
+    newcompany.companylogo = req.body.companylogo;
 
     newcompany.save().then(companyres => {
             res.status(200).send({ company: newcompany });

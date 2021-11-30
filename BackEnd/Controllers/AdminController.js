@@ -12,6 +12,7 @@ router.post("/createcompanyadmin/:company_id", authenticateadmin, (req, res) => 
     newuser.password = req.body.password;
     newuser.employeeLevel = "CompanyAdmin";
     newuser.company = company_id;
+
     newuser.save().then(userres => { //ERROR
 
             // Company.findOneAndUpdate({ _id: req.params.company_id }, { $push: { admins: userres._id } }, { new: true })
