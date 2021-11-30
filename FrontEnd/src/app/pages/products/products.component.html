@@ -2,11 +2,97 @@
     <app-categories [categories]="selectedcategory"></app-categories>
 
     <div class="productsarea row">
-        <!-- <div class="filter col-md-4">
-            <p>Filter</p>
-        </div> -->
-        <div class="products row col-md-12">
-            <div (click)="ViewProduct()" class="card col-md-3 ">
+        <div class="filters col-md-4">
+            <h3>Filter</h3>
+            <div class="filter">
+                <div (click)="togglefilter('price')" class="header d-flex align-items-center justify-content-between">
+                    <h5>Price</h5>
+                    <fa-icon *ngIf="filters.price" [icon]="faMinus"></fa-icon>
+                    <fa-icon *ngIf="!filters.price" [icon]="faPlus"></fa-icon>
+                </div>
+
+                <div *ngIf="filters.price" class="info">
+                    <label>From</label>
+                    <input class="mb-2" type="number" placeholder="From Price" />
+
+                    <label>To</label>
+                    <input class="mb-2" type="number" placeholder="To Price" />
+
+                </div>
+
+
+            </div>
+
+            <div class="filter">
+                <div (click)="togglefilter('description')" class="header d-flex align-items-center justify-content-between">
+                    <h5>Description</h5>
+                    <fa-icon *ngIf="filters.description" [icon]="faMinus"></fa-icon>
+                    <fa-icon *ngIf="!filters.description" [icon]="faPlus"></fa-icon>
+                </div>
+                <div *ngIf="filters.description" class="info">
+
+                    <input class="mb-2" type="text" placeholder="Product Description" />
+
+                </div>
+
+
+            </div>
+
+            <div class="filter">
+                <div (click)="togglefilter('supplier')" class="header d-flex align-items-center justify-content-between">
+                    <h5>Supplier</h5>
+                    <fa-icon *ngIf="filters.supplier" [icon]="faMinus"></fa-icon>
+                    <fa-icon *ngIf="!filters.supplier" [icon]="faPlus"></fa-icon>
+                </div>
+                <div *ngIf="filters.supplier" class="info">
+
+                    <ngx-bootstrap-multiselect [options]="suppliers" [texts]="myTexts" [settings]="mySettings" [(ngModel)]="optionsModel"></ngx-bootstrap-multiselect>
+                </div>
+
+
+            </div>
+
+            <div class="filter">
+                <div (click)="togglefilter('productrating')" class="header d-flex align-items-center justify-content-between">
+                    <h5>Product Rating</h5>
+                    <fa-icon *ngIf="filters.productrating" [icon]="faMinus"></fa-icon>
+                    <fa-icon *ngIf="!filters.productrating" [icon]="faPlus"></fa-icon>
+                </div>
+                <div *ngIf="filters.productrating" class="info">
+                    <ngb-rating [(rate)]="currentproductRate " [max]="5">
+                        <ng-template let-fill="fill" let-index="index">
+                            <span class="star" [class.filled]="fill === 100">&#9733;</span>
+                        </ng-template>
+                    </ngb-rating>
+
+
+                </div>
+
+
+            </div>
+            <div class="filter">
+                <div (click)="togglefilter('supplierrating')" class="header d-flex align-items-center justify-content-between">
+                    <h5>Supplier Rating</h5>
+                    <fa-icon *ngIf="filters.supplierrating" [icon]="faMinus"></fa-icon>
+                    <fa-icon *ngIf="!filters.supplierrating" [icon]="faPlus"></fa-icon>
+                </div>
+                <div *ngIf="filters.supplierrating" class="info">
+                    <ngb-rating [(rate)]="currentsupplierRate" [max]="5">
+                        <ng-template let-fill="fill" let-index="index">
+                            <span class="star" [class.filled]="fill === 100">&#9733;</span>
+                        </ng-template>
+                    </ngb-rating>
+
+
+                </div>
+
+
+            </div>
+            <button class="btn btn-primary w-100 mt-4">Apply Filter</button>
+            <button class="btn btn-primary w-100 mt-3">Clear Filter</button>
+        </div>
+        <div class="products row col-md-8">
+            <div (click)="ViewProduct()" class="card col-md-4 ">
                 <div class="card-body">
                     <div class="img-container">
                         <img src="/assets/images/nails.png" />
@@ -14,6 +100,7 @@
                     <h5 class="card-title">Nails</h5>
                     <h6 class="card-subtitle mb-2 text-muted">2 in. x 4 in. x 8 ft.</h6>
                     <p class="card-text">Price Range</p>
+                    <p class="card-text">Supplier</p>
                     <!-- QUANTITY -->
                     <div class="quanity mb-2 mt-3">
                         <button class=" minus">  <fa-icon [icon]="faMinus"></fa-icon></button>
@@ -24,7 +111,7 @@
                 </div>
             </div>
 
-            <div class="card col-md-3 ">
+            <div class="card col-md-4 ">
                 <div (click)="ViewProduct()" class="card-body">
                     <div class="upper">
                         <div class="img-container">
@@ -35,6 +122,7 @@
                     </div>
                     <div class="lower">
                         <p class="card-text">40$</p>
+                        <p class="card-text">Supplier</p>
                         <div class="quanity mb-2 mt-3">
                             <button class=" minus">  <fa-icon [icon]="faMinus"></fa-icon></button>
                             <input type="number" min="1" value="0" />
@@ -45,7 +133,7 @@
                 </div>
             </div>
 
-            <div class="card col-md-3 ">
+            <div class="card col-md-4 ">
                 <div (click)="ViewProduct()" class="card-body">
                     <div class="img-container">
                         <img src="/assets/images/nails.png" />
@@ -53,6 +141,7 @@
                     <h5 class="card-title">Nails</h5>
                     <h6 class="card-subtitle mb-2 text-muted">2 in. x 4 in. x 8 ft.</h6>
                     <p class="card-text">Price Range</p>
+                    <p class="card-text">Supplier</p>
                     <!-- QUANTITY -->
                     <div class="quanity mb-2 mt-3">
                         <button class=" minus">  <fa-icon [icon]="faMinus"></fa-icon></button>

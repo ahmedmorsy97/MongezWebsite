@@ -27,6 +27,8 @@ import { ViewcompanyComponent } from './pages/viewcompany/viewcompany.component'
 import { ViewuserComponent } from './pages/viewuser/viewuser.component';
 import { ViewsupplierComponent } from './pages/viewsupplier/viewsupplier.component';
 import { ViewproductComponent } from './pages/viewproduct/viewproduct.component';
+import { NgxBootstrapMultiselectModule } from 'ngx-bootstrap-multiselect';
+
 // export function createTranslateLoader(http: HttpClient) {
 
 //   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -60,6 +62,7 @@ import { ViewproductComponent } from './pages/viewproduct/viewproduct.component'
     HttpClientModule,
     FontAwesomeModule,
     ModalModule.forRoot(),
+    NgxBootstrapMultiselectModule
   //   TranslateModule.forRoot({
   //     defaultLanguage: 'en',
   //     loader: {

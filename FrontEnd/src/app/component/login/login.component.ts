@@ -9,9 +9,13 @@ import { faWindowClose} from '@fortawesome/free-solid-svg-icons';
 })
 export class LoginComponent implements OnInit {
   faWindowClose = faWindowClose;
+  selected = "user"
   constructor(public bsModalRef: BsModalRef) { }
 
   ngOnInit(): void {
+  }
+  handleselect(type){
+    this.selected = type;
   }
 
 }
