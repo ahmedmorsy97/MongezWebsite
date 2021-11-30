@@ -17,14 +17,16 @@ import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { ProductsComponent } from './pages/products/products.component';
 import { CategoriesComponent } from './pages/categories/categories.component';
-import { ViewproductComponent } from './pages/viewproduct/viewproduct.component';
 import { LoginComponent } from './component/login/login.component';
 import { ModalModule } from 'ngx-bootstrap/modal';
 import { CreatecompanyComponent } from './pages/createcompany/createcompany.component';
 import { CreateuserComponent } from './pages/createuser/createuser.component';
 import { CreatesupplierComponent } from './pages/createsupplier/createsupplier.component';
 import { CreateproductComponent } from './pages/createproduct/createproduct.component';
-
+import { ViewcompanyComponent } from './pages/viewcompany/viewcompany.component';
+import { ViewuserComponent } from './pages/viewuser/viewuser.component';
+import { ViewsupplierComponent } from './pages/viewsupplier/viewsupplier.component';
+import { ViewproductComponent } from './pages/viewproduct/viewproduct.component';
 // export function createTranslateLoader(http: HttpClient) {
 
 //   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -39,12 +41,16 @@ import { CreateproductComponent } from './pages/createproduct/createproduct.comp
     NavbarComponent,
     ProductsComponent,
     CategoriesComponent,
-    ViewproductComponent,
     LoginComponent,
     CreatecompanyComponent,
     CreateuserComponent,
     CreatesupplierComponent,
-    CreateproductComponent
+    CreateproductComponent,
+    ViewcompanyComponent,
+    ViewuserComponent,
+    ViewsupplierComponent,
+    ViewproductComponent
+
   ],
   imports: [
     BrowserModule,
