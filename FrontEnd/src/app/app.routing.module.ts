@@ -7,6 +7,7 @@ import { CreateuserComponent } from './pages/createuser/createuser.component';
 import { HomeComponent } from './pages/home/home.component';
 import { ProductsComponent } from './pages/products/products.component';
 import { ViewcompanyComponent } from './pages/viewcompany/viewcompany.component';
+import { ViewordersComponent } from './pages/vieworders/vieworders.component';
 import { ViewproductComponent } from './pages/viewproduct/viewproduct.component';
 import { ViewsupplierComponent } from './pages/viewsupplier/viewsupplier.component';
 import { ViewuserComponent } from './pages/viewuser/viewuser.component';
@@ -30,7 +31,8 @@ const routes: Routes = [
   { path: 'createproduct',component: CreateproductComponent},
   { path: 'viewuser',component: ViewuserComponent},
   { path: 'viewcompany',component: ViewcompanyComponent},
-  { path: 'viewsupplier',component: ViewsupplierComponent}
+  { path: 'viewsupplier',component: ViewsupplierComponent},
+  { path: 'viewmyorders',component: ViewordersComponent},
   
 ];
 

@@ -1,0 +1,57 @@
+<div class="container">
+    <h3 class="text-center">Your Orders</h3>
+    <div class="search mb-4">
+        <div class="d-flex">
+            <div class="w-100">
+                <input placeholder="What do you need?" type="search" id="form1" class="form-control text-center" />
+            </div>
+            <button type="button" class="btn no-btn">
+                <fa-icon [icon]="faSearch"></fa-icon>
+            </button>
+        </div>
+    </div>
+
+    <div class="card mb-4 orders">
+        <div (click)="ViewOrder()" class="card-body">
+            <div class="row">
+                <div class="col-md-4 img-container">
+                    <img src="/assets/images/nails.png" />
+                </div>
+                <div class="col-md-8">
+                    <p class="card-text text-center ">Product Name</p>
+                    <p class="card-text text-center ">Product Status</p>
+                    <p class="card-text text-center ">Date Of Purchase</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="card  mb-4 orders">
+        <div (click)="ViewOrder()" class="card-body">
+            <div class="row">
+                <div class="col-md-4 img-container">
+                    <img src="/assets/images/nails.png" />
+                </div>
+                <div class="col-md-8">
+                    <p class="card-text text-center ">Product Name</p>
+                    <p class="card-text text-center ">Product Status</p>
+                    <p class="card-text text-center ">Date Of Purchase</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="card  mb-4 orders">
+        <div (click)="ViewOrder()" class="card-body">
+            <div class="row">
+                <div class="col-md-4 img-container">
+                    <img src="/assets/images/nails.png" />
+                </div>
+                <div class="col-md-8">
+                    <p class="card-text text-center ">Product Name</p>
+                    <p class="card-text text-center ">Product Status</p>
+                    <p class="card-text text-center ">Date Of Purchase</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
