@@ -11,47 +11,178 @@
         </div>
     </div>
 
-    <div class="card mb-4 orders">
-        <div (click)="ViewOrder()" class="card-body">
-            <div class="row">
-                <div class="col-md-4 img-container">
-                    <img src="/assets/images/nails.png" />
-                </div>
-                <div class="col-md-8">
-                    <p class="card-text text-center ">Product Name</p>
-                    <p class="card-text text-center ">Product Status</p>
-                    <p class="card-text text-center ">Date Of Purchase</p>
-                </div>
+    <div class="row">
+        <div class="col-md-4 filter">
+            <div (click)="togglefilter('supplier')" class="header d-flex align-items-center justify-content-between mb-4">
+                <h5>Supplier</h5>
+                <fa-icon *ngIf="filters.supplier" [icon]="faMinus"></fa-icon>
+                <fa-icon *ngIf="!filters.supplier" [icon]="faPlus"></fa-icon>
             </div>
-        </div>
-    </div>
+            <div *ngIf="filters.supplier" class="mb-4">
 
-    <div class="card  mb-4 orders">
-        <div (click)="ViewOrder()" class="card-body">
-            <div class="row">
-                <div class="col-md-4 img-container">
-                    <img src="/assets/images/nails.png" />
-                </div>
-                <div class="col-md-8">
-                    <p class="card-text text-center ">Product Name</p>
-                    <p class="card-text text-center ">Product Status</p>
-                    <p class="card-text text-center ">Date Of Purchase</p>
+                <ngx-bootstrap-multiselect [options]="suppliers" [texts]="myTexts" [settings]="mySettings" [(ngModel)]="optionsModel"></ngx-bootstrap-multiselect>
+            </div>
+
+            <div (click)="togglefilter('purchasedate')" class="header d-flex align-items-center justify-content-between mb-4">
+
+                <h5>Purchase Date</h5>
+                <fa-icon *ngIf="filters.purchasedate" [icon]="faMinus"></fa-icon>
+                <fa-icon *ngIf="!filters.purchasedate" [icon]="faPlus"></fa-icon>
+                <div *ngIf="filters.purchasedate" class="mt-4 mb-2">
+                    <label>From</label>
+                    <input class="mb-2" type="date" placeholder="From" />
+
+                    <label>To</label>
+                    <input class="mb-2" type="date" placeholder="To" />
                 </div>
             </div>
-        </div>
-    </div>
-    <div class="card  mb-4 orders">
-        <div (click)="ViewOrder()" class="card-body">
-            <div class="row">
-                <div class="col-md-4 img-container">
-                    <img src="/assets/images/nails.png" />
+
+            <div (click)="togglefilter('category')" class="header d-flex align-items-center justify-content-between mb-4">
+                <h5>Category</h5>
+                <fa-icon *ngIf="filters.category" [icon]="faMinus"></fa-icon>
+                <fa-icon *ngIf="!filters.category" [icon]="faPlus"></fa-icon>
+            </div>
+            <div *ngIf="filters.category" class="info">
+
+                <ngx-bootstrap-multiselect [options]="categories" [texts]="myTexts" [settings]="mySettings" [(ngModel)]="optionsModel"></ngx-bootstrap-multiselect>
+            </div>
+            <div (click)="togglefilter('status')" class="header d-flex align-items-center justify-content-between mb-4">
+                <h5>Status</h5>
+                <fa-icon *ngIf="filters.category" [icon]="faMinus"></fa-icon>
+                <fa-icon *ngIf="!filters.category" [icon]="faPlus"></fa-icon>
+            </div>
+            <div *ngIf="filters.status" class="mb-2">
+                <div class="mb-4">
+                    <input class="form-check-input " type="checkbox" value="" id="Ondelivery">
+                    <label class="form-check-label" for="Ondelivery">
+                      On Delivery
+                    </label>
                 </div>
-                <div class="col-md-8">
-                    <p class="card-text text-center ">Product Name</p>
-                    <p class="card-text text-center ">Product Status</p>
-                    <p class="card-text text-center ">Date Of Purchase</p>
+                <div class="mb-4">
+                    <input class="form-check-input" type="checkbox" value="" id="Delivered">
+                    <label class="form-check-label" for="Delivered">
+                          Delivered
+                        </label>
+                </div>
+                <div class="mb-4">
+                    <input class="form-check-input" type="checkbox" value="" id="Cancelled">
+                    <label class="form-check-label" for="Cancelled">
+                              Cancelled
+                            </label>
                 </div>
             </div>
+            <button class="btn btn-primary w-100 mt-4">Apply Filter</button>
+            <button class="btn btn-primary w-100 mt-3">Clear Filter</button>
         </div>
+
+        <div class="col-md-8">
+            <div class="card  mb-4 orders text-center">
+                <ngb-accordion #acc="ngbAccordion">
+                    <ngb-panel id="toggle-1" title="Order#: 1">
+                        <ng-template ngbPanelContent>
+                            <div class="product">
+                                <div class="row">
+                                    <div class="col-md-4 img-container">
+                                        <img src="/assets/images/nails.png" />
+                                    </div>
+                                    <div class="col-md-8">
+                                        <p class="card-text text-center ">Product Name</p>
+                                        <p class="card-text text-center ">Product Status</p>
+                                        <p class="card-text text-center ">Date Of Purchase</p>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-4 img-container">
+                                        <img src="/assets/images/nails.png" />
+                                    </div>
+                                    <div class="col-md-8">
+                                        <p class="card-text text-center ">Product Name</p>
+                                        <p class="card-text text-center ">Product Status</p>
+                                        <p class="card-text text-center ">Date Of Purchase</p>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </ng-template>
+                    </ngb-panel>
+
+                </ngb-accordion>
+
+                <hr/>
+
+            </div>
+            <div class="card  mb-4 orders text-center">
+                <ngb-accordion #acc="ngbAccordion">
+                    <ngb-panel id="toggle-1" title="Order#:2">
+                        <ng-template ngbPanelContent>
+                            <div class="product">
+                                <div class="row">
+                                    <div class="col-md-4 img-container">
+                                        <img src="/assets/images/nails.png" />
+                                    </div>
+                                    <div class="col-md-8">
+                                        <p class="card-text text-center ">Product Name</p>
+                                        <p class="card-text text-center ">Product Status</p>
+                                        <p class="card-text text-center ">Date Of Purchase</p>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-4 img-container">
+                                        <img src="/assets/images/nails.png" />
+                                    </div>
+                                    <div class="col-md-8">
+                                        <p class="card-text text-center ">Product Name</p>
+                                        <p class="card-text text-center ">Product Status</p>
+                                        <p class="card-text text-center ">Date Of Purchase</p>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </ng-template>
+                    </ngb-panel>
+
+                </ngb-accordion>
+
+                <hr/>
+
+            </div>
+            <div class="card  mb-4 orders text-center">
+                <ngb-accordion #acc="ngbAccordion">
+                    <ngb-panel id="toggle-1" title="Order#:3">
+                        <ng-template ngbPanelContent>
+                            <div class="product">
+                                <div class="row">
+                                    <div class="col-md-4 img-container">
+                                        <img src="/assets/images/nails.png" />
+                                    </div>
+                                    <div class="col-md-8">
+                                        <p class="card-text text-center ">Product Name</p>
+                                        <p class="card-text text-center ">Product Status</p>
+                                        <p class="card-text text-center ">Date Of Purchase</p>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-4 img-container">
+                                        <img src="/assets/images/nails.png" />
+                                    </div>
+                                    <div class="col-md-8">
+                                        <p class="card-text text-center ">Product Name</p>
+                                        <p class="card-text text-center ">Product Status</p>
+                                        <p class="card-text text-center ">Date Of Purchase</p>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </ng-template>
+                    </ngb-panel>
+
+                </ngb-accordion>
+
+                <hr/>
+
+            </div>
+        </div>
+
+
+
     </div>
-</div>
