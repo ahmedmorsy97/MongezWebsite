@@ -5,11 +5,15 @@
 var express = require('express');
 var bodyParser = require('body-parser');
 var app = express();
+var cors = require('cors');
 // log requests to the console
 
 // configure body parser
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
+
+
+app.use(cors());
 
 var port = process.env.PORT || 8080; // set our port
 
