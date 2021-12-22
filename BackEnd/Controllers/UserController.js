@@ -103,7 +103,23 @@ router.get('/allusers', function(req, res) {
 })
 
 router.get('/info', authenticateuser, (req, res) => {
+    console.log("IN INFO")
     res.status(200).send(req.user)
+})
+
+router.get('/viewuser/:user_id', (req, res) => {
+    User.findById(req.params.user_id).then(user => {
+            if (!user) {
+                throw { err: "No user with this id" }
+            }
+            res.status(200).send(user);
+
+        })
+        .catch((err) => {
+            res.status(400).send({
+                err: err.message ? err.message : err,
+            });
+        });;
 })
 
 router.patch('/update', authenticateuser, (req, res) => {

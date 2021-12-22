@@ -15,6 +15,7 @@ export class ProductsComponent implements OnInit {
   electricalsubcategories = Electricalsubcategories;
   selectedcategory = [];
   faPlus = faPlus;
+  products: any = [];
   faMinus = faMinus;
   currentsupplierRate = 0;
   currentproductRate = 0;
@@ -82,8 +83,9 @@ export class ProductsComponent implements OnInit {
       page: this.fetchInfo.page,
       limit: this.fetchInfo.limit
     }).subscribe(
-      res => {
+      (res:any) => {
         console.log(res);
+        this.products = res.products;
       }
     )
   }

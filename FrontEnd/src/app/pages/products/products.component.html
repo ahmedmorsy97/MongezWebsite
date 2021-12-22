@@ -92,16 +92,16 @@
             <button class="btn btn-primary w-100 mt-3">Clear Filter</button>
         </div>
         <div class="products row col-md-8">
-            <div (click)="ViewProduct()" class="card col-md-4 ">
+            <div *ngFor="let product of products" (click)="ViewProduct()" class="card col-md-4 ">
                 <div class="card-body">
                     <div class="img-container">
                         <img src="/assets/images/nails.png" />
                     </div>
-                    <h5 class="card-title">Nails</h5>
-                    <h6 class="card-subtitle mb-2 text-muted">2 in. x 4 in. x 8 ft.</h6>
+                    <h5 class="card-title">{{product.productName}}</h5>
+                    <h6 class="card-subtitle mb-2 text-muted">{{product.specs}}</h6>
                     <p class="card-text">Price Range</p>
-                    <p class="card-text">Supplier</p>
-                    <!-- QUANTITY -->
+                    <p class="card-text">Rating</p>
+
                     <div class="quanity mb-2 mt-3">
                         <button class=" minus">  <fa-icon [icon]="faMinus"></fa-icon></button>
                         <input type="number" min="1" value="0" />
@@ -111,7 +111,7 @@
                 </div>
             </div>
 
-            <div class="card col-md-4 ">
+            <!-- <div class="card col-md-4 ">
                 <div (click)="ViewProduct()" class="card-body">
                     <div class="upper">
                         <div class="img-container">
@@ -131,8 +131,8 @@
                         <button class="btn btn-primary w-100">Add to cart</button>
                     </div>
                 </div>
-            </div>
-
+            </div> -->
+            <!-- 
             <div class="card col-md-4 ">
                 <div (click)="ViewProduct()" class="card-body">
                     <div class="img-container">
@@ -142,7 +142,7 @@
                     <h6 class="card-subtitle mb-2 text-muted">2 in. x 4 in. x 8 ft.</h6>
                     <p class="card-text">Price Range</p>
                     <p class="card-text">Supplier</p>
-                    <!-- QUANTITY -->
+                    
                     <div class="quanity mb-2 mt-3">
                         <button class=" minus">  <fa-icon [icon]="faMinus"></fa-icon></button>
                         <input type="number" min="1" value="0" />
@@ -150,7 +150,7 @@
                     </div>
                     <button class="btn btn-primary w-100">Add to cart</button>
                 </div>
-            </div>
+            </div> -->
         </div>
     </div>
 </div>
