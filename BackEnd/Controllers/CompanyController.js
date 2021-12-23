@@ -32,6 +32,23 @@ router.get('/allcompanys', function(req, res) {
         res.json(Company);
     });
 })
+
+router.get('/viewcompany/:company_id', (req, res) => {
+    Company.findById(req.params.company_id).then(company => {
+            console.log("INK")
+            if (!company) {
+                throw { err: "No company with this id" }
+            }
+            res.status(200).send(company);
+
+        })
+        .catch((err) => {
+            res.status(400).send({
+                err: err.message ? err.message : err,
+            });
+        });;
+})
+
 router.patch('/updatebyCompanyadmin', authenticateCompanyadmin, (req, res) => {
     Company.findOneAndUpdate({ admins: { $in: req.user._id } }, { $set: req.body }, { new: true }).then(updatedcompany => res.status(200).send({ company: updatedcompany }))
 })

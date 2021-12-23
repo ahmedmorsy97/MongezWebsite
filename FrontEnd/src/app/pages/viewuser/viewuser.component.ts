@@ -9,6 +9,7 @@ import { Router } from '@angular/router';
 })
 export class ViewuserComponent implements OnInit {
 User = {};
+edit = false;
 
   constructor(private router: Router, private UserSer: UserService) {
 
@@ -16,16 +17,27 @@ User = {};
   ngOnInit(): void {
     this.getUser("");
   }
+saveInfo(){
+  this.edit = !this.edit;
+  console.log(this.edit);
+  if(this.edit==true){
 
+  }
+  else{
+
+  }
+}
   getUser(id) {
     this.UserSer.getUser({
       ...id,
     }).subscribe(
       (res:any) => {
         console.log(res);
-        this.User = res.User;
+        this.User = res;
+        console.log("USER",this.User)
       }
     )
+    
   }
 
 }

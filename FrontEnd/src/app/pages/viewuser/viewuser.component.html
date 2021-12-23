@@ -7,37 +7,75 @@
     </div>
     <div>
         <form class="">
-            <label>{{User.firstname}}</label>
-            <input class="mb-2" type="text" value="Omar" readonly />
+            <div *ngIf="User!=null && edit==false ">
+                <label>First Name</label>
+                <input class="mb-2" type="text" value={{User.firstname}} readonly />
 
-            <label>Last Name</label>
-            <input class="mb-2" type="text" value="Rifky" readonly />
+                <label>Last Name</label>
+                <input class="mb-2" type="text" value={{User.lastname}} readonly />
 
-            <label>Username</label>
-            <input class="mb-2" type="text" value="omarrifky" readonly />
+                <label>Username</label>
+                <input class="mb-2" type="text" value={{User.username}} readonly />
 
-            <label>Email</label>
-            <input class="mb-2" type="email" value="omarrifky@gmail.com" readonly />
+                <label>Email</label>
+                <input class="mb-2" type="email" value={{User.email}} readonly />
 
-            <label>Password</label>
-            <input class="mb-2" type="password" value="1234567" readonly />
+                <label>Password</label>
+                <input class="mb-2" type="password" value={{User.password}} readonly />
 
-            <label>Mobile Number </label>
-            <input class="mb-2" type="tel" value="01004848737" readonly />
+                <label>Mobile Number </label>
+                <input class="mb-2" type="tel" value={{User.mobileNumber}} readonly />
 
-            <label>Date Of Birth</label>
-            <input class="mb-2" type="date" value="1997-10-05" readonly />
+                <label>Date of birth</label>
+                <input class="mb-2" type="date" value={{User.dateOfBirth}} readonly />
 
-            <label>National ID</label>
-            <input class="mb-2" type="text" value="12345673939" readonly />
+                <label>National ID</label>
+                <input class="mb-2" type="text" value={{User.nationalID}} readonly />
 
-            <label>Employee Level</label>
-            <input class="mb-2" type="text" value="CompanyAdmin" readonly />
+                <label>Level</label>
+                <input class="mb-2" type="text" value={{User.employeeLevel}} readonly />
+
+                <label>Limit</label>
+                <input class="mb-2" type="number" value={{User.limit}} readonly />
+
+                <button (click)="saveInfo()" class="btn btn-primary w-100 mt-4">Edit Info</button>
+            </div>
 
 
-            <label>Employee Limit</label>
-            <input class="mb-2" type="number" value="100000" readonly />
 
+            <div *ngIf="User!=null && edit==true ">
+                <label>First Name</label>
+                <input class="mb-2" type="text" value={{User.firstname}} />
+
+                <label>Last Name</label>
+                <input class="mb-2" type="text" value={{User.lastname}} />
+
+                <label>Username</label>
+                <input class="mb-2" type="text" value={{User.username}} />
+
+                <label>Email</label>
+                <input class="mb-2" type="email" value={{User.email}} />
+
+                <label>Password</label>
+                <input class="mb-2" type="password" value={{User.password}} />
+
+                <label>Mobile Number </label>
+                <input class="mb-2" type="tel" value={{User.mobileNumber}} />
+
+                <label>Date of birth</label>
+                <input class="mb-2" type="date" value={{User.dateOfBirth}} />
+
+                <label>National ID</label>
+                <input class="mb-2" type="text" value={{User.nationalID}} />
+
+                <label>Level</label>
+                <input class="mb-2" type="text" value={{User.employeeLevel}} />
+
+                <label>Limit</label>
+                <input class="mb-2" type="number" value={{User.limit}} />
+
+                <button (click)="saveInfo()" class="btn btn-primary w-100 mt-4">Update Info</button>
+            </div>
             <!-- HOW? -->
             <!-- <label>Personal Image</label>
         <input class="mb-2" type="text" placeholder="Personal Image" /> -->
@@ -47,6 +85,6 @@
 
 
 
-            <button class="btn btn-primary w-100 mt-4">Edit User</button>
+
         </form>
     </div>

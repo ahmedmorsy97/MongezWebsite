@@ -6,22 +6,45 @@
         </div>
     </div>
     <form class="">
-        <label>Company Name</label>
-        <input class="mb-2" type="text" value="Orascom" readonly/>
+        <div *ngIf="Company!=null && edit==false">
+            <label>Company Name</label>
+            <input class="mb-2" type="text" value={{Company.name}} readonly/>
 
-        <label>Company Email</label>
-        <input class="mb-2" type="email" value="Orascom@gmial.com" readonly />
+            <label>Email</label>
+            <input class="mb-2" type="email" value={{Company.email}} readonly />
 
-        <label>Company Address </label>
-        <input class="mb-2" type="text" value="Mohandseen" readonly />
+            <label>Address</label>
+            <input class="mb-2" type="text" value={{Company.address}} readonly />
 
-        <label>Company Number </label>
-        <input class="mb-2" type="tel" value="01004848737" readonly />
+            <label>Company Number</label>
+            <input class="mb-2" type="tel" value={{Company.companyNumber}} readonly />
 
-        <label>Tax Number</label>
-        <input class="mb-2" type="text" value="123456789" readonly />
+            <label>Tax Number</label>
+            <input class="mb-2" type="text" value={{Company.TaxNumber}} readonly />
 
 
-        <button class="btn btn-primary w-100 mt-4">Edit Company</button>
+            <button (click)="saveInfo()" class="btn btn-primary w-100 mt-4">Edit Info</button>
+        </div>
+
+        <div *ngIf="Company!=null && edit==true">
+            <label>Company Name</label>
+            <input class="mb-2" type="text" value={{Company.name}}/>
+
+            <label>Email</label>
+            <input class="mb-2" type="email" value={{Company.email}} readonly />
+
+            <label>Address</label>
+            <input class="mb-2" type="text" value={{Company.address}} readonly />
+
+            <label>Company Number</label>
+            <input class="mb-2" type="tel" value={{Company.companyNumber}} readonly />
+
+            <label>Tax Number</label>
+            <input class="mb-2" type="text" value={{Company.TaxNumber}} readonly />
+
+
+            <button (click)="saveInfo()" class="btn btn-primary w-100 mt-4">Save Info</button>
+        </div>
+
     </form>
 </div>
