@@ -35,7 +35,6 @@ router.get('/allcompanys', function(req, res) {
 
 router.get('/viewcompany/:company_id', (req, res) => {
     Company.findById(req.params.company_id).then(company => {
-            console.log("INK")
             if (!company) {
                 throw { err: "No company with this id" }
             }
