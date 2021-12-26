@@ -13,10 +13,10 @@
 
                 <div *ngIf="filters.price" class="info">
                     <label>From</label>
-                    <input class="mb-2" type="number" placeholder="From Price" />
+                    <input class="mb-2" type="number" placeholder="From Price" name="price_from" [(ngModel)]="filterData.price.from" />
 
                     <label>To</label>
-                    <input class="mb-2" type="number" placeholder="To Price" />
+                    <input class="mb-2" type="number" placeholder="To Price" name="price_to" [(ngModel)]="filterData.price.to" />
 
                 </div>
 
@@ -31,7 +31,7 @@
                 </div>
                 <div *ngIf="filters.description" class="info">
 
-                    <input class="mb-2" type="text" placeholder="Product Description" />
+                    <input class="mb-2" type="text" placeholder="Product Description" name="desc" [(ngModel)]="filterData.description" />
 
                 </div>
 
@@ -45,8 +45,7 @@
                     <fa-icon *ngIf="!filters.supplier" [icon]="faPlus"></fa-icon>
                 </div>
                 <div *ngIf="filters.supplier" class="info">
-
-                    <ngx-bootstrap-multiselect [options]="suppliers" [texts]="myTexts" [settings]="mySettings" [(ngModel)]="optionsModel"></ngx-bootstrap-multiselect>
+                    <ngx-bootstrap-multiselect [options]="suppliers" [texts]="myTexts" [settings]="mySettings" name="suppliers" [(ngModel)]="filterData.supplier"></ngx-bootstrap-multiselect>
                 </div>
 
 
@@ -59,7 +58,7 @@
                     <fa-icon *ngIf="!filters.productrating" [icon]="faPlus"></fa-icon>
                 </div>
                 <div *ngIf="filters.productrating" class="info">
-                    <ngb-rating [(rate)]="currentproductRate " [max]="5">
+                    <ngb-rating name="productrating" [(rate)]="filterData.productrating" [max]="5">
                         <ng-template let-fill="fill" let-index="index">
                             <span class="star" [class.filled]="fill === 100">&#9733;</span>
                         </ng-template>
@@ -70,14 +69,14 @@
 
 
             </div>
-            <div class="filter">
+            <!-- <div class="filter">
                 <div (click)="togglefilter('supplierrating')" class="header d-flex align-items-center justify-content-between">
                     <h5>Supplier Rating</h5>
                     <fa-icon *ngIf="filters.supplierrating" [icon]="faMinus"></fa-icon>
                     <fa-icon *ngIf="!filters.supplierrating" [icon]="faPlus"></fa-icon>
                 </div>
                 <div *ngIf="filters.supplierrating" class="info">
-                    <ngb-rating [(rate)]="currentsupplierRate" [max]="5">
+                    <ngb-rating name="supplierrating" [(rate)]="filterData.supplierrating" [max]="5">
                         <ng-template let-fill="fill" let-index="index">
                             <span class="star" [class.filled]="fill === 100">&#9733;</span>
                         </ng-template>
@@ -87,9 +86,9 @@
                 </div>
 
 
-            </div>
-            <button class="btn btn-primary w-100 mt-4">Apply Filter</button>
-            <button class="btn btn-primary w-100 mt-3">Clear Filter</button>
+            </div> -->
+            <button (click)="applyFilter()" class="btn btn-primary w-100 mt-4">Apply Filter</button>
+            <button (click)="clearFilter()" class="btn btn-primary w-100 mt-3">Clear Filter</button>
         </div>
         <div class="products row col-md-8">
             <div *ngFor="let product of products" (click)="ViewProduct()" class="card col-md-4 ">

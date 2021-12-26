@@ -14,12 +14,24 @@ export class ProductsComponent implements OnInit {
   mechanicalsubcategories = Mechanicalsubcategories;
   electricalsubcategories = Electricalsubcategories;
   selectedcategory = [];
+  category: string = null;
+  subcategory: string = null;
   faPlus = faPlus;
   products: any = [];
   faMinus = faMinus;
   currentsupplierRate = 0;
   currentproductRate = 0;
   filters = { price: false, description: false, supplier: false, productrating: false, supplierrating: false };
+  filterData = {
+    price: {
+      from: null,
+      to: null
+    },
+    description: null,
+    supplier: null,
+    productrating: null,
+    supplierrating: null,
+  }
   optionsModel: number[];
   suppliers: IMultiSelectOption[];
 
@@ -56,16 +68,26 @@ export class ProductsComponent implements OnInit {
     defaultTitle: 'Select Suppliers',
     allSelected: 'All selected',
   };
+
+  filterParsed:any = {};
+
   ngOnInit(): void {
     const url = this.router.url.replace("/products", "").split("/");
     if (url.length == 1) {
       this.selectedcategory = categories;
+      this.category = null;
+      this.subcategory = null;
     }
     else if (url.length == 2) {
       switch (url[1]) {
         case "electrical": this.selectedcategory = this.electricalsubcategories; break;
         case "mechanical": this.selectedcategory = this.mechanicalsubcategories; break;
       }
+      this.category = url[1];
+      this.subcategory = null;
+    } else {
+      this.category = url[1];
+      this.subcategory = url[2];
     }
     this.suppliers = [
       { id: 1, name: 'Supplier 1' },
@@ -77,9 +99,49 @@ export class ProductsComponent implements OnInit {
     this.getProducts();
   }
 
-  getProducts(filters = {}) {
+  applyFilter() {
+    // console.log(this.filterData);
+    this.filterParsed = {
+      price: this.filterData.price.from && this.filterData.price.to && {
+          $gte: this.filterData.price.from || null,
+          $lte: this.filterData.price.to || null
+      },
+      description: this.filterData.description && {
+        $regex: this.filterData.description,
+        $options: "i"
+      },
+      $or: this.filterData.supplier?.map( supplier => ({supplier})) || null,
+      rating: this.filterData.productrating || null
+    }
+
+    Object.keys(this.filterParsed).forEach( el => {
+      if(!this.filterParsed[el]) delete this.filterParsed[el]
+    })
+
+    // console.log(this.filterParsed);
+    this.getProducts(this.filterParsed);
+  }
+
+  clearFilter() {
+    this.filterData = {
+      price: {
+        from: null,
+        to: null
+      },
+      description: null,
+      supplier: null,
+      productrating: null,
+      supplierrating: null,
+    }
+  }
+
+  getProducts(filters = null) {
+    const queryBody = {...(filters || this.filterParsed), category: this.category, Subcategory: this.subcategory};
+    if(!queryBody.category) delete queryBody.category;
+    if(!queryBody.Subcategory) delete queryBody.Subcategory;
+
     this.ProductSer.getProducts({
-      ...filters,
+      queryBody,
       page: this.fetchInfo.page,
       limit: this.fetchInfo.limit
     }).subscribe(
