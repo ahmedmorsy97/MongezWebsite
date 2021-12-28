@@ -29,7 +29,7 @@ const routes: Routes = [
   { path: 'createuser',component: CreateuserComponent},
   { path: 'createsupplier',component: CreatesupplierComponent},
   { path: 'createproduct',component: CreateproductComponent},
-  { path: 'viewuser',component: ViewuserComponent},
+  { path: 'viewuser/:id',component: ViewuserComponent},
   { path: 'viewcompany',component: ViewcompanyComponent},
   { path: 'viewsupplier',component: ViewsupplierComponent},
   { path: 'viewmyorders',component: ViewordersComponent},

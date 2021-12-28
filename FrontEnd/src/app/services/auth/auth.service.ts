@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { EventEmitter, Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
 
 @Injectable({
@@ -8,11 +8,16 @@ import { environment } from 'src/environments/environment';
 export class AuthService {
 
   baseUrl: string = `${environment.baseUrl}`;
+  authState: EventEmitter<string> = new EventEmitter<string>()
+
   constructor(private http: HttpClient) { }
 
   getToken() {
     const token = localStorage.getItem("currentuser") && JSON.parse(localStorage.getItem("currentuser"))?.token;
     return token ? `Bearer ${token}` : null;
+  }
+  checkUser(){
+    return localStorage.getItem("currentuser");
   }
 
   login(email, password, type ="user") {
@@ -24,7 +29,7 @@ export class AuthService {
   }
 
   setToken(data) {
-    localStorage.setItem("currentuser", data)
+    localStorage.setItem("currentuser", JSON.stringify(data))
   }
 
   logout( type ="user") {

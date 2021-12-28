@@ -10,7 +10,7 @@ export class UserService {
 
   constructor(private http: HttpClient) { }
   
-  getUser(id: any = {}) {
-    return this.http.get(this.baseUrl+'/viewuser/'+'61648a84ed391a2580d89a87');
+  getUser(id:string) {
+    return this.http.get(this.baseUrl+'/viewuser/'+ id);
   }
 }

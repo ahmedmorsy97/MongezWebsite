@@ -44,7 +44,7 @@ router.post("/registercompanyadmin", authenticateCompanyadmin, (req, res) => {
     newuser.firstname = req.body.firstname;
     newuser.lastname = req.body.lastname;
     newuser.password = req.body.password;
-    newuser.levelOfPurchase = req.body.levelOfPurchase;
+
     newuser.rating = req.body.rating;
     newuser.numberOfRatings = req.body.numberOfRatings;
     newuser.imageURL = req.body.imageURL;
@@ -70,7 +70,7 @@ router.post("/registerCompanyAdmin", authenticateadmin, (req, res) => {
     newuser.firstname = req.body.firstname;
     newuser.lastname = req.body.lastname;
     newuser.password = req.body.password;
-    newuser.levelOfPurchase = req.body.levelOfPurchase;
+
     newuser.rating = req.body.rating;
     newuser.numberOfRatings = req.body.numberOfRatings;
     newuser.imageURL = req.body.imageURL;
@@ -96,7 +96,7 @@ router.post("/registerEmployeeByCompanyAdmin", authenticateCompanyadmin, (req, r
     newuser.firstname = req.body.firstname;
     newuser.lastname = req.body.lastname;
     newuser.password = req.body.password;
-    newuser.levelOfPurchase = req.body.levelOfPurchase;
+
     newuser.rating = req.body.rating;
     newuser.numberOfRatings = req.body.numberOfRatings;
     newuser.imageURL = req.body.imageURL;
@@ -112,6 +112,30 @@ router.post("/registerEmployeeByCompanyAdmin", authenticateCompanyadmin, (req, r
         });
 })
 
+router.post("/registerEmployee", (req, res) => {
+
+    var newuser = new User(); // create a new instance of the User model
+    newuser.username = req.body.username;
+    newuser.email = req.body.email;
+    newuser.mobileNumber = req.body.mobileNumber;
+    newuser.dateOfBirth = req.body.dateOfBirth;
+    newuser.firstname = req.body.firstname;
+    newuser.lastname = req.body.lastname;
+    newuser.password = req.body.password;
+    newuser.rating = req.body.rating;
+    newuser.numberOfRatings = req.body.numberOfRatings;
+    newuser.imageURL = req.body.imageURL;
+    newuser.nationalID = req.body.nationalID;
+    newuser.employeeLevel = "Employee";
+    // newuser.createdBy = req.user._id;
+    newuser.company = req.body.company;
+    newuser.save().then(user => res.status(200).send(user))
+        .catch((err) => {
+            res.status(400).send({
+                err: err.message ? err.message : err,
+            });
+        });
+})
 
 router.post("/registerEmployeeByAdmin", authenticateadmin, (req, res) => {
 
@@ -123,7 +147,6 @@ router.post("/registerEmployeeByAdmin", authenticateadmin, (req, res) => {
     newuser.firstname = req.body.firstname;
     newuser.lastname = req.body.lastname;
     newuser.password = req.body.password;
-    newuser.levelOfPurchase = req.body.levelOfPurchase;
     newuser.rating = req.body.rating;
     newuser.numberOfRatings = req.body.numberOfRatings;
     newuser.imageURL = req.body.imageURL;
@@ -149,7 +172,6 @@ router.post("/registerManagerByAdmin", authenticateadmin, (req, res) => {
     newuser.firstname = req.body.firstname;
     newuser.lastname = req.body.lastname;
     newuser.password = req.body.password;
-    newuser.levelOfPurchase = req.body.levelOfPurchase;
     newuser.rating = req.body.rating;
     newuser.numberOfRatings = req.body.numberOfRatings;
     newuser.imageURL = req.body.imageURL;
@@ -174,7 +196,7 @@ router.post("/registerManagerByAdmin", authenticateadmin, (req, res) => {
     newuser.firstname = req.body.firstname;
     newuser.lastname = req.body.lastname;
     newuser.password = req.body.password;
-    newuser.levelOfPurchase = req.body.levelOfPurchase;
+
     newuser.rating = req.body.rating;
     newuser.numberOfRatings = req.body.numberOfRatings;
     newuser.imageURL = req.body.imageURL;
