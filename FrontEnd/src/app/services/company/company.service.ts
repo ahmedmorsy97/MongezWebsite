@@ -12,7 +12,7 @@ export class CompanyService {
   }
 
   getCompany(id: any = {}) {
-    return this.http.get(this.baseUrl+'/viewcompany/'+'61c498763811283cc0748315');
+    return this.http.get(this.baseUrl+'/viewcompany/'+'61745abb6ca3910d0cb41c47');
   }
   
 }
