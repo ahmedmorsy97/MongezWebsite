@@ -35,6 +35,10 @@
                 <label>Limit</label>
                 <input class="mb-2" type="number" value={{User.limit}} readonly />
 
+                <label>Wallet</label>
+                <input class="mb-2" type="number" value={{User.wallet}} readonly />
+
+
                 <button (click)="saveInfo()" class="btn btn-primary w-100 mt-4">Edit Info</button>
             </div>
 
@@ -68,11 +72,6 @@
                 <label>National ID</label>
                 <input class="mb-2" type="text" value={{User.nationalID}} />
 
-                <label>Level</label>
-                <input class="mb-2" type="text" value={{User.employeeLevel}} />
-
-                <label>Limit</label>
-                <input class="mb-2" type="number" value={{User.limit}} />
 
                 <button (click)="saveInfo()" class="btn btn-primary w-100 mt-4">Update Info</button>
             </div>

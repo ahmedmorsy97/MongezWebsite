@@ -112,7 +112,7 @@ router.post("/registerEmployeeByCompanyAdmin", authenticateCompanyadmin, (req, r
         });
 })
 
-router.post("/registerEmployee", (req, res) => {
+router.post("/registerEmployeetest", (req, res) => {
 
     var newuser = new User(); // create a new instance of the User model
     newuser.username = req.body.username;
@@ -126,7 +126,7 @@ router.post("/registerEmployee", (req, res) => {
     newuser.numberOfRatings = req.body.numberOfRatings;
     newuser.imageURL = req.body.imageURL;
     newuser.nationalID = req.body.nationalID;
-    newuser.employeeLevel = "Employee";
+    newuser.employeeLevel = req.body.params;
     // newuser.createdBy = req.user._id;
     newuser.company = req.body.company;
     newuser.save().then(user => res.status(200).send(user))
