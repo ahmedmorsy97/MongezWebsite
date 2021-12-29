@@ -12,7 +12,6 @@ import { NgForm } from '@angular/forms';
 export class LoginComponent implements OnInit {
   faWindowClose = faWindowClose;
   selected = "user";
-  
   err: string = null;
   disabled: boolean = false;
   email: string = null;
@@ -37,6 +36,7 @@ export class LoginComponent implements OnInit {
       this.disabled = true;
       this.authSer.login(this.email, this.password ,this.selected).subscribe(
         (res: any) => {
+          localStorage.setItem("type", this.selected)
           this.disabled = false;
           this.authSer.setToken(res)
           this.authSer.authState.emit("Login")

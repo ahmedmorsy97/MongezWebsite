@@ -1,24 +1,24 @@
 <div class="container">
     <form class="">
         <label>Company Name</label>
-        <input class="mb-2" type="text" placeholder="Name" />
+        <input class="mb-2" type="text" placeholder="Name" name="name" [(ngModel)]="name" />
 
         <label>Company Email</label>
-        <input class="mb-2" type="email" placeholder="Company Email" />
+        <input class="mb-2" type="email" placeholder="Company Email" name="email" [(ngModel)]="email" />
 
         <label>Company Address </label>
-        <input class="mb-2" type="text" placeholder="Company Address" />
+        <input class="mb-2" type="text" placeholder="Company Address" name="address" [(ngModel)]="address" />
 
         <label>Company Number </label>
-        <input class="mb-2" type="tel" placeholder="Company Number" />
+        <input class="mb-2" type="tel" placeholder="Company Number" name="number" [(ngModel)]="number" />
 
         <label>Tax Number</label>
-        <input class="mb-2" type="text" placeholder="Tax Number" />
+        <input class="mb-2" type="text" placeholder="Tax Number" name="taxNumber" [(ngModel)]="taxNumber" />
 
         <label>Company Logo</label>
-        <input class="mb-2" type="text" placeholder="Company Logo" />
+        <input class="mb-2" type="text" placeholder="Company Logo" name="logo" [(ngModel)]="logo" />
 
 
-        <button class="btn btn-primary w-100 mt-4">Create Company</button>
+        <button (click)="createCompany()" class="btn btn-primary w-100 mt-4">Create Company</button>
     </form>
 </div>

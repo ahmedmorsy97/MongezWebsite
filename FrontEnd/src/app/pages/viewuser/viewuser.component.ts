@@ -10,6 +10,16 @@ import { ActivatedRoute, Router } from '@angular/router';
 export class ViewuserComponent implements OnInit {
 User = {};
 edit = false;
+email="";
+firstname="";
+lastname="";
+username="";
+password="";
+mobileNumber="";
+dateOfBirth="";
+nationalID="";
+companyName="";
+taxNumber ="";
 
   constructor(private router: Router,private activerouter: ActivatedRoute, private UserSer: UserService) {
 

@@ -31,7 +31,7 @@ const routes: Routes = [
   { path: 'createproduct',component: CreateproductComponent},
   { path: 'viewuser/:id',component: ViewuserComponent},
   { path: 'viewcompany',component: ViewcompanyComponent},
-  { path: 'viewsupplier',component: ViewsupplierComponent},
+  { path: 'viewsupplier/:id',component: ViewsupplierComponent},
   { path: 'viewmyorders',component: ViewordersComponent},
   
 ];

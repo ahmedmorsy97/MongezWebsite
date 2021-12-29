@@ -17,13 +17,14 @@ export class NavbarComponent implements OnInit {
   faUser = faUser;
   modalRef?: BsModalRef;
   user = null;
-
+  type = "";
   constructor(private router:Router,private modalService: BsModalService, private authServ: AuthService) { 
    
 
   }
   ngOnInit(): void {
     this.user = this.authServ.checkUser();
+    this.type = localStorage.getItem("type")
     this.authServ.authState.subscribe(
       state =>{
         this.user = this.authServ.checkUser();
@@ -37,7 +38,11 @@ export class NavbarComponent implements OnInit {
      console.log(this.user);
      const userdata = JSON.parse(this.user);
      console.log(userdata);
+    this.type = localStorage.getItem("type")
+    if(this.type=="user")
     this.router.navigateByUrl('/viewuser/'+ userdata.user._id);
+    if(this.type=="supplier")
+    this.router.navigateByUrl('/viewsupplier/'+ userdata.supplier._id);
    }
    GoToHome(){
     this.router.navigateByUrl('/')

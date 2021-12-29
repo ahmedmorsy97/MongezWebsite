@@ -1,35 +1,38 @@
 <div class="container">
     <form class="">
         <label>First Name</label>
-        <input class="mb-2" type="text" placeholder="First Name" />
+        <input class="mb-2" type="text" placeholder="First Name" name="firstname" [(ngModel)]="firstname" />
 
         <label>Last Name</label>
-        <input class="mb-2" type="text" placeholder="Last Name" />
+        <input class="mb-2" type="text" placeholder="Last Name" name="lastname" [(ngModel)]="lastname" />
 
         <label>Username</label>
-        <input class="mb-2" type="text" placeholder="Username" />
+        <input class="mb-2" type="text" placeholder="Username" name="username" [(ngModel)]="username" />
 
         <label>Email</label>
-        <input class="mb-2" type="email" placeholder="User Email" />
+        <input class="mb-2" type="email" placeholder="User Email" name="email" [(ngModel)]="email" />
 
         <label>Password</label>
-        <input class="mb-2" type="password" placeholder="Company Address" />
+        <input class="mb-2" type="text" placeholder="Password" name="password" [(ngModel)]="password" />
+
+        <label>Address</label>
+        <input class="mb-2" type="text" placeholder="Address" name="address" [(ngModel)]="address" />
 
         <label>Mobile Number </label>
-        <input class="mb-2" type="tel" placeholder="Moble Number" />
+        <input class="mb-2" type="tel" placeholder="Moble Number" name="mobileNumber" [(ngModel)]="mobileNumber" />
 
         <label>Date Of Birth</label>
-        <input class="mb-2" type="date" placeholder="Date Of Birth" />
+        <input class="mb-2" type="date" placeholder="Date Of Birth" name="dateOfBirth" [(ngModel)]="dateOfBirth" />
 
         <label>National ID</label>
-        <input class="mb-2" type="text" placeholder="National ID" />
+        <input class="mb-2" type="text" placeholder="National ID" name="nationalID" [(ngModel)]="nationalID" />
 
         <label>Company Name</label>
-        <input class="mb-2" type="text" placeholder="Company Name" />
+        <input class="mb-2" type="text" placeholder="Company Name" name="companyName" [(ngModel)]="companyName" />
 
 
         <label>Tax Number</label>
-        <input class="mb-2" type="text" placeholder="Tax Number" />
+        <input class="mb-2" type="text" placeholder="Tax Number" name="taxNumber" [(ngModel)]="taxNumber" />
 
         <!-- HOW?? -->
         <label>Official Documents</label>
@@ -42,6 +45,6 @@
 
 
 
-        <button class="btn btn-primary w-100 mt-4">Create Supplier</button>
+        <button (click)="createSupplier()" class="btn btn-primary w-100 mt-4">Create Supplier</button>
     </form>
 </div>

@@ -1,45 +1,45 @@
 <div class="container">
     <form class="">
         <label>First Name</label>
-        <input class="mb-2" type="text" placeholder="First Name" />
+        <input class="mb-2" type="text" placeholder="First Name" name="firstname" [(ngModel)]="firstname" />
 
         <label>Last Name</label>
-        <input class="mb-2" type="text" placeholder="Last Name" />
+        <input class="mb-2" type="text" placeholder="Last Name" name="lastname" [(ngModel)]="lastname" />
 
         <label>Username</label>
-        <input class="mb-2" type="text" placeholder="Username" />
+        <input class="mb-2" type="text" placeholder="Username" name="username" [(ngModel)]="username" />
 
         <label>Email</label>
-        <input class="mb-2" type="email" placeholder="User Email" />
+        <input class="mb-2" type="email" placeholder="User Email" name="email" [(ngModel)]="email" />
 
         <label>Password</label>
-        <input class="mb-2" type="password" placeholder="Company Address" />
+        <input class="mb-2" type="password" placeholder="Password" name="password" [(ngModel)]="password" />
 
         <label>Mobile Number </label>
-        <input class="mb-2" type="tel" placeholder="Moble Number" />
+        <input class="mb-2" type="tel" placeholder="Moble Number" name="mobileNumber" [(ngModel)]="mobileNumber" />
 
         <label>Date Of Birth</label>
-        <input class="mb-2" type="date" placeholder="Date Of Birth" />
+        <input class="mb-2" type="date" placeholder="Date Of Birth" name="dateOfBirth" [(ngModel)]="dateOfBirth" />
 
         <label>National ID</label>
-        <input class="mb-2" type="text" placeholder="National ID" />
+        <input class="mb-2" type="text" placeholder="National ID" name="nationalID" [(ngModel)]="nationalID" />
 
         <label>Employee Level</label>
-        <input class="mb-2" type="text" placeholder="Employee Level" />
+        <input class="mb-2" type="text" placeholder="Employee Level" name="employeeLevel" [(ngModel)]="employeeLevel" />
 
 
         <label>Employee Limit</label>
-        <input class="mb-2" type="number" placeholder="Employee Limit" />
+        <input class="mb-2" type="number" placeholder="Employee Limit" name="limit" [(ngModel)]="limit" />
 
         <!-- HOW? -->
         <label>Personal Image</label>
-        <input class="mb-2" type="text" placeholder="Personal Image" />
+        <input class="mb-2" type="text" placeholder="Personal Image" name="image" [(ngModel)]="image" />
 
         <!--  -->
 
 
 
 
-        <button class="btn btn-primary w-100 mt-4">Create User</button>
+        <button (click)="createUser()" class="btn btn-primary w-100 mt-4">Create User</button>
     </form>
 </div>

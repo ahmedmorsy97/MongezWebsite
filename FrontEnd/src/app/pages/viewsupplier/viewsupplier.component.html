@@ -6,44 +6,87 @@
         </div>
     </div>
     <form class="">
-        <label>First Name</label>
-        <input class="mb-2" type="text" value="Ahmed" readonly/>
 
-        <label>Last Name</label>
-        <input class="mb-2" type="text" value="Samir" readonly />
+        <div *ngIf="Supplier!=null && edit==false">
+            <label>First Name</label>
+            <input class="mb-2" type="text" value={{Supplier.firstname}} readonly/>
 
-        <label>Username</label>
-        <input class="mb-2" type="text" value="ahmedsamir" readonly />
+            <label>Last Name</label>
+            <input class="mb-2" type="text" value={{Supplier.lastname}} readonly />
 
-        <label>Email</label>
-        <input class="mb-2" type="email" value="ahmedsamir@gmail.com" readonly />
+            <label>Username</label>
+            <input class="mb-2" type="text" value={{Supplier.username}} readonly />
 
-        <label>Password</label>
-        <input class="mb-2" type="password" value="Ahmedsamir1234" readonly />
+            <label>Email</label>
+            <input class="mb-2" type="email" value={{Supplier.email}} readonly />
 
-        <label>Mobile Number </label>
-        <input class="mb-2" type="tel" value="01158830910" readonly />
-
-        <label>Date Of Birth</label>
-        <input class="mb-2" type="date" value="1997-10-06" readonly/>
-
-        <label>National ID</label>
-        <input class="mb-2" type="text" value="123903300020" readonly />
-
-        <label>Company Name</label>
-        <input class="mb-2" type="text" value="Hadeed Ezz" readonly />
+            <label>Address</label>
+            <input class="mb-2" type="text" value={{Supplier.address}} readonly />
 
 
-        <label>Tax Number</label>
-        <input class="mb-2" type="text" value="1234544544" readonly />
+            <label>Mobile Number </label>
+            <input class="mb-2" type="tel" value={{Supplier.mobileNumber}} readonly />
 
-        <!-- HOW?? -->
-        <label>Official Documents</label>
-        <input class="mb-2" type="text" placeholder="Official Documents" />
+            <label>Date Of Birth</label>
+            <input class="mb-2" type="date" value={{Supplier.dateOfBirth}} readonly/>
 
+            <label>National ID</label>
+            <input class="mb-2" type="text" value={{Supplier.nationalID}} readonly />
+
+            <label>Company Name</label>
+            <input class="mb-2" type="text" value={{Supplier.companyName}} readonly />
+
+
+            <label>Tax Number</label>
+            <input class="mb-2" type="text" value={{Supplier.taxNumber}} readonly />
+
+            <!-- HOW?? -->
+            <label>Official Documents</label>
+            <input class="mb-2" type="text" placeholder="Official Documents" />
+            <button (click)="saveInfo()" class="btn btn-primary w-100 mt-4">Edit Info</button>
+        </div>
+
+        <div *ngIf="Supplier!=null && edit==true ">
+            <label>First Name</label>
+            <input class="mb-2" type="text" placeholder={{Supplier.firstname}} name="firstname" [(ngModel)]="firstname" />
+
+            <label>Last Name</label>
+            <input class="mb-2" type="text" placeholder={{Supplier.lastname}} name="lastname" [(ngModel)]="lastname" />
+
+            <label>Username</label>
+            <input class="mb-2" type="text" placeholder={{Supplier.username}} name="username" [(ngModel)]="username" />
+
+            <label>Email</label>
+            <input class="mb-2" type="email" placeholder={{Supplier.email}} name="email" [(ngModel)]="email" />
+
+            <label>Enter New Password</label>
+            <input class="mb-2" type="password" placeholder={{Supplier.password}} name="password" [(ngModel)]="password" />
+
+            <label>Address</label>
+            <input class="mb-2" type="text" placeholder={{Supplier.address}} name="address" [(ngModel)]="address" />
+
+
+            <label>Mobile Number </label>
+            <input class="mb-2" type="tel" placeholder={{Supplier.mobileNumber}} name="mobileNumber" [(ngModel)]="mobileNumber" />
+
+            <label>Date Of Birth</label>
+            <input class="mb-2" type="date" placeholder={{Supplier.dateOfBirth}} name="dateOfBirth" [(ngModel)]="dateOfBirth" />
+
+            <label>National ID</label>
+            <input class="mb-2" type="text" placeholder={{Supplier.nationalID}} name="nationalID" [(ngModel)]="nationalID" />
+
+            <label>Company Name</label>
+            <input class="mb-2" type="text" placeholder={{Supplier.companyName}} name="companyName" [(ngModel)]="companyName" />
+
+
+            <label>Tax Number</label>
+            <input class="mb-2" type="text" placeholder={{Supplier.taxNumber}} name="taxNumber" [(ngModel)]="taxNumber" />
+
+            <!-- HOW?? -->
+            <label>Official Documents</label>
+            <input class="mb-2" type="text" placeholder="Official Documents" />
+            <button (click)="saveInfo()" class="btn btn-primary w-100 mt-4">Update Info</button>
+        </div>
         <!--  -->
-
-
-        <button class="btn btn-primary w-100 mt-4">Edit Supplier</button>
     </form>
 </div>
