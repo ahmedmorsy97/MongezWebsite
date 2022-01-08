@@ -6,6 +6,7 @@ import { environment } from "../../../environments/environment"
 })
 export class SupplierService {
   baseUrl: string = `${environment.baseUrl}/supplier`;
+  supplier :any;
 
   constructor(private http: HttpClient) { }
 
@@ -31,6 +32,37 @@ export class SupplierService {
       taxNumber,
       image,
       address
+    });
+  }
+  updateInfo( id,firstname,lastname,password,mobileNumber,dateOfBirth,email,address){
+ const url = `${this.baseUrl}/updatemyinfo/`+id;
+    this.supplier= this.http.get(this.baseUrl+'/viewsupplier/'+id); ;
+    if(firstname=="")
+    firstname = this.supplier.firstname
+     if(lastname=="")
+    lastname = this.supplier.lastname
+     if(password=="")
+    password = this.supplier.password
+     if(mobileNumber=="")
+    mobileNumber = this.supplier.mobileNumber
+     if(dateOfBirth=="")
+    dateOfBirth = this.supplier.dateOfBirth
+     if(email=="")
+    email = this.supplier.email
+    if(address=="")
+    address = this.supplier.address
+    // if(logo=="")
+    // logo = this.supplier.logo;
+
+    return this.http.patch(url, {
+   firstname,
+   lastname,
+   password,
+   mobileNumber,
+   dateOfBirth,
+   email
+  // logo,
+    
     });
   }
 }

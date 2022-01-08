@@ -9,6 +9,17 @@ import { ActivatedRoute, Router } from '@angular/router';
 export class ViewsupplierComponent implements OnInit {
 Supplier = {};
 edit = false;
+email="";
+firstname="";
+lastname="";
+username="";
+password="";
+address = "";
+mobileNumber="";
+dateOfBirth="";
+nationalID="";
+// companyName="";
+taxNumber ="";
   constructor(private router: Router, private activerouter: ActivatedRoute, private SupplierSer: SupplierService) { }
 
   ngOnInit(): void {
@@ -27,13 +38,24 @@ edit = false;
     )
   }
 
-  saveInfo(){
+
+saveInfo(id){
     this.edit = !this.edit;
     console.log(this.edit);
-    if(this.edit==false){
-      
-      
+    if(this.edit!=true){
+ this.activerouter.paramMap.subscribe((res:any)=>{
+      console.log(res)
+     this.SupplierSer.updateInfo(res.params.id,this.firstname,this.lastname,this.password,this.mobileNumber,this.dateOfBirth,this.email,this.address).subscribe(
+      (res:any) => {
+          console.log(res);
+          this.Supplier = res;
+          this.router.navigateByUrl('') // In implementation navigation goes to users page
+
+        }
+    )
+
+    })
     }
- 
   }
+
 }

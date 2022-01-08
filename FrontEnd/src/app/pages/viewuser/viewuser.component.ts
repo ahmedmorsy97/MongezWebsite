@@ -18,8 +18,7 @@ password="";
 mobileNumber="";
 dateOfBirth="";
 nationalID="";
-companyName="";
-taxNumber ="";
+
 
   constructor(private router: Router,private activerouter: ActivatedRoute, private UserSer: UserService) {
 
@@ -31,16 +30,24 @@ taxNumber ="";
 
     })
   }
-saveInfo(){
-  this.edit = !this.edit;
-  console.log(this.edit);
-  if(this.edit==true){
+saveInfo(id){
+    this.edit = !this.edit;
+    console.log(this.edit);
+    if(this.edit!=true){
+ this.activerouter.paramMap.subscribe((res:any)=>{
+      console.log(res)
+    this.UserSer.updateInfo(res.params.id,this.firstname,this.lastname,this.password,this.mobileNumber,this.dateOfBirth,this.email).subscribe(
+      (res:any) => {
+          console.log(res);
+          this.User = res;
+          this.router.navigateByUrl('') // In implementation navigation goes to users page
 
-  }
-  else{
+        }
+    )
 
+    })
+    }
   }
-}
   getUser(id) {
     this.UserSer.getUser(id).subscribe(
       (res:any) => {

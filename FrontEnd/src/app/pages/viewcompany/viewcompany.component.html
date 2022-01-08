@@ -28,22 +28,22 @@
 
         <div *ngIf="Company!=null && edit==true">
             <label>Company Name</label>
-            <input class="mb-2" type="text" value={{Company.name}}/>
+            <input class="mb-2" type="text" placeholder={{Company.name}} name="name" [(ngModel)]="name" />
 
             <label>Email</label>
-            <input class="mb-2" type="email" value={{Company.email}} />
+            <input class="mb-2" type="email" placeholder={{Company.email}} name="email" [(ngModel)]="email" />
 
             <label>Address</label>
-            <input class="mb-2" type="text" value={{Company.address}} />
+            <input class="mb-2" type="text" placeholder={{Company.address}} name="address" [(ngModel)]="address" />
 
             <label>Company Number</label>
-            <input class="mb-2" type="tel" value={{Company.companyNumber}} />
+            <input class="mb-2" type="tel" placeholder={{Company.companyNumber}} name="companyNumber" [(ngModel)]="companyNumber" />
 
             <label>Tax Number</label>
-            <input class="mb-2" type="text" value={{Company.TaxNumber}} />
+            <input class="mb-2" type="text" placeholder={{Company.TaxNumber}} name="taxNumber" [(ngModel)]="taxNumber" />
 
 
-            <button (click)="saveInfo()" class="btn btn-primary w-100 mt-4">Save Info</button>
+            <button (click)="saveInfo(2)" class="btn btn-primary w-100 mt-4">Update Info</button>
         </div>
 
     </form>

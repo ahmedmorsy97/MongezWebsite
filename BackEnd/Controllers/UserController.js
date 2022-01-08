@@ -275,9 +275,13 @@ router.get('/viewuser/:user_id', (req, res) => {
         });;
 })
 
-router.patch('/update', authenticateuser, (req, res) => {
+router.patch('/updateuserinfo', authenticateCompanyadmin, (req, res) => {
     User.findOneAndUpdate({ _id: req.user._id }, { $set: req.body }, { new: true }).then(updateduser => res.status(200).send({ user: updateduser }))
 })
+router.patch('/updatemyinfo/:user_id', (req, res) => {
+    User.findOneAndUpdate({ _id: req.params.user_id }, { $set: req.body }, { new: true }).then(updateduser => res.status(200).send({ user: updateduser }))
+})
+
 
 router.patch('/addtocart', authenticateuser, (req, res) => {
     User.findOneAndUpdate({ _id: req.user._id }, { $push: { cart: { product: req.body.productid, quantity: req.body.quantity } } }, { new: true }).then(updatedcart => res.status(200).send({ cart: updatedcart }))

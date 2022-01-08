@@ -78,6 +78,10 @@ router.patch('unblockcompany/:company_id', authenticateadmin, (req, res) => {
     User.findOneAndUpdate({ _id: req.params.company_id }, { $set: { blocked: false } }, { new: true }).then(updateduser => res.status(200).send({ updateduser: updateduser }))
 })
 
+router.patch('/updateCompanytest/:company_id', (req, res) => {
+    Company.findOneAndUpdate({ _id: req.params.company_id }, { $set: req.body }, { new: true }).then(updatedcompany => res.status(200).send({ company: updatedcompany }))
+})
+
 
 
 //Create company done tested

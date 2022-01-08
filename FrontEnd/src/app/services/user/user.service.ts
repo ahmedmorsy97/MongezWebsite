@@ -7,7 +7,7 @@ import { environment } from "../../../environments/environment"
 })
 export class UserService {
   baseUrl: string = `${environment.baseUrl}/user`;
-
+  user :any;
   constructor(private http: HttpClient) { }
   
   getUser(id:string) {
@@ -27,6 +27,36 @@ export class UserService {
       employeeLevel,
       limit,
       image
+    });
+  }
+
+  updateInfo( id,firstname,lastname,password,mobileNumber,dateOfBirth,email){
+      const url = `${this.baseUrl}/updatemyinfo/`+id;
+    this.user= this.http.get(this.baseUrl+'/viewuser/'+id); ;
+    if(firstname=="")
+    firstname = this.user.firstname
+     if(lastname=="")
+    lastname = this.user.lastname
+     if(password=="")
+    password = this.user.password
+     if(mobileNumber=="")
+    mobileNumber = this.user.mobileNumber
+     if(dateOfBirth=="")
+    dateOfBirth = this.user.dateOfBirth
+     if(email=="")
+    email = this.user.email
+    // if(logo=="")
+    // logo = this.user.logo;
+
+    return this.http.patch(url, {
+   firstname,
+   lastname,
+   password,
+   mobileNumber,
+   dateOfBirth,
+   email
+  // logo,
+    
     });
   }
 }

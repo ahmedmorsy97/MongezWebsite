@@ -10,20 +10,30 @@ import { Router } from '@angular/router';
 export class ViewcompanyComponent implements OnInit {
 Company = {}
 edit = false;
+name = "";
+email = "";
+address = "";
+companynumber = "";
+taxNumber="";
+logo="";
   constructor(private router: Router, private CompanySer: CompanyService) { }
 
   ngOnInit(): void {
     this.getCompany("")
   }
 
-  saveInfo(){
+  saveInfo(id){
     this.edit = !this.edit;
     console.log(this.edit);
-    if(this.edit==true){
-  
-    }
-    else{
-  
+    if(this.edit!=true){
+      this.CompanySer.updateInfo( id,this.name,this.email,this.address,this.companynumber,this.taxNumber).subscribe(
+        (res:any) => {
+          console.log(res);
+          this.Company = res;
+          this.router.navigateByUrl('') // In implementation navigation goes to companys page
+
+        }
+      )
     }
   }
 
