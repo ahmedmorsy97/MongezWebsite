@@ -30,14 +30,19 @@ logo="";
     this.edit = !this.edit;
     console.log(this.edit);
     if(this.edit!=true){
-      this.CompanySer.updateInfo( id,this.name,this.email,this.address,this.companynumber,this.taxNumber).subscribe(
-        (res:any) => {
-          console.log(res);
-          this.Company = res;
-          this.router.navigateByUrl('') // In implementation navigation goes to companys page
 
-        }
+      this.activerouter.paramMap.subscribe((res:any)=>{
+        console.log(res)
+       this.CompanySer.updateInfo(res.params.id,this.name,this.email,this.address,this.companynumber,this.taxNumber).subscribe(
+        (res:any) => {
+            console.log(res);
+            this.Company = res;
+            this.router.navigateByUrl('viewcompanies') // In implementation navigation goes to users page
+  
+          }
       )
+  
+      })
     }
   }
 

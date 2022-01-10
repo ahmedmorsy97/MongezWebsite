@@ -31,8 +31,8 @@ export class CompanyService {
   }
 
   updateInfo( id,name,email,address,companyNumber,taxNumber){
-    const url = `${this.baseUrl}/updateCompanytest/`+'61745abb6ca3910d0cb41c47';
-    this.company= this.http.get(this.baseUrl+'/viewcompany/'+'61745abb6ca3910d0cb41c47');
+    const url = `${this.baseUrl}/updateCompanytest/`+id;
+    this.company= this.http.get(this.baseUrl+'/viewcompany/'+id);
     if(name=="")
     name = this.company.name;
     if(email=="")
