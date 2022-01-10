@@ -11,8 +11,11 @@ export class CompanyService {
     
   }
 
-  getCompany(id: any = {}) {
-    return this.http.get(this.baseUrl+'/viewcompany/'+'61745abb6ca3910d0cb41c47');
+  getCompany(id: string) {
+    return this.http.get(this.baseUrl+'/viewcompany/'+id);
+  }
+  getCompanies(){
+    return this.http.get(this.baseUrl+'/allcompanies');
   }
   createCompany(name,email,address,companyNumber,taxNumber,logo){
     const url = `${this.baseUrl}/createcompanytest`;

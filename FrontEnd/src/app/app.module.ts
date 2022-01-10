@@ -29,6 +29,9 @@ import { ViewsupplierComponent } from './pages/viewsupplier/viewsupplier.compone
 import { ViewproductComponent } from './pages/viewproduct/viewproduct.component';
 import { NgxBootstrapMultiselectModule } from 'ngx-bootstrap-multiselect';
 import { ViewordersComponent } from './pages/vieworders/vieworders.component';
+import { ViewusersComponent } from './pages/viewusers/viewusers.component';
+import { ViewsuppliersComponent } from './pages/viewsuppliers/viewsuppliers.component';
+import { ViewcompaniesComponent } from './pages/viewcompanies/viewcompanies.component';
 
 // export function createTranslateLoader(http: HttpClient) {
 
@@ -53,7 +56,10 @@ import { ViewordersComponent } from './pages/vieworders/vieworders.component';
     ViewuserComponent,
     ViewsupplierComponent,
     ViewproductComponent,
-    ViewordersComponent
+    ViewordersComponent,
+    ViewusersComponent,
+    ViewsuppliersComponent,
+    ViewcompaniesComponent
 
   ],
   imports: [

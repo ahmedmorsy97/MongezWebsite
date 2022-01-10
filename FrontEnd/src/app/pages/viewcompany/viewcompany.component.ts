@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { CompanyService } from 'src/app/services/company/company.service';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-viewcompany',
@@ -16,10 +16,14 @@ address = "";
 companynumber = "";
 taxNumber="";
 logo="";
-  constructor(private router: Router, private CompanySer: CompanyService) { }
+  constructor(private router: Router, private activerouter: ActivatedRoute,private CompanySer: CompanyService) { }
 
   ngOnInit(): void {
-    this.getCompany("")
+    this.activerouter.paramMap.subscribe((res:any)=>{
+      console.log(res)
+    this.getCompany(res.params.id);
+
+    })
   }
 
   saveInfo(id){
@@ -38,9 +42,7 @@ logo="";
   }
 
   getCompany(id) {
-    this.CompanySer.getCompany({
-      ...id,
-    }).subscribe(
+    this.CompanySer.getCompany(id).subscribe(
       (res:any) => {
         console.log(res);
         this.Company = res;

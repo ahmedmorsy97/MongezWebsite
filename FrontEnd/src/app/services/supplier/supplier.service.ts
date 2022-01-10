@@ -13,10 +13,11 @@ export class SupplierService {
   getSupplier(id: string) {
     return this.http.get(this.baseUrl+'/viewsupplier/'+id);
   }
-
-  updateSupplierinfo(){
-    
+  getSuppliers(){
+    return this.http.get(this.baseUrl+'/allsuppliers');
   }
+
+
   createSupplier(firstname,lastname,username,email,password,mobileNumber,dateOfBirth,nationalID,companyName,taxNumber,image,address){
     const url = `${this.baseUrl}/registerSuppliertest`;
     return this.http.post(url, {

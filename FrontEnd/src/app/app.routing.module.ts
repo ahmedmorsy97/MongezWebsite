@@ -6,11 +6,14 @@ import { CreatesupplierComponent } from './pages/createsupplier/createsupplier.c
 import { CreateuserComponent } from './pages/createuser/createuser.component';
 import { HomeComponent } from './pages/home/home.component';
 import { ProductsComponent } from './pages/products/products.component';
+import { ViewcompaniesComponent } from './pages/viewcompanies/viewcompanies.component';
 import { ViewcompanyComponent } from './pages/viewcompany/viewcompany.component';
 import { ViewordersComponent } from './pages/vieworders/vieworders.component';
 import { ViewproductComponent } from './pages/viewproduct/viewproduct.component';
 import { ViewsupplierComponent } from './pages/viewsupplier/viewsupplier.component';
+import { ViewsuppliersComponent } from './pages/viewsuppliers/viewsuppliers.component';
 import { ViewuserComponent } from './pages/viewuser/viewuser.component';
+import { ViewusersComponent } from './pages/viewusers/viewusers.component';
 
 const routes: Routes = [
   { path: '',component: HomeComponent},
@@ -30,10 +33,12 @@ const routes: Routes = [
   { path: 'createsupplier',component: CreatesupplierComponent},
   { path: 'createproduct',component: CreateproductComponent},
   { path: 'viewuser/:id',component: ViewuserComponent},
-  { path: 'viewcompany',component: ViewcompanyComponent},
+  { path: 'viewcompany/:id',component: ViewcompanyComponent},
   { path: 'viewsupplier/:id',component: ViewsupplierComponent},
   { path: 'viewmyorders',component: ViewordersComponent},
-  
+  { path: 'viewusers',component: ViewusersComponent},
+  { path: 'viewsuppliers',component: ViewsuppliersComponent},
+  { path: 'viewcompanies',component: ViewcompaniesComponent},
 ];
 
 @NgModule({
