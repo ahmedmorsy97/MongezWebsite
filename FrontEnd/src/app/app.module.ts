@@ -32,6 +32,7 @@ import { ViewordersComponent } from './pages/vieworders/vieworders.component';
 import { ViewusersComponent } from './pages/viewusers/viewusers.component';
 import { ViewsuppliersComponent } from './pages/viewsuppliers/viewsuppliers.component';
 import { ViewcompaniesComponent } from './pages/viewcompanies/viewcompanies.component';
+import { NgSimpleSidebarModule } from 'ng-simple-sidebar';
 
 // export function createTranslateLoader(http: HttpClient) {
 
@@ -70,7 +71,8 @@ import { ViewcompaniesComponent } from './pages/viewcompanies/viewcompanies.comp
     HttpClientModule,
     FontAwesomeModule,
     ModalModule.forRoot(),
-    NgxBootstrapMultiselectModule
+    NgxBootstrapMultiselectModule,
+    NgSimpleSidebarModule
   //   TranslateModule.forRoot({
   //     defaultLanguage: 'en',
   //     loader: {

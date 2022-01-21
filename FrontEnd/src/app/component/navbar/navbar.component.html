@@ -38,7 +38,8 @@
                 </div>
             </div>
             <button *ngIf="user==null" (click)="Login()" class="btn btn-primary btn-lg ml-3 mr-3"> Login </button>
-            <button *ngIf="user!=null" (click)="ViewProfile()" class="btn btn-primary btn-lg ml-3 mr-3">   <fa-icon [icon]="faUser"></fa-icon> </button>
+            <button *ngIf="user!=null" (click)="ViewProfile()" class="btn btn-primary btn-lg ml-3 mr-3"><fa-icon [icon]="faUser"></fa-icon></button>
+            <button *ngIf="user==null" (click)="toggleSideNav()" class="btn btn-primary btn-lg ml-3 mr-3"><fa-icon [icon]="faBars"></fa-icon></button>
 
             <button class="no-btn ml-3 mr-3"> 
                 <svg height="24" width="24">

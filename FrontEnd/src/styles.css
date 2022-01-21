@@ -36,3 +36,38 @@ a:hover {
 .error {
     color: firebrick;
 }
+
+html, body {
+    margin: 0;
+    padding: 0;
+}
+
+.content-wrapper {
+	display: flex;
+	flex-wrap: nowrap;
+}
+
+.content {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+lib-ng-simple-sidebar .dock {
+    z-index: 999999;
+    position: fixed !important;
+    height: 100% !important;
+    width: 0 !important;
+    padding: 0 !important;
+
+    /* transition: width 0.25s linear !important; */
+    visibility: hidden;
+    opacity: 0;
+}
+
+lib-ng-simple-sidebar .dock.dock-open {
+    width: auto !important;
+    padding: 15px !important;
+    visibility: visible;
+    opacity: 1;
+}
