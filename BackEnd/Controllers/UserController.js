@@ -44,7 +44,6 @@ router.post("/registercompanyadmin", authenticateCompanyadmin, (req, res) => {
     newuser.firstname = req.body.firstname;
     newuser.lastname = req.body.lastname;
     newuser.password = req.body.password;
-
     newuser.rating = req.body.rating;
     newuser.numberOfRatings = req.body.numberOfRatings;
     newuser.imageURL = req.body.imageURL;
@@ -96,7 +95,8 @@ router.post("/registerEmployeetest", (req, res) => {
     newuser.firstname = req.body.firstname;
     newuser.lastname = req.body.lastname;
     newuser.password = req.body.password;
-
+    newuser.wallet = req.body.wallet;
+    newuser.limit = req.body.limit;
     newuser.rating = req.body.rating;
     newuser.numberOfRatings = req.body.numberOfRatings;
     newuser.imageURL = req.body.imageURL;

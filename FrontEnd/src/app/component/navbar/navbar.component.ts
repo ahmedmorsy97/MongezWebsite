@@ -51,7 +51,7 @@ export class NavbarComponent implements OnInit {
       {
         name: 'Welcome',
         icon: 'las la-home',
-        routerLink: ['/welcome'],
+        routerLink: [''],
         position: SimpleSidebarPosition.top
       },
       
@@ -196,6 +196,9 @@ export class NavbarComponent implements OnInit {
   }
   GoToHome() {
     this.router.navigateByUrl('/')
+  }
+  viewCart(){
+    this.router.navigateByUrl('/cart') 
   }
   Login() {
     const initialState = {

@@ -9,7 +9,7 @@
         <form class="">
             <div *ngIf="User!=null && edit==false ">
                 <label>First Name</label>
-                <input class="mb-2" type="text" value={{User.firstname}} readonly  />
+                <input class="mb-2" type="text" value={{User.firstname}} readonly />
 
                 <label>Last Name</label>
                 <input class="mb-2" type="text" value={{User.lastname}} readonly />
@@ -32,11 +32,7 @@
                 <label>Level</label>
                 <input class="mb-2" type="text" value={{User.employeeLevel}} readonly />
 
-                <label>Limit</label>
-                <input class="mb-2" type="number" value={{User.limit}} readonly />
 
-                <label>Wallet</label>
-                <input class="mb-2" type="number" value={{User.wallet}} readonly />
 
 
                 <button (click)="saveInfo()" class="btn btn-primary w-100 mt-4">Edit Info</button>
@@ -46,27 +42,31 @@
 
             <div *ngIf="User!=null && edit==true ">
                 <label>First Name</label>
-                <input class="mb-2" type="text" placeholder={{User.firstname}} name="firstname" [(ngModel)]="firstname"/>
+                <input class="mb-2" type="text" placeholder={{User.firstname}} name="firstname" [(ngModel)]="firstname" />
 
                 <label>Last Name</label>
-                <input class="mb-2" type="text" placeholder={{User.lastname}} name="lastname" [(ngModel)]="lastname"/>
+                <input class="mb-2" type="text" placeholder={{User.lastname}} name="lastname" [(ngModel)]="lastname" />
 
                 <label>Username</label>
-                <input class="mb-2" type="text" placeholder={{User.username}} name="username" [(ngModel)]="username"/>
+                <input class="mb-2" type="text" placeholder={{User.username}} name="username" [(ngModel)]="username" />
 
                 <label>Email</label>
-                <input class="mb-2" type="email" placeholder={{User.email}} name="email" [(ngModel)]="email"/>
+                <input class="mb-2" type="email" placeholder={{User.email}} name="email" [(ngModel)]="email" />
 
                 <label>Enter New Password</label>
-                <input class="mb-2" type="password" placeholder={{User.password}} name="password" [(ngModel)]="password"/>
+                <input class="mb-2" type="password" placeholder={{User.password}} name="password" [(ngModel)]="password" />
 
                 <label>Mobile Number </label>
-                <input class="mb-2" type="tel" placeholder={{User.mobileNumber}} name="mobileNumber" [(ngModel)]="mobileNumber"/>
+                <input class="mb-2" type="tel" placeholder={{User.mobileNumber}} name="mobileNumber" [(ngModel)]="mobileNumber" />
 
                 <label>Date of birth</label>
-                <input class="mb-2" type="date" placeholder={{User.dateOfBirth}} name="dateOfBirth" [(ngModel)]="dateOfBirth"/>
+                <input class="mb-2" type="date" placeholder={{User.dateOfBirth}} name="dateOfBirth" [(ngModel)]="dateOfBirth" />
+                <!-- Visible to manager and admins only -->
+                <label>Limit</label>
+                <input class="mb-2" type="number" value={{User.limit}} name="limit" [(ngModel)]="limit" />
 
-
+                <label>Wallet</label>
+                <input class="mb-2" type="number" value={{User.wallet}} name="wallet" [(ngModel)]="wallet" />
 
                 <button (click)="saveInfo()" class="btn btn-primary w-100 mt-4">Update Info</button>
             </div>

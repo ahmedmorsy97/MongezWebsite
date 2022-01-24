@@ -17,7 +17,7 @@ export class UserService {
   getUsers(){
     return this.http.get(this.baseUrl+'/allusers');
   }
-  createUser(firstname,lastname,username,email,password,mobileNumber,dateOfBirth,nationalID,employeeLevel,limit,image){
+  createUser(firstname,lastname,username,email,password,mobileNumber,dateOfBirth,nationalID,employeeLevel,limit,wallet,image){
     const url = `${this.baseUrl}/registerEmployeetest`;
     return this.http.post(url, {
       firstname,
@@ -30,6 +30,7 @@ export class UserService {
       nationalID,
       employeeLevel,
       limit,
+      wallet,
       image
     });
   }
