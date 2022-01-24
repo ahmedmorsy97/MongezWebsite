@@ -8,6 +8,8 @@ import { HomeComponent } from './pages/home/home.component';
 import { ProductsComponent } from './pages/products/products.component';
 import { ViewcompaniesComponent } from './pages/viewcompanies/viewcompanies.component';
 import { ViewcompanyComponent } from './pages/viewcompany/viewcompany.component';
+import { ViewmyproductsComponent } from './pages/viewmyproducts/viewmyproducts.component';
+import { ViewmywalletComponent } from './pages/viewmywallet/viewmywallet.component';
 import { ViewordersComponent } from './pages/vieworders/vieworders.component';
 import { ViewproductComponent } from './pages/viewproduct/viewproduct.component';
 import { ViewsupplierComponent } from './pages/viewsupplier/viewsupplier.component';
@@ -39,6 +41,8 @@ const routes: Routes = [
   { path: 'viewusers',component: ViewusersComponent},
   { path: 'viewsuppliers',component: ViewsuppliersComponent},
   { path: 'viewcompanies',component: ViewcompaniesComponent},
+  { path: 'viewmywallet',component: ViewmywalletComponent},
+  { path: 'viewmyproducts',component: ViewmyproductsComponent},
 ];
 
 @NgModule({

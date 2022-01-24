@@ -33,6 +33,8 @@ import { ViewusersComponent } from './pages/viewusers/viewusers.component';
 import { ViewsuppliersComponent } from './pages/viewsuppliers/viewsuppliers.component';
 import { ViewcompaniesComponent } from './pages/viewcompanies/viewcompanies.component';
 import { NgSimpleSidebarModule } from 'ng-simple-sidebar';
+import { ViewmywalletComponent } from './pages/viewmywallet/viewmywallet.component';
+import { ViewmyproductsComponent } from './pages/viewmyproducts/viewmyproducts.component';
 
 // export function createTranslateLoader(http: HttpClient) {
 
@@ -60,7 +62,9 @@ import { NgSimpleSidebarModule } from 'ng-simple-sidebar';
     ViewordersComponent,
     ViewusersComponent,
     ViewsuppliersComponent,
-    ViewcompaniesComponent
+    ViewcompaniesComponent,
+    ViewmywalletComponent,
+    ViewmyproductsComponent
 
   ],
   imports: [

@@ -54,10 +54,71 @@ export class NavbarComponent implements OnInit {
         routerLink: ['/welcome'],
         position: SimpleSidebarPosition.top
       },
+      
       {
         name: 'About',
         icon: 'las la-address-book',
         routerLink: ['/about'],
+        position: SimpleSidebarPosition.top
+      },
+      {
+        name: 'View My Wallet',
+        icon: 'las la-wallet',
+        routerLink: ['/viewmywallet'],
+        position: SimpleSidebarPosition.top
+      },
+      {
+        name: 'View My Orders',
+        icon: 'las la-shopping-bag',
+        routerLink: ['/viewmyorders'],
+        position: SimpleSidebarPosition.top
+      },
+      {
+        name: 'View Users',
+        icon: 'las la-users',
+        routerLink: ['/viewusers'],
+        position: SimpleSidebarPosition.top
+      },
+      {
+        name: 'View Suppliers',
+        icon: 'las la-users',
+        routerLink: ['/viewsuppliers'],
+        position: SimpleSidebarPosition.top
+      },
+      {
+        name: 'View Companies',
+        icon: 'las la-building',
+        routerLink: ['/viewcompanies'],
+        position: SimpleSidebarPosition.top
+      },
+      {
+        name: 'Create User',
+        icon: 'las la-plus-circle',
+        routerLink: ['/createuser'],
+        position: SimpleSidebarPosition.top
+      },
+      {
+        name: 'Create Supplier',
+        icon: 'las la-plus-circle',
+        routerLink: ['/createsupplier'],
+        position: SimpleSidebarPosition.top
+      },
+      {
+        name: 'Create Company',
+        icon: 'las la-plus-circle',
+        routerLink: ['/createcompany'],
+        position: SimpleSidebarPosition.top
+      },
+      {
+        name: 'Create Product',
+        icon: 'las la-plus-circle',
+        routerLink: ['/createproduct'],
+        position: SimpleSidebarPosition.top
+      },
+      {
+        name: 'View my Products',
+        icon: 'las la-shopping-bag',
+        routerLink: ['/viewmyproducts'],
         position: SimpleSidebarPosition.top
       },
       {
@@ -78,7 +139,7 @@ export class NavbarComponent implements OnInit {
       closeIcon: 'las la-times',
       colors: {
         darkMode: false,
-        background: "#000",
+        background: "#f8f9fa",
         font: "#F56A00",
         // darkModeBackground: "#333",
         // darkModeFont: "#fff"
