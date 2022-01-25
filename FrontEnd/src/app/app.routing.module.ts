@@ -7,6 +7,7 @@ import { CreateproductComponent } from './pages/createproduct/createproduct.comp
 import { CreatesupplierComponent } from './pages/createsupplier/createsupplier.component';
 import { CreateuserComponent } from './pages/createuser/createuser.component';
 import { HomeComponent } from './pages/home/home.component';
+import { PayementComponent } from './pages/payement/payement.component';
 import { ProductsComponent } from './pages/products/products.component';
 import { ViewcompaniesComponent } from './pages/viewcompanies/viewcompanies.component';
 import { ViewcompanyComponent } from './pages/viewcompany/viewcompany.component';
@@ -31,11 +32,11 @@ const routes: Routes = [
   { path: 'products/electrical/highvoltage',component: ProductsComponent},
   { path: 'products/electrical/lowvoltage',component: ProductsComponent},
   { path: 'products/hardware',component: ProductsComponent},
-  { path: 'viewproduct',component: ViewproductComponent},
+  { path: 'viewproduct/:id',component: ViewproductComponent},
   { path: 'createcompany',component: CreatecompanyComponent},
   { path: 'createuser',component: CreateuserComponent},
   { path: 'createsupplier',component: CreatesupplierComponent},
-  { path: 'createproduct',component: CreateproductComponent},
+  { path: 'createproduct/:id',component: CreateproductComponent},
   { path: 'viewuser/:id',component: ViewuserComponent},
   { path: 'viewcompany/:id',component: ViewcompanyComponent},
   { path: 'viewsupplier/:id',component: ViewsupplierComponent},
@@ -44,9 +45,11 @@ const routes: Routes = [
   { path: 'viewsuppliers',component: ViewsuppliersComponent},
   { path: 'viewcompanies',component: ViewcompaniesComponent},
   { path: 'viewmywallet',component: ViewmywalletComponent},
-  { path: 'viewmyproducts',component: ViewmyproductsComponent},
+  { path: 'viewmyproducts/:id',component: ViewmyproductsComponent},
   { path: 'about',component: AboutComponent},
-  { path: 'cart',component: CartComponent},
+  { path: 'cart/:id',component: CartComponent},
+  { path: 'payement',component: PayementComponent},
+
 ];
 
 @NgModule({

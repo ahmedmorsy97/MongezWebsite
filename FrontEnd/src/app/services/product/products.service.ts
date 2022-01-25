@@ -13,5 +13,25 @@ export class ProductsService {
   getProducts(query: any = {}) {
     return this.http.post(this.baseUrl + "/getall", query);
   }
-
+  getmyProducts(id:String){
+    return this.http.get(this.baseUrl+'/myproductstest/'+ id);
+  }
+  createProduct(supplier:any,productName,description,specs,pricerange,quantity,category,photoLinks,Subcategory){
+    const url = `${this.baseUrl}/createtest`;
+    console.log("supplier")
+    console.log(supplier)
+    return this.http.post(url, {
+      supplier,
+      productName,
+      description,
+      specs,
+      pricerange,quantity,
+      category,
+      photoLinks,
+      Subcategory
+    });
+  }
+  viewProduct(id){
+    return this.http.get(this.baseUrl+'/viewproduct/'+ id);
+  }
 }

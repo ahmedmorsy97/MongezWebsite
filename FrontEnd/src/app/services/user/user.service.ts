@@ -35,6 +35,8 @@ export class UserService {
     });
   }
 
+
+
   updateInfo( id,firstname,lastname,password,mobileNumber,dateOfBirth,email){
       const url = `${this.baseUrl}/updatemyinfo/`+id;
     this.user= this.http.get(this.baseUrl+'/viewuser/'+id); ;

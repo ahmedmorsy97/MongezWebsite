@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
+import { ProductsService } from 'src/app/services/product/products.service';
 
 @Component({
   selector: 'app-createproduct',
@@ -6,10 +8,35 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./createproduct.component.scss']
 })
 export class CreateproductComponent implements OnInit {
+  name="";
+  description="";
+  specs="";
+  pricerange=[];
+  quantity="";
+  category="";
+  photos="";
+  subcategory="";
 
-  constructor() { }
+  err: string = null;
+  constructor(private router: Router,private activerouter: ActivatedRoute, private ProductSer: ProductsService) { }
 
   ngOnInit(): void {
+    
+  }
+  createProduct(){
+    this.activerouter.paramMap.subscribe((res:any)=>{
+      console.log(res)
+    this.ProductSer.createProduct(res.params.id,this.name,this.description,this.specs,this.pricerange,this.quantity,this.category,this.photos,this.subcategory).subscribe(
+      (res: any) => {
+      console.log(res)
+      this.router.navigateByUrl('')
+      }, err => {
+        this.err = err?.error?.err || "Something went wrong";
+      }
+    )
+  
+    })
+    
   }
 
 }

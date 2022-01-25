@@ -20,8 +20,14 @@ export class NavbarComponent implements OnInit {
   faBars = faBars;
   modalRef?: BsModalRef;
   user = null;
+
   type = "";
   sidebarItems: SimpleSidebarItem[];
+  adminsidebarItems: SimpleSidebarItem[];
+  companyadminsidebarItems: SimpleSidebarItem[];
+  managersidebarItems: SimpleSidebarItem[];
+  suppliersidebarItems: SimpleSidebarItem[];
+
   isOpen$: BehaviorSubject<Boolean>;
   sidebarOpened: Boolean = false;
 
@@ -40,13 +46,13 @@ export class NavbarComponent implements OnInit {
         this.user = this.authServ.checkUser();
       }
     )
-    
+   
     // init side nav when logged in
     this.initSideNav();
   }
 
   initSideNav() {
-
+    if(this.type=="user"){
     this.sidebarItems = [
       {
         name: 'Welcome',
@@ -109,16 +115,63 @@ export class NavbarComponent implements OnInit {
         routerLink: ['/createcompany'],
         position: SimpleSidebarPosition.top
       },
+
+      {
+        name: 'Logout',
+        icon: 'las la-external-link-alt',
+        // url: 'https://secanis.ch',
+        // target: '_blank',
+        routerLink: ['/logout'],
+        position: SimpleSidebarPosition.bottom
+      }
+    ];
+  }
+  else{
+    const userdata = JSON.parse(this.user);
+    this.sidebarItems = [
+      {
+        name: 'Welcome',
+        icon: 'las la-home',
+        routerLink: [''],
+        position: SimpleSidebarPosition.top
+      },
+      
+      {
+        name: 'About',
+        icon: 'las la-address-book',
+        routerLink: ['/about'],
+        position: SimpleSidebarPosition.top
+      },
+ 
+      {
+        name: 'View Users',
+        icon: 'las la-users',
+        routerLink: ['/viewusers'],
+        position: SimpleSidebarPosition.top
+      },
+      {
+        name: 'View Suppliers',
+        icon: 'las la-users',
+        routerLink: ['/viewsuppliers'],
+        position: SimpleSidebarPosition.top
+      },
+      {
+        name: 'View Companies',
+        icon: 'las la-building',
+        routerLink: ['/viewcompanies'],
+        position: SimpleSidebarPosition.top
+      },
+      
       {
         name: 'Create Product',
         icon: 'las la-plus-circle',
-        routerLink: ['/createproduct'],
+        routerLink: ['/createproduct/'+userdata.supplier._id],
         position: SimpleSidebarPosition.top
       },
       {
         name: 'View my Products',
         icon: 'las la-shopping-bag',
-        routerLink: ['/viewmyproducts'],
+        routerLink: ['/viewmyproducts/'+userdata.supplier._id],
         position: SimpleSidebarPosition.top
       },
       {
@@ -130,8 +183,12 @@ export class NavbarComponent implements OnInit {
         position: SimpleSidebarPosition.bottom
       }
     ];
+  }
     // required, configure items
+   
+  
     this.ngSimpleSidebarService.addItems(this.sidebarItems);
+    
 
     // required, configure icons
     this.ngSimpleSidebarService.configure({
@@ -198,7 +255,10 @@ export class NavbarComponent implements OnInit {
     this.router.navigateByUrl('/')
   }
   viewCart(){
-    this.router.navigateByUrl('/cart') 
+    if (this.type == "user"){
+    const userdata = JSON.parse(this.user);
+    this.router.navigateByUrl('/cart/'+userdata.user._id) 
+    }
   }
   Login() {
     const initialState = {

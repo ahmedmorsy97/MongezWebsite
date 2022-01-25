@@ -152,13 +152,16 @@ export class ProductsComponent implements OnInit {
     )
   }
 
-  ViewProduct() {
-    this.router.navigateByUrl('/viewproduct')
+  ViewProduct(id) {
+    this.router.navigateByUrl('/viewproduct/'+id)
   }
   togglefilter(type) {
     this.filters[type] = !this.filters[type]
   }
   onChange() {
     console.log(this.optionsModel);
+  }
+  addToCart(id){
+
   }
 }

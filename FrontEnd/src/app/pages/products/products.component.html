@@ -91,7 +91,7 @@
             <button (click)="clearFilter()" class="btn btn-primary w-100 mt-3">Clear Filter</button>
         </div>
         <div class="products row col-md-8">
-            <div *ngFor="let product of products" (click)="ViewProduct()" class="card col-md-4 ">
+            <div *ngFor="let product of products" (click)="ViewProduct(product._id)" class="card col-md-4 ">
                 <div class="card-body">
                     <div class="img-container">
                         <img src="/assets/images/nails.png" />
@@ -106,7 +106,7 @@
                         <input type="number" min="1" value="0" />
                         <button class=" plus">  <fa-icon [icon]="faPlus"></fa-icon></button>
                     </div>
-                    <button class="btn btn-primary w-100">Add to cart</button>
+                    <button (click)="addToCart(product._id)" class="btn btn-primary w-100">Add to cart</button>
                 </div>
             </div>
 

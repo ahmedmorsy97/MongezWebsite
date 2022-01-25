@@ -1,35 +1,35 @@
 <div class="container">
     <form class="">
         <label>Product Name</label>
-        <input class="mb-2" type="text" placeholder="Product Name" />
+        <input class="mb-2" type="text" placeholder="Product Name" name="name" [(ngModel)]="name" />
 
         <label>Product Description</label>
-        <input class="mb-2" type="text" placeholder="Product Description" />
+        <input class="mb-2" type="text" placeholder="Product Description" name="description" [(ngModel)]="description" />
 
         <label>Products Specs</label>
-        <input class="mb-2" type="text" placeholder="Username" />
+        <input class="mb-2" type="text" placeholder="Product Specs" name="specs" [(ngModel)]="specs" />
         <!-- HOW? -->
         <label>Price Range</label>
-        <input class="mb-2" type="text" placeholder="Price" />
+        <input class="mb-2" type="text" placeholder="Price" name="pricerange" [(ngModel)]="pricerange" />
         <!--  -->
         <label>Quantity</label>
-        <input class="mb-2" type="number" placeholder="Quantity" />
+        <input class="mb-2" type="number" placeholder="Quantity" name="quantity" [(ngModel)]="quantity" />
 
         <label>Category </label>
-        <input class="mb-2" type="text" placeholder="Category" />
+        <input class="mb-2" type="text" placeholder="Category" name="category" [(ngModel)]="category" />
 
         <label>SubCategory</label>
-        <input class="mb-2" type="text" placeholder="SubCategory" />
+        <input class="mb-2" type="text" placeholder="SubCategory" name="subCategory" [(ngModel)]="subcategory" />
 
         <!-- HOW? -->
         <label>Product Photos</label>
-        <input class="mb-2" type="text" placeholder="Product Photos" />
+        <input class="mb-2" type="text" placeholder="Product Photos" name="photos" [(ngModel)]="photos" />
 
         <!--  -->
 
 
 
 
-        <button class="btn btn-primary w-100 mt-4">Create Product</button>
+        <button (click)="createProduct()" class="btn btn-primary w-100 mt-4">Create Product</button>
     </form>
 </div>

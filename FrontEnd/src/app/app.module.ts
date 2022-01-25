@@ -37,6 +37,7 @@ import { ViewmywalletComponent } from './pages/viewmywallet/viewmywallet.compone
 import { ViewmyproductsComponent } from './pages/viewmyproducts/viewmyproducts.component';
 import { AboutComponent } from './pages/about/about.component';
 import { CartComponent } from './pages/cart/cart.component';
+import { PayementComponent } from './pages/payement/payement.component';
 
 // export function createTranslateLoader(http: HttpClient) {
 
@@ -68,7 +69,8 @@ import { CartComponent } from './pages/cart/cart.component';
     ViewmywalletComponent,
     ViewmyproductsComponent,
     AboutComponent,
-    CartComponent
+    CartComponent,
+    PayementComponent
 
   ],
   imports: [
