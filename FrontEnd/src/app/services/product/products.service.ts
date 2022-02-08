@@ -16,7 +16,7 @@ export class ProductsService {
   getmyProducts(id:String){
     return this.http.get(this.baseUrl+'/myproducts/'+ id);
   }
-  createProduct(supplier:any,productName,description,specs,pricerange,quantity,category,photoLinks,Subcategory){
+  createProduct(supplier:any,productName,description,specs,priceRange,quantity,category,photoLinks,Subcategory){
     const url = `${this.baseUrl}/create`;
     console.log("supplier")
     console.log(supplier)
@@ -25,7 +25,8 @@ export class ProductsService {
       productName,
       description,
       specs,
-      pricerange,quantity,
+      priceRange,
+      quantity,
       category,
       photoLinks,
       Subcategory

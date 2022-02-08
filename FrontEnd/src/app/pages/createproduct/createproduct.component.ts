@@ -11,12 +11,13 @@ export class CreateproductComponent implements OnInit {
   name="";
   description="";
   specs="";
-  pricerange=[];
+  pricerange=[{minquantity:0,maxquantity:0,priceofRange:0}];
   quantity="";
   category="";
   photos="";
   subcategory="";
-
+  SubCategorydata = {Mechanical:[{name:"HVAC",value:"HVAC"},{name:"FireFighting",value:"FireFighting"},{name:"Plumbing",value:"Plumbing"}],
+  Electrical:[{name:"Light Current",value:"lightcurrent"},{name:"High Voltage",value:"highvoltage"},{name:"Low Voltage",value:"lowvoltage"}]}
   err: string = null;
   constructor(private router: Router,private activerouter: ActivatedRoute, private ProductSer: ProductsService) { }
 
@@ -37,6 +38,13 @@ export class CreateproductComponent implements OnInit {
   
     })
     
+  }
+  addPriceRange(){
+    this.pricerange.push({minquantity:0,maxquantity:0,priceofRange:0});
+  }
+
+  deletePriceRange(index){
+    this.pricerange.splice(index,1);
   }
 
 }
