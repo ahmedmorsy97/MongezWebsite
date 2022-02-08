@@ -97,6 +97,15 @@ const userSchema = mongoose.Schema({
             type: mongoose.Types.ObjectId,
             ref: "Product"
         },
+        productName: {
+            type: String
+        },
+        productPrice: {
+            type: Number
+        },
+        productLogo: {
+            type: String
+        },
         quantity: Number,
 
 

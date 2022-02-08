@@ -18,7 +18,7 @@ export class UserService {
     return this.http.get(this.baseUrl+'/allusers');
   }
   createUser(firstname,lastname,username,email,password,mobileNumber,dateOfBirth,nationalID,employeeLevel,limit,wallet,image){
-    const url = `${this.baseUrl}/registerEmployeetest`;
+    const url = `${this.baseUrl}/registerEmployee`;
     return this.http.post(url, {
       firstname,
       lastname,
@@ -65,5 +65,19 @@ export class UserService {
   // logo,
     
     });
+  }
+
+  AddtoCart(productid,quantity,name,price,logo){
+    const url = `${this.baseUrl}/addtocart`;
+    
+
+    return this.http.patch(url, {
+    productid,
+    quantity,
+    name,
+    price,
+    logo
+    
+       });
   }
 }

@@ -14,10 +14,10 @@ export class ProductsService {
     return this.http.post(this.baseUrl + "/getall", query);
   }
   getmyProducts(id:String){
-    return this.http.get(this.baseUrl+'/myproductstest/'+ id);
+    return this.http.get(this.baseUrl+'/myproducts/'+ id);
   }
   createProduct(supplier:any,productName,description,specs,pricerange,quantity,category,photoLinks,Subcategory){
-    const url = `${this.baseUrl}/createtest`;
+    const url = `${this.baseUrl}/create`;
     console.log("supplier")
     console.log(supplier)
     return this.http.post(url, {

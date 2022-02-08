@@ -91,63 +91,64 @@
             <button (click)="clearFilter()" class="btn btn-primary w-100 mt-3">Clear Filter</button>
         </div>
         <div class="products row col-md-8">
-            <div *ngFor="let product of products" (click)="ViewProduct(product._id)" class="card col-md-4 ">
+            <div *ngFor="let product of products" class="card col-md-4 ">
                 <div class="card-body">
-                    <div class="img-container">
+                    <div class="img-container" (click)="ViewProduct(product._id)">
                         <img src="/assets/images/nails.png" />
                     </div>
-                    <h5 class="card-title">{{product.productName}}</h5>
-                    <h6 class="card-subtitle mb-2 text-muted">{{product.specs}}</h6>
-                    <p class="card-text">Price Range</p>
-                    <p class="card-text">Rating</p>
-
-                    <div class="quanity mb-2 mt-3">
-                        <button class=" minus">  <fa-icon [icon]="faMinus"></fa-icon></button>
-                        <input type="number" min="1" value="0" />
-                        <button class=" plus">  <fa-icon [icon]="faPlus"></fa-icon></button>
+                    <div (click)="ViewProduct(product._id)">
+                        <h5 class=" card-title ">{{product.productName}}</h5>
+                        <h6 class="card-subtitle mb-2 text-muted ">{{product.specs}}</h6>
+                        <p class="card-text "><b>{{getprice(product)}} EGP</b></p>
+                        <p class="card-text ">Rating</p>
                     </div>
-                    <button (click)="addToCart(product._id)" class="btn btn-primary w-100">Add to cart</button>
+                    <div class="quanity mb-2 mt-3 ">
+                        <button (click)="decrementQuanity(product)" class=" minus ">  <fa-icon [icon]="faMinus "></fa-icon></button>
+                        <input type="number" min="1 " [max]="product.quanity" [(ngModel)]="product.customerquantity" />
+                        <button (click)="incrementQuanity(product) " class=" plus ">  <fa-icon [icon]="faPlus "></fa-icon></button>
+                    </div>
+                    <button (click)="addToCart(product) " class="btn btn-primary w-100 ">Add to cart</button>
                 </div>
             </div>
 
             <!-- <div class="card col-md-4 ">
-                <div (click)="ViewProduct()" class="card-body">
-                    <div class="upper">
-                        <div class="img-container">
-                            <img src="/assets/images/nails.png" />
+                <div (click)="ViewProduct() " class="card-body ">
+                    <div class="upper ">
+                        <div class="img-container ">
+                            <img src="/assets/images/nails.png " />
                         </div>
-                        <h5 class="card-title">Nails</h5>
-                        <h6 class="card-subtitle mb-2 text-muted">2 in. x 4 in. x 8 ft.</h6>
+                        <h5 class="card-title ">Nails</h5>
+                        <h6 class="card-subtitle mb-2 text-muted ">2 in. x 4 in. x 8 ft.</h6>
                     </div>
-                    <div class="lower">
-                        <p class="card-text">40$</p>
-                        <p class="card-text">Supplier</p>
-                        <div class="quanity mb-2 mt-3">
-                            <button class=" minus">  <fa-icon [icon]="faMinus"></fa-icon></button>
-                            <input type="number" min="1" value="0" />
-                            <button class=" plus">  <fa-icon [icon]="faPlus"></fa-icon></button>
+                    <div class="lower ">
+                        <p class="card-text ">40$</p>
+                        <p class="card-text ">Supplier</p>
+                        <div class="quanity mb-2 mt-3 ">
+                            <button class=" minus ">  <fa-icon [icon]="faMinus "></fa-icon></button>
+                            <input type="number " min="1 " value="0 " />
+                            <button class=" plus ">  <fa-icon [icon]="faPlus "></fa-icon></button>
                         </div>
-                        <button class="btn btn-primary w-100">Add to cart</button>
+                        <button class="btn btn-primary w-100 ">Add to cart</button>
                     </div>
                 </div>
             </div> -->
             <!-- 
             <div class="card col-md-4 ">
-                <div (click)="ViewProduct()" class="card-body">
-                    <div class="img-container">
-                        <img src="/assets/images/nails.png" />
+                <div (click)="ViewProduct() " class="card-body ">
+                    <div class="img-container ">
+                        <img src="/assets/images/nails.png " />
                     </div>
-                    <h5 class="card-title">Nails</h5>
-                    <h6 class="card-subtitle mb-2 text-muted">2 in. x 4 in. x 8 ft.</h6>
-                    <p class="card-text">Price Range</p>
-                    <p class="card-text">Supplier</p>
+                    <h5 class="card-title ">Nails</h5>
+                    <h6 class="card-subtitle mb-2 text-muted ">2 in. x 4 in. x 8 ft.</h6>
+                    <p class="card-text ">Price Range</p>
+                    <p class="card-text ">Supplier</p>
                     
-                    <div class="quanity mb-2 mt-3">
-                        <button class=" minus">  <fa-icon [icon]="faMinus"></fa-icon></button>
-                        <input type="number" min="1" value="0" />
-                        <button class=" plus">  <fa-icon [icon]="faPlus"></fa-icon></button>
+                    <div class="quanity mb-2 mt-3 ">
+                        <button class=" minus ">  <fa-icon [icon]="faMinus "></fa-icon></button>
+                        <input type="number " min="1 " value="0 " />
+                        <button class=" plus ">  <fa-icon [icon]="faPlus "></fa-icon></button>
                     </div>
-                    <button class="btn btn-primary w-100">Add to cart</button>
+                    <button class="btn btn-primary w-100 ">Add to cart</button>
                 </div>
             </div> -->
         </div>

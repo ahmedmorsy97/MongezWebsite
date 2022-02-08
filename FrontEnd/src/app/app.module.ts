@@ -13,7 +13,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { NavbarComponent } from './component/navbar/navbar.component';
 // import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 // import { TranslateHttpLoader } from '@ngx-translate/http-loader';
-import { HttpClientModule, HttpClient } from '@angular/common/http';
+import { HttpClientModule, HttpClient, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { ProductsComponent } from './pages/products/products.component';
 import { CategoriesComponent } from './pages/categories/categories.component';
@@ -38,6 +38,7 @@ import { ViewmyproductsComponent } from './pages/viewmyproducts/viewmyproducts.c
 import { AboutComponent } from './pages/about/about.component';
 import { CartComponent } from './pages/cart/cart.component';
 import { PayementComponent } from './pages/payement/payement.component';
+import { JwtInterceptor } from './interciptors/jwt.interceptor';
 
 // export function createTranslateLoader(http: HttpClient) {
 
@@ -93,7 +94,11 @@ import { PayementComponent } from './pages/payement/payement.component';
   //   })
   ],
 
-  providers: [],
+  providers: [{
+    provide:HTTP_INTERCEPTORS,
+    useClass:JwtInterceptor,
+    multi:true
+  }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

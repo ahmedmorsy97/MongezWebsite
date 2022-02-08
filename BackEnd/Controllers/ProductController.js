@@ -49,30 +49,7 @@ router.post("/create", authenticatesupplier, (req, res) => {
         });
 })
 
-router.post("/createtest", (req, res) => {
 
-    var newproduct = new Product(); // create a new instance of the Product model
-    newproduct.productName = req.body.productName;
-    newproduct.photoLinks = req.body.photoLinks;
-    newproduct.description = req.body.description;
-    newproduct.specs = req.body.specs;
-    newproduct.priceRange = req.body.priceRange;
-    newproduct.percentageDiscount = req.body.percentageDiscount;
-    newproduct.priceDiscount = req.body.priceDiscount;
-    newproduct.rating = req.body.rating;
-    newproduct.supplier = req.body.supplier;
-    newproduct.quantity = req.body.quantity;
-    newproduct.category = req.body.category;
-    newproduct.Subcategory = req.body.Subcategory;
-    newproduct.save().then(product => {
-            res.status(200).send({ product: newproduct });
-        })
-        .catch((err) => {
-            res.status(400).send({
-                err: err.message ? err.message : err,
-            });
-        });
-})
 router.get("/myproducts/:supplier_id", authenticatesupplier, (req, res) => {
     Product.find({ supplier: req.params.supplier_id }).then((products) => {
             res.status(200).send(products)
@@ -84,16 +61,7 @@ router.get("/myproducts/:supplier_id", authenticatesupplier, (req, res) => {
         });
 })
 
-router.get("/myproductstest/:supplier_id", (req, res) => {
-    Product.find({ supplier: req.params.supplier_id }).then((products) => {
-            res.status(200).send(products)
-        })
-        .catch((err) => {
-            res.status(400).send({
-                err: err.message ? err.message : err,
-            });
-        });
-})
+
 
 router.get('/viewproduct/:product_id', (req, res) => {
     Product.findById(req.params.product_id).then(product => {

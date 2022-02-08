@@ -19,7 +19,7 @@ export class SupplierService {
 
 
   createSupplier(firstname,lastname,username,email,password,mobileNumber,dateOfBirth,nationalID,companyName,taxNumber,image,address){
-    const url = `${this.baseUrl}/registerSuppliertest`;
+    const url = `${this.baseUrl}/registerSupplier`;
     return this.http.post(url, {
       firstname,
       lastname,

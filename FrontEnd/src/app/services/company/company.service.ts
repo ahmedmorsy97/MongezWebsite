@@ -18,7 +18,7 @@ export class CompanyService {
     return this.http.get(this.baseUrl+'/allcompanies');
   }
   createCompany(name,email,address,companyNumber,taxNumber,logo){
-    const url = `${this.baseUrl}/createcompanytest`;
+    const url = `${this.baseUrl}/createcompany`;
     return this.http.post(url, {
       name,
       email,
@@ -31,7 +31,7 @@ export class CompanyService {
   }
 
   updateInfo( id,name,email,address,companyNumber,taxNumber){
-    const url = `${this.baseUrl}/updateCompanytest/`+id;
+    const url = `${this.baseUrl}/updateCompany/`+id;
     this.company= this.http.get(this.baseUrl+'/viewcompany/'+id);
     if(name=="")
     name = this.company.name;

@@ -25,26 +25,7 @@ router.post("/createcompany", authenticateadmin, (req, res) => {
             });
         });
 })
-router.post("/createcompanytest", (req, res) => {
 
-    var newcompany = new Company(); // create a new instance of the User model
-    newcompany.name = req.body.name;
-    newcompany.email = req.body.email;
-    newcompany.address = req.body.address;
-    newcompany.companyNumber = req.body.companyNumber;
-    newcompany.taxNumber = req.body.taxNumber;
-    newcompany.officialDocuments = req.body.officialDocuments;
-    newcompany.companylogo = req.body.companylogo;
-
-    newcompany.save().then(companyres => {
-            res.status(200).send({ company: newcompany });
-        })
-        .catch((err) => {
-            res.status(400).send({
-                err: err.message ? err.message : err,
-            });
-        });
-})
 router.get('/allcompanies', function(req, res) {
     Company.find(function(err, Company) {
         if (err)
@@ -78,9 +59,7 @@ router.patch('unblockcompany/:company_id', authenticateadmin, (req, res) => {
     User.findOneAndUpdate({ _id: req.params.company_id }, { $set: { blocked: false } }, { new: true }).then(updateduser => res.status(200).send({ updateduser: updateduser }))
 })
 
-router.patch('/updateCompanytest/:company_id', (req, res) => {
-    Company.findOneAndUpdate({ _id: req.params.company_id }, { $set: req.body }, { new: true }).then(updatedcompany => res.status(200).send({ company: updatedcompany }))
-})
+
 
 
 

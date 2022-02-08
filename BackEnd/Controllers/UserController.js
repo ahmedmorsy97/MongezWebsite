@@ -1,5 +1,5 @@
 import { response, Router } from "express";
-import { authenticateadmin, authenticateCompanyadmin, authenticatemanager, authenticateuser } from "../../MiddleWare";
+import { authenticateadmin, authenticateCompanyadmin, authenticateCompanyadminorManager, authenticatemanager, authenticateuser } from "../../MiddleWare";
 import { User } from "../Models/User";
 
 const router = Router();
@@ -34,31 +34,7 @@ router.post("/login", (req, res) => { // If email or password fields are not ent
         });
 });
 
-router.post("/registercompanyadmin", authenticateCompanyadmin, (req, res) => {
 
-    var newuser = new User(); // create a new instance of the User model
-    newuser.username = req.body.username;
-    newuser.email = req.body.email;
-    newuser.mobileNumber = req.body.mobileNumber;
-    newuser.dateOfBirth = req.body.dateOfBirth;
-    newuser.firstname = req.body.firstname;
-    newuser.lastname = req.body.lastname;
-    newuser.password = req.body.password;
-    newuser.rating = req.body.rating;
-    newuser.cart = [];
-    newuser.numberOfRatings = req.body.numberOfRatings;
-    newuser.imageURL = req.body.imageURL;
-    newuser.nationalID = req.body.nationalID;
-    newuser.employeeLevel = req.body.employeeLevel;
-    newuser.createdBy = req.user._id;
-    newuser.company = req.user.company;
-    newuser.save().then(user => res.status(200).send(user))
-        .catch((err) => {
-            res.status(400).send({
-                err: err.message ? err.message : err,
-            });
-        });
-})
 
 router.post("/registerCompanyAdmin", authenticateadmin, (req, res) => {
 
@@ -86,35 +62,9 @@ router.post("/registerCompanyAdmin", authenticateadmin, (req, res) => {
         });
 })
 
-router.post("/registerEmployeetest", (req, res) => {
 
-    var newuser = new User(); // create a new instance of the User model
-    newuser.username = req.body.username;
-    newuser.email = req.body.email;
-    newuser.mobileNumber = req.body.mobileNumber;
-    newuser.dateOfBirth = req.body.dateOfBirth;
-    newuser.firstname = req.body.firstname;
-    newuser.lastname = req.body.lastname;
-    newuser.password = req.body.password;
-    newuser.wallet = req.body.wallet;
-    newuser.limit = req.body.limit;
-    newuser.cart = [];
-    newuser.rating = req.body.rating;
-    newuser.numberOfRatings = req.body.numberOfRatings;
-    newuser.imageURL = req.body.imageURL;
-    newuser.nationalID = req.body.nationalID;
-    newuser.employeeLevel = "Employee";
-    // newuser.createdBy = req.user._id;
-    newuser.company = req.body.company;
-    newuser.save().then(user => res.status(200).send(user))
-        .catch((err) => {
-            res.status(400).send({
-                err: err.message ? err.message : err,
-            });
-        });
-})
 
-router.post("/registerEmployeeByCompanyAdmin", authenticateCompanyadmin, (req, res) => {
+router.post("/registeremployee", authenticateCompanyadminorManager, (req, res) => {
 
     var newuser = new User(); // create a new instance of the User model
     newuser.username = req.body.username;
@@ -140,33 +90,11 @@ router.post("/registerEmployeeByCompanyAdmin", authenticateCompanyadmin, (req, r
         });
 })
 
-router.post("/registerEmployeetest", (req, res) => {
 
-    var newuser = new User(); // create a new instance of the User model
-    newuser.username = req.body.username;
-    newuser.email = req.body.email;
-    newuser.mobileNumber = req.body.mobileNumber;
-    newuser.dateOfBirth = req.body.dateOfBirth;
-    newuser.firstname = req.body.firstname;
-    newuser.lastname = req.body.lastname;
-    newuser.password = req.body.password;
-    newuser.rating = req.body.rating;
-    newuser.numberOfRatings = req.body.numberOfRatings;
-    newuser.imageURL = req.body.imageURL;
-    newuser.nationalID = req.body.nationalID;
-    newuser.employeeLevel = req.body.params;
-    newuser.cart = [];
-    // newuser.createdBy = req.user._id;
-    newuser.company = req.body.company;
-    newuser.save().then(user => res.status(200).send(user))
-        .catch((err) => {
-            res.status(400).send({
-                err: err.message ? err.message : err,
-            });
-        });
-})
 
-router.post("/registerEmployeeByAdmin", authenticateadmin, (req, res) => {
+
+
+router.post("/registerAdmin", authenticateadmin, (req, res) => {
 
     var newuser = new User(); // create a new instance of the User model
     newuser.username = req.body.username;
@@ -181,7 +109,7 @@ router.post("/registerEmployeeByAdmin", authenticateadmin, (req, res) => {
     newuser.numberOfRatings = req.body.numberOfRatings;
     newuser.imageURL = req.body.imageURL;
     newuser.nationalID = req.body.nationalID;
-    newuser.employeeLevel = "Employee";
+    newuser.employeeLevel = "Admin";
     newuser.createdBy = req.user._id;
     newuser.company = req.body.company;
     newuser.save().then(user => res.status(200).send(user))
@@ -192,56 +120,6 @@ router.post("/registerEmployeeByAdmin", authenticateadmin, (req, res) => {
         });
 })
 
-router.post("/registerManagerByAdmin", authenticateadmin, (req, res) => {
-
-    var newuser = new User(); // create a new instance of the User model
-    newuser.username = req.body.username;
-    newuser.email = req.body.email;
-    newuser.mobileNumber = req.body.mobileNumber;
-    newuser.dateOfBirth = req.body.dateOfBirth;
-    newuser.firstname = req.body.firstname;
-    newuser.lastname = req.body.lastname;
-    newuser.password = req.body.password;
-    newuser.cart = [];
-    newuser.rating = req.body.rating;
-    newuser.numberOfRatings = req.body.numberOfRatings;
-    newuser.imageURL = req.body.imageURL;
-    newuser.nationalID = req.body.nationalID;
-    newuser.employeeLevel = "Employee";
-    newuser.createdBy = req.user._id;
-    newuser.company = req.body.company;
-    newuser.save().then(user => res.status(200).send(user))
-        .catch((err) => {
-            res.status(400).send({
-                err: err.message ? err.message : err,
-            });
-        });
-})
-router.post("/registerManagerByAdmin", authenticateadmin, (req, res) => {
-
-    var newuser = new User(); // create a new instance of the User model
-    newuser.username = req.body.username;
-    newuser.email = req.body.email;
-    newuser.mobileNumber = req.body.mobileNumber;
-    newuser.dateOfBirth = req.body.dateOfBirth;
-    newuser.firstname = req.body.firstname;
-    newuser.lastname = req.body.lastname;
-    newuser.password = req.body.password;
-    newuser.cart = [];
-    newuser.rating = req.body.rating;
-    newuser.numberOfRatings = req.body.numberOfRatings;
-    newuser.imageURL = req.body.imageURL;
-    newuser.nationalID = req.body.nationalID;
-    newuser.employeeLevel = "Employee";
-    newuser.createdBy = req.user._id;
-    newuser.company = req.body.company;
-    newuser.save().then(user => res.status(200).send(user))
-        .catch((err) => {
-            res.status(400).send({
-                err: err.message ? err.message : err,
-            });
-        });
-})
 
 
 router.post("/logout", authenticateuser, (req, res) => {
@@ -289,7 +167,9 @@ router.patch('/updatemyinfo/:user_id', (req, res) => {
 
 
 router.patch('/addtocart', authenticateuser, (req, res) => {
-    User.findOneAndUpdate({ _id: req.user._id }, { $push: { cart: { product: req.body.productid, quantity: req.body.quantity } } }, { new: true }).then(updatedcart => res.status(200).send({ cart: updatedcart }))
+    console.log(req.user._id)
+    User.findOneAndUpdate({ _id: req.user._id }, { $push: { cart: { product: req.body.productid, quantity: req.body.quantity, productName: req.body.name, productPrice: req.body.price, productLogo: req.body.logo } } }, { new: true }).then(updatedcart => res.status(200).send({ cart: updatedcart }))
+
 })
 router.patch('/addexistingtocart', authenticateuser, (req, res) => {
     User.findOneAndUpdate({ _id: req.user._id, "cart.product": req.body.productid }, { $inc: { "cart.$.quantity": req.body.quantity } }, { new: true }).then(updatedcart => res.status(200).send({ user: updatedcart }))

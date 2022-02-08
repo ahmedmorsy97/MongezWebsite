@@ -4,6 +4,8 @@ import { categories, Mechanicalsubcategories, Electricalsubcategories } from '..
 import { faPlus, faMinus } from '@fortawesome/free-solid-svg-icons';
 import { IMultiSelectOption, IMultiSelectSettings, IMultiSelectTexts } from 'ngx-bootstrap-multiselect';
 import { ProductsService } from 'src/app/services/product/products.service';
+import { UserService } from 'src/app/services/user/user.service';
+import { PropertyRead } from '@angular/compiler';
 @Component({
   selector: 'app-products',
   templateUrl: './products.component.html',
@@ -41,7 +43,7 @@ export class ProductsComponent implements OnInit {
     limit: 9
   }
 
-  constructor(private router: Router, private ProductSer: ProductsService) {
+  constructor(private router: Router, private ProductSer: ProductsService,private UserSer: UserService) {
 
   }
   // Settings configuration
@@ -147,7 +149,7 @@ export class ProductsComponent implements OnInit {
     }).subscribe(
       (res:any) => {
         console.log(res);
-        this.products = res.products;
+        this.products = res.products.map(element=>({...element,customerquantity:1})); // Add this attribute to the object product
       }
     )
   }
@@ -161,7 +163,59 @@ export class ProductsComponent implements OnInit {
   onChange() {
     console.log(this.optionsModel);
   }
-  addToCart(id){
+  addToCart(product){
+    
+      if(product.customerquantity<=product.quantity&& product.customerquantity>0){
+        const price = this.getprice(product);
+      this.UserSer.AddtoCart(product._id,product.customerquantity,product.productName,price,product.productLogo).subscribe(
+        res=>{
+          alert("Product added to cart")
+        },
+        err=>{
+          alert("Something went wrong")
+        }
+      );
+      }
+    if(product.customerquantity>product.quantity){
+      alert("You've exceeded the available quanity fro this product")
+    }
+    
+    if(product.customerquantity<=0){
+      alert("You can't order for 0 or less")
+    }
+  }
+  incrementQuanity(product){
+    if(!product.customerquantity){
+      product.customerquantity = 0;
+    }
+    if( product.customerquantity<product.quantity)
+    product.customerquantity+=1;
+  }
 
+  decrementQuanity(product){
+    if(!product.customerquantity){
+      product.customerquantity = 0;
+    }
+    if(product.customerquantity>0)
+    product.customerquantity-=1;
+  }
+  getprice(product){
+    let price = 0;
+    product.priceRange.forEach((element,index) => {
+      if(index==product.priceRange.length-1 && product.customerquantity>=element.minquantity ){
+        price = element.priceofRange;
+        return price;
+      }
+      else{
+        if(product.customerquantity>=element.minquantity && product.customerquantity<=element.maxquantity ){
+        price = element.priceofRange;
+        return price;
+      }
+    }
+    });
+    if(price==0&& product.priceRange.length>0){
+      price = product.priceRange[0].priceofRange;
+    }
+    return price;
   }
 }
