@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { faMinus, faPlus } from '@fortawesome/free-solid-svg-icons';
 import { ProductsService } from 'src/app/services/product/products.service';
 
 @Component({
@@ -16,6 +17,8 @@ export class CreateproductComponent implements OnInit {
   category="";
   photos="";
   subcategory="";
+  faPlus = faPlus;
+  faMinus = faMinus;
   SubCategorydata = {Mechanical:[{name:"HVAC",value:"HVAC"},{name:"FireFighting",value:"FireFighting"},{name:"Plumbing",value:"Plumbing"}],
   Electrical:[{name:"Light Current",value:"lightcurrent"},{name:"High Voltage",value:"highvoltage"},{name:"Low Voltage",value:"lowvoltage"}]}
   err: string = null;

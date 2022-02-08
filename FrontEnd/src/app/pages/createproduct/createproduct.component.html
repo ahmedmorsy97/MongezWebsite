@@ -23,10 +23,11 @@
                 <input type="number" placeholder="Price" [name]="'pricerange' +i" [(ngModel)]="price.priceofRange" />
             </div>
             <div *ngIf="pricerange.length>1" class=" mb-2 col-2 col-md-1 ">
-                <button (click)="deletePriceRange(i)" class="btn btn-primary w-100 mt-4">Delete</button>
+                <button (click)="deletePriceRange()" class=" minus ">  <fa-icon [icon]="faMinus "></fa-icon></button>
             </div>
         </div>
-        <button (click)="addPriceRange()" class="btn btn-primary w-100 mt-3 mb-4">Add Range</button>
+
+        <button (click)="addPriceRange()" class=" plus ">  <fa-icon [icon]="faPlus "></fa-icon></button>
         <!--  -->
         <label>Quantity</label>
         <input class="mb-2" type="number" placeholder="Quantity" name="quantity" [(ngModel)]="quantity" />
