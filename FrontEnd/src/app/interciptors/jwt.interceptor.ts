@@ -22,7 +22,7 @@ export class JwtInterceptor implements HttpInterceptor {
     // const headers = new Headers(headersInfo);
 
     const token = this.authService.getToken();
-    console.log(token)
+  
     return next.handle(request.clone({
       headers: request.headers.set("Authorization", `${token}`)
     }))

@@ -39,6 +39,9 @@ import { AboutComponent } from './pages/about/about.component';
 import { CartComponent } from './pages/cart/cart.component';
 import { PayementComponent } from './pages/payement/payement.component';
 import { JwtInterceptor } from './interciptors/jwt.interceptor';
+import { CreatemanagerComponent } from './pages/createmanager/createmanager.component';
+import { CreatecompanyadminComponent } from './pages/createcompanyadmin/createcompanyadmin.component';
+import { CreateadminComponent } from './pages/createadmin/createadmin.component';
 
 // export function createTranslateLoader(http: HttpClient) {
 
@@ -71,7 +74,10 @@ import { JwtInterceptor } from './interciptors/jwt.interceptor';
     ViewmyproductsComponent,
     AboutComponent,
     CartComponent,
-    PayementComponent
+    PayementComponent,
+    CreatemanagerComponent,
+    CreatecompanyadminComponent,
+    CreateadminComponent
 
   ],
   imports: [

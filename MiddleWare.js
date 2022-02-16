@@ -101,7 +101,7 @@ export const authenticateCompanyadmin = (req, res, next) => {
 
 export const authenticateCompanyadminorManager = (req, res, next) => {
     const token = req.headers.authorization.split("Bearer ")[1];
-
+    console.log("IN AUTHENTICATION");
     User.findByToken(token)
         .then((user) => {
             if (!user) {
@@ -109,7 +109,8 @@ export const authenticateCompanyadminorManager = (req, res, next) => {
                     message: "No admin with this id !",
                 };
             }
-            if (user.employeeLevel != "CompanyAdmin" || user.employeeLevel != "manager") {
+            console.log(user.employeeLevel);
+            if (user.employeeLevel != "CompanyAdmin" && user.employeeLevel != "Manager") {
                 throw {
                     message: "Access Denied, Not a Company Admin or Manager!",
                 };

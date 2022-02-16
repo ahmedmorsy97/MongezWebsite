@@ -2,7 +2,10 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AboutComponent } from './pages/about/about.component';
 import { CartComponent } from './pages/cart/cart.component';
+import { CreateadminComponent } from './pages/createadmin/createadmin.component';
 import { CreatecompanyComponent } from './pages/createcompany/createcompany.component';
+import { CreatecompanyadminComponent } from './pages/createcompanyadmin/createcompanyadmin.component';
+import { CreatemanagerComponent } from './pages/createmanager/createmanager.component';
 import { CreateproductComponent } from './pages/createproduct/createproduct.component';
 import { CreatesupplierComponent } from './pages/createsupplier/createsupplier.component';
 import { CreateuserComponent } from './pages/createuser/createuser.component';
@@ -34,7 +37,10 @@ const routes: Routes = [
   { path: 'products/hardware',component: ProductsComponent},
   { path: 'viewproduct/:id',component: ViewproductComponent},
   { path: 'createcompany',component: CreatecompanyComponent},
-  { path: 'createuser',component: CreateuserComponent},
+  { path: 'createemployee',component: CreateuserComponent},
+  { path: 'createmanager',component: CreatemanagerComponent},
+  { path: 'createadmin',component: CreateadminComponent},
+  { path: 'createcompanyadmin',component: CreatecompanyadminComponent},
   { path: 'createsupplier',component: CreatesupplierComponent},
   { path: 'createproduct/:id',component: CreateproductComponent},
   { path: 'viewuser/:id',component: ViewuserComponent},

@@ -18,7 +18,7 @@ export class UserService {
     return this.http.get(this.baseUrl+'/allusers');
   }
   createUser(firstname,lastname,username,email,password,mobileNumber,dateOfBirth,nationalID,employeeLevel,limit,wallet,image){
-    const url = `${this.baseUrl}/registerEmployee`;
+    const url = `${this.baseUrl}/registeremployee`;
     return this.http.post(url, {
       firstname,
       lastname,
@@ -31,6 +31,52 @@ export class UserService {
       employeeLevel,
       limit,
       wallet,
+      image
+    });
+  }
+
+  createManager(firstname,lastname,username,email,password,mobileNumber,dateOfBirth,nationalID,employeeLevel,image){
+    const url = `${this.baseUrl}/registermanager`;
+    return this.http.post(url, {
+      firstname,
+      lastname,
+      username,
+      email,
+      password,
+      mobileNumber,
+      dateOfBirth,
+      nationalID,
+      employeeLevel,
+      image
+    });
+  }
+  createCompanyAdmin(firstname,lastname,username,email,password,mobileNumber,dateOfBirth,nationalID,employeeLevel,image){
+    const url = `${this.baseUrl}/registerCompanyAdmin`;
+    return this.http.post(url, {
+      firstname,
+      lastname,
+      username,
+      email,
+      password,
+      mobileNumber,
+      dateOfBirth,
+      nationalID,
+      employeeLevel,
+      image
+    });
+  }
+  createAdmin(firstname,lastname,username,email,password,mobileNumber,dateOfBirth,nationalID,employeeLevel,image){
+    const url = `${this.baseUrl}/registerAdmin`;
+    return this.http.post(url, {
+      firstname,
+      lastname,
+      username,
+      email,
+      password,
+      mobileNumber,
+      dateOfBirth,
+      nationalID,
+      employeeLevel,
       image
     });
   }

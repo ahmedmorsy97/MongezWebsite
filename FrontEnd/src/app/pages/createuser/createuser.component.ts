@@ -25,7 +25,7 @@ err: string = null;
   ngOnInit(): void {
   }
 createUser(){
-  this.UserServ.createUser(this.firstname,this.lastname,this.username,this.email,this.password,this.mobileNumber,this.dateOfBirth,this.nationalID,this.employeeLevel,this.limit,this.wallet,this.image).subscribe(
+  this.UserServ.createUser(this.firstname,this.lastname,this.username,this.email,this.password,this.mobileNumber,this.dateOfBirth,this.nationalID,"Employee",this.limit,this.wallet,this.image).subscribe(
     (res: any) => {
     console.log(res)
     this.router.navigateByUrl('')

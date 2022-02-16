@@ -98,9 +98,27 @@ export class NavbarComponent implements OnInit {
         position: SimpleSidebarPosition.top
       },
       {
-        name: 'Create User',
+        name: 'Create Employee',
         icon: 'las la-plus-circle',
-        routerLink: ['/createuser'],
+        routerLink: ['/createemployee'],
+        position: SimpleSidebarPosition.top
+      },
+      {
+        name: 'Create Manager',
+        icon: 'las la-plus-circle',
+        routerLink: ['/createmanager'],
+        position: SimpleSidebarPosition.top
+      },
+      {
+        name: 'Create Company Admin',
+        icon: 'las la-plus-circle',
+        routerLink: ['/createcompanyadmin'],
+        position: SimpleSidebarPosition.top
+      },
+      {
+        name: 'Create Admin',
+        icon: 'las la-plus-circle',
+        routerLink: ['/createadmin'],
         position: SimpleSidebarPosition.top
       },
       {

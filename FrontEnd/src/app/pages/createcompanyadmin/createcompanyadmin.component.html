@@ -25,14 +25,8 @@
         <input class="mb-2" type="text" placeholder="National ID" name="nationalID" [(ngModel)]="nationalID" />
 
         <label>User Level</label>
-        <input class="mb-2" type="text" placeholder="Employee Level" value="Employee" readonly />
+        <input class="mb-2" type="text" placeholder="Employee Level" value="Company Admin" readonly />
 
-
-        <label>Employee Limit</label>
-        <input class="mb-2" type="number" placeholder="Employee Limit" name="limit" [(ngModel)]="limit" />
-
-        <label>Employee Wallet</label>
-        <input class="mb-2" type="number" placeholder="Employee Limit" name="wallet" [(ngModel)]="wallet" />
 
         <!-- HOW? -->
         <label>Personal Image</label>
@@ -43,6 +37,6 @@
 
 
 
-        <button (click)="createUser()" class="btn btn-primary w-100 mt-4">Create Employee</button>
+        <button (click)="createUser()" class="btn btn-primary w-100 mt-4">Create Company Admin</button>
     </form>
 </div>
