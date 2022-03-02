@@ -50,8 +50,9 @@ router.post("/create", authenticatesupplier, (req, res) => {
 })
 
 
-router.get("/myproducts/:supplier_id", authenticatesupplier, (req, res) => {
-    Product.find({ supplier: req.params.supplier_id }).then((products) => {
+router.get("/viewmyproducts", authenticatesupplier, (req, res) => {
+    console.log(req.supplier._id)
+    Product.find({ supplier: req.supplier._id, isremoved: false }).then((products) => {
             res.status(200).send(products)
         })
         .catch((err) => {
@@ -97,6 +98,11 @@ router.patch("/editsupplierproduct/:product_id", authenticateadmin, (req, res) =
 
 
 })
+router.patch('/removeproduct/:productid', authenticatesupplier, (req, res) => {
+
+    Product.findOneAndUpdate({ _id: req.params.productid }, { $set: { isremoved: true } }, { new: true }).then(updatedproduct => res.status(200).send({ updatedproduct: updatedproduct }))
+})
+
 
 
 export const productController = router;

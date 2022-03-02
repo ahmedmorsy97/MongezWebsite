@@ -37,14 +37,15 @@ a:hover {
     color: firebrick;
 }
 
-html, body {
+html,
+body {
     margin: 0;
     padding: 0;
 }
 
 .content-wrapper {
-	display: flex;
-	flex-wrap: nowrap;
+    display: flex;
+    flex-wrap: nowrap;
 }
 
 .content {
@@ -59,7 +60,6 @@ lib-ng-simple-sidebar .dock {
     height: 100% !important;
     width: 0 !important;
     padding: 0 !important;
-
     /* transition: width 0.25s linear !important; */
     visibility: hidden;
     opacity: 0;

@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { EventEmitter, Injectable } from '@angular/core';
+import { Router } from '@angular/router';
 import { environment } from 'src/environments/environment';
 
 @Injectable({
@@ -10,7 +11,7 @@ export class AuthService {
   baseUrl: string = `${environment.baseUrl}`;
   authState: EventEmitter<string> = new EventEmitter<string>()
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient,private Router: Router) { }
 
   getToken() {
     const token = localStorage.getItem("currentuser") && JSON.parse(localStorage.getItem("currentuser"))?.token;
@@ -33,8 +34,13 @@ export class AuthService {
   }
 
   logout( type ="user") {
-    localStorage.removeItem("currentuser");
     const url = `${this.baseUrl}/${type}/logout`;
-    return this.http.post(url, {});
+    return this.http.post(url, {}).subscribe(res=>{
+      localStorage.removeItem("currentuser");
+      this.authState.emit("Logout")
+      this.Router.navigateByUrl('/');
+
+    });
+
   }
 }

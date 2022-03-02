@@ -50,7 +50,7 @@ export class UserService {
       image
     });
   }
-  createCompanyAdmin(firstname,lastname,username,email,password,mobileNumber,dateOfBirth,nationalID,employeeLevel,image){
+  createCompanyAdmin(firstname,lastname,username,email,password,mobileNumber,dateOfBirth,nationalID,employeeLevel,image,company){
     const url = `${this.baseUrl}/registerCompanyAdmin`;
     return this.http.post(url, {
       firstname,
@@ -62,7 +62,8 @@ export class UserService {
       dateOfBirth,
       nationalID,
       employeeLevel,
-      image
+      image,
+      company
     });
   }
   createAdmin(firstname,lastname,username,email,password,mobileNumber,dateOfBirth,nationalID,employeeLevel,image){
@@ -81,10 +82,34 @@ export class UserService {
     });
   }
 
+  editLimit(userid,limit){
 
+    const url = `${this.baseUrl}/setemployeelimit/`+userid;
+
+    return this.http.patch(url, {
+      limit
+    
+       
+       });
+  }
+  increasewallet(userid,wallet){
+    const url = `${this.baseUrl}/setemployeewallet/`+userid;
+   
+    return this.http.patch(url, {
+ wallet
+ 
+       });
+  }
+  delete(userid){
+   
+    const url = `${this.baseUrl}/removeEmployee/`+userid;    
+    return this.http.patch(url, {
+      
+       });
+  }
 
   updateInfo( id,firstname,lastname,password,mobileNumber,dateOfBirth,email){
-      const url = `${this.baseUrl}/updatemyinfo/`+id;
+      const url = `${this.baseUrl}/updatemyinfo/`;
     this.user= this.http.get(this.baseUrl+'/viewuser/'+id); ;
     if(firstname=="")
     firstname = this.user.firstname
@@ -115,7 +140,6 @@ export class UserService {
 
   AddtoCart(productid,quantity,name,price,logo){
     const url = `${this.baseUrl}/addtocart`;
-    
 
     return this.http.patch(url, {
     productid,

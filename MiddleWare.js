@@ -33,9 +33,9 @@ export const authenticateadmin = (req, res, next) => {
                 };
             }
 
-            if (user.admin == false) {
+            if (user.employeeLevel != "Admin") {
                 throw {
-                    message: "Access Denied, Not and admin!",
+                    message: "Access Denied, Not an admin!",
                 };
             }
             req.user = user;

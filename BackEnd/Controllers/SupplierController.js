@@ -85,8 +85,8 @@ router.patch('/update', authenticateadmin, (req, res) => {
     Supplier.findOneAndUpdate({ _id: req.user._id }, { $set: req.body }, { new: true }).then(updatedsupplier => res.status(200).send({ supplier: updatedsupplier }))
 })
 
-router.patch('/updatemyinfo/:supplier_id', (req, res) => {
-    Supplier.findOneAndUpdate({ _id: req.params.supplier_id }, { $set: req.body }, { new: true }).then(updatedsupplier => res.status(200).send({ supplier: updatedsupplier }))
+router.patch('/updatemyinfo', (req, res) => {
+    Supplier.findOneAndUpdate({ _id: req.user._id }, { $set: req.body }, { new: true }).then(updatedsupplier => res.status(200).send({ supplier: updatedsupplier }))
 })
 
 router.get('/viewsupplier/:supplier_id', (req, res) => {

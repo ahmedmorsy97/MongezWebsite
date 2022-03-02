@@ -42,6 +42,7 @@ import { JwtInterceptor } from './interciptors/jwt.interceptor';
 import { CreatemanagerComponent } from './pages/createmanager/createmanager.component';
 import { CreatecompanyadminComponent } from './pages/createcompanyadmin/createcompanyadmin.component';
 import { CreateadminComponent } from './pages/createadmin/createadmin.component';
+import { EditusermoneyComponent } from './pages/editusermoney/editusermoney.component';
 
 // export function createTranslateLoader(http: HttpClient) {
 
@@ -77,7 +78,8 @@ import { CreateadminComponent } from './pages/createadmin/createadmin.component'
     PayementComponent,
     CreatemanagerComponent,
     CreatecompanyadminComponent,
-    CreateadminComponent
+    CreateadminComponent,
+    EditusermoneyComponent
 
   ],
   imports: [

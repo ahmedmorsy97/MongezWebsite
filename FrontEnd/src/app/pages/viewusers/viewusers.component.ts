@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { faSearch } from '@fortawesome/free-solid-svg-icons';
+import { BsModalService } from 'ngx-bootstrap/modal';
 import { UserService } from 'src/app/services/user/user.service';
+import { EditusermoneyComponent } from '../editusermoney/editusermoney.component';
 
 @Component({
   selector: 'app-viewusers',
@@ -11,22 +13,54 @@ import { UserService } from 'src/app/services/user/user.service';
 export class ViewusersComponent implements OnInit {
   faSearch = faSearch;
   users:any =[];
-  constructor(private router: Router,private activerouter: ActivatedRoute, private UserSer: UserService) {
+  signedinuser : any
+  constructor(private router: Router,private activerouter: ActivatedRoute, private UserSer: UserService,private modalService: BsModalService) {
 
   }
   ngOnInit(): void {
     this.getUsers();
+    this.signedinuser = JSON.parse(localStorage.getItem("currentuser")).user
+    console.log(this.signedinuser.employeeLevel)
   }
 getUsers(){
   this.UserSer.getUsers().subscribe(
     (res:any) => {
-      console.log(res);
+     
       this.users = res;
-      console.log("USERS",this.users)
+
     }
   )
+}
 
+editLimit(userid){
+  const initialState = {
+    title:"Edit Employee limit",
+    type:"Limit",
+    userid:userid
+  }
+  this.modalService.show(EditusermoneyComponent, {
+    animated: true,
+    initialState
+  }).content.render.subscribe(res=>this.getUsers())
 
+}
+increaseWallet(userid){
+  const initialState = {
+    title:"Add to Employee Wallet",
+    type:"Wallet",
+    userid:userid
+  }
+  this.modalService.show(EditusermoneyComponent, {
+    animated: true,
+    initialState
+  }).content.render.subscribe(res=>this.getUsers())
+
+}
+deleteUser(userid){
+this.UserSer.delete(userid).subscribe(res=>{
+  alert("Deleted Successfully")
+  this.getUsers()
+})
 }
 viewUser(){
 

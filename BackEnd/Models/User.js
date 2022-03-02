@@ -84,6 +84,10 @@ const userSchema = mongoose.Schema({
         type: Boolean,
         default: false
     },
+    isremoved: {
+        type: Boolean,
+        default: false
+    },
     imageURL: {
         type: String,
         required: false
@@ -216,6 +220,12 @@ userSchema.statics.findByCredentials = function(email, password) { // Find using
         if (user.blocked == true) {
             return Promise.reject({
                 message: "This is user is blocked from the system",
+            });
+
+        }
+        if (user.isremoved == true) {
+            return Promise.reject({
+                message: "This is user is removed from the system",
             });
         }
         return new Promise((resolve, reject) => {

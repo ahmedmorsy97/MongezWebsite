@@ -25,7 +25,14 @@
                     <h5 class="card-title">Email: {{user.email}}</h5>
                     <h5 class="card-title">Mobile Number: {{user.mobileNumber}}</h5>
                     <h5 class="card-title">Level: {{user.employeeLevel}}</h5>
+                    <h5 *ngIf="signedinuser.employeeLevel!='Employee' && user.employeeLevel=='Employee'" class="card-title">User Wallet: {{user.wallet}}</h5>
+                    <h5 *ngIf="signedinuser.employeeLevel!='Employee'&&user.employeeLevel=='Employee'" class="card-title">User Limit: {{user.limit}}</h5>
 
+                </div>
+                <div *ngIf="user.employeeLevel=='Employee' && signedinuser.employeeLevel!='Employee'" class="col-12 d-flex justify-content-end flex-wrap">
+                    <button (click)="deleteUser(user._id)" *ngIf="signedinuser.employeeLevel=='CompanyAdmin'" class="btn btn-primary mx-3">Delete</button>
+                    <button (click)="increaseWallet(user._id)" class="btn btn-primary mx-3">Add Wallet</button>
+                    <button (click)="editLimit(user._id)" class="btn btn-primary mx-3">Edit Limit</button>
                 </div>
             </div>
 

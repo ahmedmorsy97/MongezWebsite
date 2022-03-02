@@ -13,8 +13,8 @@ export class ProductsService {
   getProducts(query: any = {}) {
     return this.http.post(this.baseUrl + "/getall", query);
   }
-  getmyProducts(id:String){
-    return this.http.get(this.baseUrl+'/myproducts/'+ id);
+  getmyProducts(){
+    return this.http.get(this.baseUrl+'/viewmyproducts');
   }
   createProduct(supplier:any,productName,description,specs,priceRange,quantity,category,photoLinks,Subcategory){
     const url = `${this.baseUrl}/create`;
@@ -34,5 +34,11 @@ export class ProductsService {
   }
   viewProduct(id){
     return this.http.get(this.baseUrl+'/viewproduct/'+ id);
+  }
+  removeproduct(id){
+    const url = `${this.baseUrl}/removeProduct/`+id;    
+    return this.http.patch(url, {
+      
+       });
   }
 }

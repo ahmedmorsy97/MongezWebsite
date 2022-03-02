@@ -17,12 +17,12 @@ export class ViewmyproductsComponent implements OnInit {
   ngOnInit(): void {
     this.activerouter.paramMap.subscribe((res:any)=>{
       console.log(res)
-    this.getmyProducts(res.params.id);
+    this.getmyProducts();
 
     })
   }
-  getmyProducts(id:String){
-    this.ProductSer.getmyProducts(id).subscribe(
+  getmyProducts(){
+    this.ProductSer.getmyProducts().subscribe(
       (res:any) => {
         console.log(res);
         this.products = res;
@@ -35,5 +35,12 @@ export class ViewmyproductsComponent implements OnInit {
   viewProduct(id:string){
     this.router.navigateByUrl('/viewproduct/'+id+"")
    
+  }
+
+  deleteProduct(id){
+    this.ProductSer.removeproduct(id).subscribe(res=>{
+      alert("Product Successfully Deleted")
+      this.getmyProducts();
+    })
   }
 }

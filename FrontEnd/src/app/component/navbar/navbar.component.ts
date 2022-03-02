@@ -20,7 +20,8 @@ export class NavbarComponent implements OnInit {
   faBars = faBars;
   modalRef?: BsModalRef;
   user = null;
-
+  level= ""
+currentuser = null
   type = "";
   sidebarItems: SimpleSidebarItem[];
   adminsidebarItems: SimpleSidebarItem[];
@@ -41,6 +42,7 @@ export class NavbarComponent implements OnInit {
   ngOnInit(): void {
     this.user = this.authServ.checkUser();
     this.type = localStorage.getItem("type")
+    console.log(this.type)
     this.authServ.authState.subscribe(
       state => {
         this.user = this.authServ.checkUser();
@@ -52,97 +54,277 @@ export class NavbarComponent implements OnInit {
   }
 
   initSideNav() {
+    
     if(this.type=="user"){
-    this.sidebarItems = [
-      {
-        name: 'Welcome',
-        icon: 'las la-home',
-        routerLink: [''],
-        position: SimpleSidebarPosition.top
-      },
+this.currentuser = JSON.parse(this.user).user
+this.level = this.currentuser.employeeLevel
+      if(this.level=="Admin"){
+        this.sidebarItems = [
+          {
+            name: 'Welcome',
+            icon: 'las la-home',
+            routerLink: [''],
+            position: SimpleSidebarPosition.top
+          },
+          
+          {
+            name: 'About',
+            icon: 'las la-address-book',
+            routerLink: ['/about'],
+            position: SimpleSidebarPosition.top
+          },
+          {
+            name: 'View My Wallet',
+            icon: 'las la-wallet',
+            routerLink: ['/viewmywallet'],
+            position: SimpleSidebarPosition.top
+          },
+          {
+            name: 'View My Orders',
+            icon: 'las la-shopping-bag',
+            routerLink: ['/viewmyorders'],
+            position: SimpleSidebarPosition.top
+          },
+          {
+            name: 'View Users',
+            icon: 'las la-users',
+            routerLink: ['/viewusers'],
+            position: SimpleSidebarPosition.top
+          },
+          {
+            name: 'View Suppliers',
+            icon: 'las la-users',
+            routerLink: ['/viewsuppliers'],
+            position: SimpleSidebarPosition.top
+          },
+          {
+            name: 'View Companies',
+            icon: 'las la-building',
+            routerLink: ['/viewcompanies'],
+            position: SimpleSidebarPosition.top
+          },
+          {
+            name: 'Create Employee',
+            icon: 'las la-plus-circle',
+            routerLink: ['/createemployee'],
+            position: SimpleSidebarPosition.top
+          },
+          {
+            name: 'Create Manager',
+            icon: 'las la-plus-circle',
+            routerLink: ['/createmanager'],
+            position: SimpleSidebarPosition.top
+          },
+          {
+            name: 'Create Company Admin',
+            icon: 'las la-plus-circle',
+            routerLink: ['/createcompanyadmin'],
+            position: SimpleSidebarPosition.top
+          },
+          {
+            name: 'Create Admin',
+            icon: 'las la-plus-circle',
+            routerLink: ['/createadmin'],
+            position: SimpleSidebarPosition.top
+          },
+          {
+            name: 'Create Supplier',
+            icon: 'las la-plus-circle',
+            routerLink: ['/createsupplier'],
+            position: SimpleSidebarPosition.top
+          },
+          {
+            name: 'Create Company',
+            icon: 'las la-plus-circle',
+            routerLink: ['/createcompany'],
+            position: SimpleSidebarPosition.top
+          },
+    
+          {
+            name: 'Logout',
+            icon: 'las la-external-link-alt',
+            // url: 'https://secanis.ch',
+            // target: '_blank',
+            routerLink: ['/logout'],
+            position: SimpleSidebarPosition.bottom
+          }
+        ];
+       }
+        if(this.level=="CompanyAdmin"){
+          
+          this.sidebarItems = [
+            {
+              name: 'Welcome',
+              icon: 'las la-home',
+              routerLink: [''],
+              position: SimpleSidebarPosition.top
+            },
+            
+            {
+              name: 'About',
+              icon: 'las la-address-book',
+              routerLink: ['/about'],
+              position: SimpleSidebarPosition.top
+            },
+        
+            {
+              name: 'View My Orders',
+              icon: 'las la-shopping-bag',
+              routerLink: ['/viewmyorders'],
+              position: SimpleSidebarPosition.top
+            },
+            {
+              name: 'View Users',
+              icon: 'las la-users',
+              routerLink: ['/viewusers'],
+              position: SimpleSidebarPosition.top
+            },
+            {
+              name: 'View Suppliers',
+              icon: 'las la-users',
+              routerLink: ['/viewsuppliers'],
+              position: SimpleSidebarPosition.top
+            },
+            {
+              name: 'View Companies',
+              icon: 'las la-building',
+              routerLink: ['/viewcompanies'],
+              position: SimpleSidebarPosition.top
+            },
+            {
+              name: 'Create Employee',
+              icon: 'las la-plus-circle',
+              routerLink: ['/createemployee'],
+              position: SimpleSidebarPosition.top
+            },
+            {
+              name: 'Create Manager',
+              icon: 'las la-plus-circle',
+              routerLink: ['/createmanager'],
+              position: SimpleSidebarPosition.top
+            },
+            {
+              name: 'Create Company Admin',
+              icon: 'las la-plus-circle',
+              routerLink: ['/createcompanyadmin'],
+              position: SimpleSidebarPosition.top
+            },
+  
       
-      {
-        name: 'About',
-        icon: 'las la-address-book',
-        routerLink: ['/about'],
-        position: SimpleSidebarPosition.top
-      },
-      {
-        name: 'View My Wallet',
-        icon: 'las la-wallet',
-        routerLink: ['/viewmywallet'],
-        position: SimpleSidebarPosition.top
-      },
-      {
-        name: 'View My Orders',
-        icon: 'las la-shopping-bag',
-        routerLink: ['/viewmyorders'],
-        position: SimpleSidebarPosition.top
-      },
-      {
-        name: 'View Users',
-        icon: 'las la-users',
-        routerLink: ['/viewusers'],
-        position: SimpleSidebarPosition.top
-      },
-      {
-        name: 'View Suppliers',
-        icon: 'las la-users',
-        routerLink: ['/viewsuppliers'],
-        position: SimpleSidebarPosition.top
-      },
-      {
-        name: 'View Companies',
-        icon: 'las la-building',
-        routerLink: ['/viewcompanies'],
-        position: SimpleSidebarPosition.top
-      },
-      {
-        name: 'Create Employee',
-        icon: 'las la-plus-circle',
-        routerLink: ['/createemployee'],
-        position: SimpleSidebarPosition.top
-      },
-      {
-        name: 'Create Manager',
-        icon: 'las la-plus-circle',
-        routerLink: ['/createmanager'],
-        position: SimpleSidebarPosition.top
-      },
-      {
-        name: 'Create Company Admin',
-        icon: 'las la-plus-circle',
-        routerLink: ['/createcompanyadmin'],
-        position: SimpleSidebarPosition.top
-      },
-      {
-        name: 'Create Admin',
-        icon: 'las la-plus-circle',
-        routerLink: ['/createadmin'],
-        position: SimpleSidebarPosition.top
-      },
-      {
-        name: 'Create Supplier',
-        icon: 'las la-plus-circle',
-        routerLink: ['/createsupplier'],
-        position: SimpleSidebarPosition.top
-      },
-      {
-        name: 'Create Company',
-        icon: 'las la-plus-circle',
-        routerLink: ['/createcompany'],
-        position: SimpleSidebarPosition.top
-      },
-
-      {
-        name: 'Logout',
-        icon: 'las la-external-link-alt',
-        // url: 'https://secanis.ch',
-        // target: '_blank',
-        routerLink: ['/logout'],
-        position: SimpleSidebarPosition.bottom
-      }
-    ];
+            {
+              name: 'Logout',
+              icon: 'las la-external-link-alt',
+              // url: 'https://secanis.ch',
+              // target: '_blank',
+              routerLink: ['/logout'],
+              position: SimpleSidebarPosition.bottom
+            }
+          ];
+        }
+        if(this.level=="Manager"){
+          this.sidebarItems = [
+            {
+              name: 'Welcome',
+              icon: 'las la-home',
+              routerLink: [''],
+              position: SimpleSidebarPosition.top
+            },
+            
+            {
+              name: 'About',
+              icon: 'las la-address-book',
+              routerLink: ['/about'],
+              position: SimpleSidebarPosition.top
+            },
+        
+            {
+              name: 'View My Orders',
+              icon: 'las la-shopping-bag',
+              routerLink: ['/viewmyorders'],
+              position: SimpleSidebarPosition.top
+            },
+            {
+              name: 'View Users',
+              icon: 'las la-users',
+              routerLink: ['/viewusers'],
+              position: SimpleSidebarPosition.top
+            },
+            {
+              name: 'View Suppliers',
+              icon: 'las la-users',
+              routerLink: ['/viewsuppliers'],
+              position: SimpleSidebarPosition.top
+            },
+            {
+              name: 'View Companies',
+              icon: 'las la-building',
+              routerLink: ['/viewcompanies'],
+              position: SimpleSidebarPosition.top
+            },
+      
+            {
+              name: 'Logout',
+              icon: 'las la-external-link-alt',
+              // url: 'https://secanis.ch',
+              // target: '_blank',
+              routerLink: ['/logout'],
+              position: SimpleSidebarPosition.bottom
+            }
+          ];
+        }
+        if(this.level=="Employee"){
+          console.log("IN HERE BITCH")
+          this.sidebarItems = [
+            {
+              name: 'Welcome',
+              icon: 'las la-home',
+              routerLink: [''],
+              position: SimpleSidebarPosition.top
+            },
+            
+            {
+              name: 'About',
+              icon: 'las la-address-book',
+              routerLink: ['/about'],
+              position: SimpleSidebarPosition.top
+            },
+        
+            {
+              name: 'View My Orders',
+              icon: 'las la-shopping-bag',
+              routerLink: ['/viewmyorders'],
+              position: SimpleSidebarPosition.top
+            },
+            {
+              name: 'View Users',
+              icon: 'las la-users',
+              routerLink: ['/viewusers'],
+              position: SimpleSidebarPosition.top
+            },
+            {
+              name: 'View Suppliers',
+              icon: 'las la-users',
+              routerLink: ['/viewsuppliers'],
+              position: SimpleSidebarPosition.top
+            },
+            {
+              name: 'View Companies',
+              icon: 'las la-building',
+              routerLink: ['/viewcompanies'],
+              position: SimpleSidebarPosition.top
+            },
+      
+            {
+              name: 'Logout',
+              icon: 'las la-external-link-alt',
+              // url: 'https://secanis.ch',
+              // target: '_blank',
+              routerLink: ['/logout'],
+              position: SimpleSidebarPosition.bottom
+            }
+          ];
+        }
+   
   }
   else{
     const userdata = JSON.parse(this.user);

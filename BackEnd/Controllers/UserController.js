@@ -81,7 +81,7 @@ router.post("/registeremployee", authenticateCompanyadminorManager, (req, res) =
     newuser.nationalID = req.body.nationalID;
     newuser.employeeLevel = "Employee";
     newuser.createdBy = req.user._id;
-    newuser.company = req.body.company;
+    newuser.company = req.user.company;
     newuser.limit = req.body.limit;
     newuser.wallet = req.body.wallet;
     newuser.save().then(user => res.status(200).send(user))
@@ -109,7 +109,7 @@ router.post("/registermanager", authenticateCompanyadmin, (req, res) => {
     newuser.nationalID = req.body.nationalID;
     newuser.employeeLevel = "Manager";
     newuser.createdBy = req.user._id;
-    newuser.company = req.body.company;
+    newuser.company = req.user.company;
     newuser.save().then(user => res.status(200).send(user))
         .catch((err) => {
             res.status(400).send({
@@ -154,11 +154,13 @@ router.post("/logout", authenticateuser, (req, res) => {
     });
 })
 
-router.get('/allusers', function(req, res) {
-    User.find(function(err, User) {
+router.get('/allusers', authenticateuser, function(req, res) {
+
+    User.find({ company: req.user.company, isremoved: false, blocked: false }, function(err, User) {
         if (err)
             res.send(err);
         res.json(User);
+
     });
 })
 
@@ -182,11 +184,11 @@ router.get('/viewuser/:user_id', (req, res) => {
         });;
 })
 
-router.patch('/updateuserinfo', authenticateCompanyadmin, (req, res) => {
-    User.findOneAndUpdate({ _id: req.user._id }, { $set: req.body }, { new: true }).then(updateduser => res.status(200).send({ user: updateduser }))
-})
-router.patch('/updatemyinfo/:user_id', (req, res) => {
+router.patch('/updateuserinfo/:user_id', authenticateCompanyadminorManager, (req, res) => {
     User.findOneAndUpdate({ _id: req.params.user_id }, { $set: req.body }, { new: true }).then(updateduser => res.status(200).send({ user: updateduser }))
+})
+router.patch('/updatemyinfo', authenticateuser, (req, res) => {
+    User.findOneAndUpdate({ _id: req.user._id }, { $set: req.body }, { new: true }).then(updateduser => res.status(200).send({ user: updateduser }))
 })
 
 
@@ -211,19 +213,25 @@ router.patch('/rateuser/:user_id', authenticateuser, (req, res) => {
     User.findOneAndUpdate({ _id: req.params.user_id }, { $inc: { rating: req.body.rating, numberOfRatings: 1 } }, { new: true }).then(updateduser => res.status(200).send({ updateduser: updateduser }))
 
 })
-router.patch('setemployeewallet/:employee_id', authenticatemanager, (req, res) => {
-    User.findOneAndUpdate({ _id: req.params.employee_id, createdBy: req.user._id }, { $inc: { wallet: req.body.wallet } }, { new: true }).then(updateduser => res.status(200).send({ updateduser: updateduser }))
+router.patch('/setemployeewallet/:employee_id', authenticateCompanyadminorManager, (req, res) => {
+    User.findOneAndUpdate({ _id: req.params.employee_id, company: req.user.company }, { $inc: { wallet: req.body.wallet } }, { new: true }).then(updateduser => res.status(200).send({ updateduser: updateduser }))
 })
 
-router.patch('setemployeelimit/:employee_id', authenticatemanager, (req, res) => {
-    User.findOneAndUpdate({ _id: req.params.employee_id, createdBy: req.user._id }, { $set: { limit: req.body.limit } }, { new: true }).then(updateduser => res.status(200).send({ updateduser: updateduser }))
+router.patch('/setemployeelimit/:employee_id', authenticateCompanyadminorManager, (req, res) => {
+    User.findOneAndUpdate({ _id: req.params.employee_id, company: req.user.company }, { $set: { limit: req.body.limit } }, { new: true }).then(updateduser => res.status(200).send({ updateduser: updateduser }))
 })
 
-router.patch('blockemployee/:employee_id', authenticateadmin, (req, res) => {
+router.patch('/blockemployee/:employee_id', authenticateadmin, (req, res) => {
     User.findOneAndUpdate({ _id: req.params.employee_id }, { $set: { blocked: true } }, { new: true }).then(updateduser => res.status(200).send({ updateduser: updateduser }))
 })
-router.patch('unblockemployee/:employee_id', authenticateadmin, (req, res) => {
+
+router.patch('/unblockemployee/:employee_id', authenticateadmin, (req, res) => {
     User.findOneAndUpdate({ _id: req.params.employee_id }, { $set: { blocked: false } }, { new: true }).then(updateduser => res.status(200).send({ updateduser: updateduser }))
+})
+
+router.patch('/removeEmployee/:employee_id', authenticateCompanyadmin, (req, res) => {
+
+    User.findOneAndUpdate({ _id: req.params.employee_id, company: req.user.company }, { $set: { isremoved: true } }, { new: true }).then(updateduser => res.status(200).send({ updateduser: updateduser }))
 })
 
 

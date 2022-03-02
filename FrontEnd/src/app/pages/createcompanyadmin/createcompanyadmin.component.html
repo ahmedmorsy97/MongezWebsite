@@ -24,6 +24,14 @@
         <label>National ID</label>
         <input class="mb-2" type="text" placeholder="National ID" name="nationalID" [(ngModel)]="nationalID" />
 
+        <label>Company</label>
+        <select class="mb-2" placeholder="Company" name="company" [(ngModel)]="company">
+            <option *ngFor="let company of companies" [ngValue]="company._id">
+                {{company.name}}
+            </option>
+        
+        </select>
+
         <label>User Level</label>
         <input class="mb-2" type="text" placeholder="Employee Level" value="Company Admin" readonly />
 

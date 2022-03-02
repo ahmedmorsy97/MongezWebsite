@@ -25,6 +25,7 @@ import { ViewusersComponent } from './pages/viewusers/viewusers.component';
 
 const routes: Routes = [
   { path: '',component: HomeComponent},
+  { path: 'logout',component: HomeComponent},
   { path: 'products',component: ProductsComponent},
   { path: 'products/mechanical',component: ProductsComponent},
   { path: 'products/mechanical/hvac',component: ProductsComponent},

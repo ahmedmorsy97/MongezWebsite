@@ -36,7 +36,7 @@ export class SupplierService {
     });
   }
   updateInfo( id,firstname,lastname,password,mobileNumber,dateOfBirth,email,address){
- const url = `${this.baseUrl}/updatemyinfo/`+id;
+ const url = `${this.baseUrl}/updatemyinfo/`;
     this.supplier= this.http.get(this.baseUrl+'/viewsupplier/'+id); ;
     if(firstname=="")
     firstname = this.supplier.firstname
