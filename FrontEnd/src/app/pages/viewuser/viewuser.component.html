@@ -29,10 +29,17 @@
                 <label>National ID</label>
                 <input class="mb-2" type="text" value={{User.nationalID}} readonly />
 
+
+               <div *ngIf="User.employeeLevel=='Employee'">
                 <label>Level</label>
                 <input class="mb-2" type="text" value={{User.employeeLevel}} readonly />
 
+                <label>Limit</label>
+                <input class="mb-2" type="number" value={{User.limit}} readonly />
 
+                <label>Wallet</label>
+                <input class="mb-2" type="number" value={{User.wallet}} readonly />
+               </div>
 
 
                 <button (click)="saveInfo()" class="btn btn-primary w-100 mt-4">Edit Info</button>
@@ -62,11 +69,7 @@
                 <label>Date of birth</label>
                 <input class="mb-2" type="date" placeholder={{User.dateOfBirth}} name="dateOfBirth" [(ngModel)]="dateOfBirth" />
                 <!-- Visible to manager and admins only -->
-                <label>Limit</label>
-                <input class="mb-2" type="number" value={{User.limit}} name="limit" [(ngModel)]="limit" />
-
-                <label>Wallet</label>
-                <input class="mb-2" type="number" value={{User.wallet}} name="wallet" [(ngModel)]="wallet" />
+               
 
                 <button (click)="saveInfo()" class="btn btn-primary w-100 mt-4">Update Info</button>
             </div>

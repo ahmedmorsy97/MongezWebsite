@@ -18,6 +18,8 @@ password="";
 mobileNumber="";
 dateOfBirth="";
 nationalID="";
+wallet = "";
+limit = "";
 
 
   constructor(private router: Router,private activerouter: ActivatedRoute, private UserSer: UserService) {
