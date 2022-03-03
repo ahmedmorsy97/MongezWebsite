@@ -20,7 +20,7 @@ export class HomeComponent implements OnInit {
   ngOnInit(): void {
     console.log(this.router.url);
     if(this.router.url.indexOf('logout')!=-1){
-     this.auth.logout();
+     this.auth.logout(localStorage.getItem("type"));
   }
 }
   GoToProducts(){

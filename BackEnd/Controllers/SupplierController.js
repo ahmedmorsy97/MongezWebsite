@@ -71,7 +71,7 @@ router.post("/register", authenticateadmin, (req, res) => {
 })
 
 router.post("/logout", authenticatesupplier, (req, res) => {
-    req.supplier.removeToken(req.token).then(logoutres => res.status(200).send({ msg: "Supplier logged out successfully" })).catch((err) => {
+    req.supplier.removeToken(req.token).then(logoutres => res.status(200).send({ msg: "Supplier  logged out successfully" })).catch((err) => {
         res.status(400).send({
             err: err.message ? err.message : err,
         });

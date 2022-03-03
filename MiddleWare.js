@@ -128,7 +128,7 @@ export const authenticateCompanyadminorManager = (req, res, next) => {
 
 export const authenticatesupplier = (req, res, next) => {
     const token = req.headers.authorization.split("Bearer ")[1];
-
+    console.log("IN AUTH")
     Supplier.findByToken(token)
         .then((supplier) => {
             if (!supplier) {

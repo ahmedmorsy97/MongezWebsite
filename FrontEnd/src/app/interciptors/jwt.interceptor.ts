@@ -31,7 +31,7 @@ export class JwtInterceptor implements HttpInterceptor {
           if (err instanceof HttpErrorResponse) {
             switch ((<HttpErrorResponse>err).status) {
               case 401:
-                this.authService.logout();
+                this.authService.logout(localStorage.getItem("type"));
                 this.router.navigate(['/']);
               default:
                 return throwError(err);

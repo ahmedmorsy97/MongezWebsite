@@ -73,12 +73,7 @@ this.level = this.currentuser.employeeLevel
             routerLink: ['/about'],
             position: SimpleSidebarPosition.top
           },
-          {
-            name: 'View My Wallet',
-            icon: 'las la-wallet',
-            routerLink: ['/viewmywallet'],
-            position: SimpleSidebarPosition.top
-          },
+      
           {
             name: 'View My Orders',
             icon: 'las la-shopping-bag',

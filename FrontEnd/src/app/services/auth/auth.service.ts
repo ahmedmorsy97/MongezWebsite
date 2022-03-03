@@ -33,10 +33,13 @@ export class AuthService {
     localStorage.setItem("currentuser", JSON.stringify(data))
   }
 
-  logout( type ="user") {
+  logout(type) {
+
     const url = `${this.baseUrl}/${type}/logout`;
+    console.log(url)
     return this.http.post(url, {}).subscribe(res=>{
       localStorage.removeItem("currentuser");
+      localStorage.removeItem("type");
       this.authState.emit("Logout")
       this.Router.navigateByUrl('/');
 
