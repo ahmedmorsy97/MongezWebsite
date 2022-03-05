@@ -169,7 +169,7 @@ router.patch("/changetotalorderstatus/:order_id", authenticatesupplier, (req, re
 })
 
 router.patch("/changepartialorderstatus/:order_id", authenticatesupplier, (req, res) => {
-    Order.findOneAndUpdate({ _id: req.params.order_id, "products.supplier": req.supplier._id, "products.product": req.body.product._id }, { $set: { "products.$.status": req.body.status } }, { new: true }).then(updatedorder => res.status(200).send({ updatedorder: updatedorder }))
+    Order.findOneAndUpdate({ _id: req.params.order_id, "products.supplier": req.supplier._id, "products.product": req.body.product }, { $set: { "products.$.status": req.body.status } }, { new: true }).then(updatedorder => res.status(200).send({ updatedorder: updatedorder }))
         .catch((err) => {
             res.status(400).send({
                 err: err.message ? err.message : err,
