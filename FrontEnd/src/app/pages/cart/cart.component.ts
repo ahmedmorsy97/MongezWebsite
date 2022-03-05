@@ -16,6 +16,7 @@ export class CartComponent implements OnInit {
   faSearch = faSearch;
 
 err: string = null;
+loading:boolean = false
 constructor(private router: Router,private activerouter: ActivatedRoute, private UserSer: UserService) { }
 
   ngOnInit(): void {
@@ -35,6 +36,30 @@ constructor(private router: Router,private activerouter: ActivatedRoute, private
     })
   }
   checkout(){
-    this.router.navigateByUrl('payement')
+    const products = this.cart.map((cart:any)=>({
+      product:cart.product,
+      quantity:cart.quantity,
+      priceatPurchase: cart.quantity * cart.productPrice,
+      supplier:cart.supplier
+    }))
+    const order = {
+      products,
+      price: products.map(element=>element.priceatPurchase).reduce((a,b)=>a + b)
+    }
+    this.loading = true
+      this.UserSer.checkout(order).subscribe( res =>{
+        this.UserSer.clearcart().subscribe(orderres=>{
+          this.router.navigateByUrl('viewmyorders')
+        })
+      },
+      err =>{
+      this.err = err?.error?.err || "Something went wrong";
+      this.loading = false;
+      alert(this.err)
+
+      }
+
+      )
+    //  this.router.navigateByUrl('payement')
   }
 }

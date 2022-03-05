@@ -111,6 +111,11 @@ const userSchema = mongoose.Schema({
             type: String
         },
         quantity: Number,
+        
+        supplier:{ 
+            type:mongoose.Types.ObjectId,
+            ref:"supplier"
+        }
 
 
 

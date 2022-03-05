@@ -1,19 +1,20 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { faSearch, faCartPlus,faMinus,faPlus } from '@fortawesome/free-solid-svg-icons';
+import { faMinus, faPlus, faSearch } from '@fortawesome/free-solid-svg-icons';
 import { IMultiSelectSettings, IMultiSelectTexts } from 'ngx-bootstrap-multiselect';
+import { SupplierService } from 'src/app/services/supplier/supplier.service';
 import { UserService } from 'src/app/services/user/user.service';
 
 @Component({
-  selector: 'app-vieworders',
-  templateUrl: './vieworders.component.html',
-  styleUrls: ['./vieworders.component.scss']
+  selector: 'app-vieworderstome',
+  templateUrl: './vieworderstome.component.html',
+  styleUrls: ['./vieworderstome.component.scss']
 })
-export class ViewordersComponent implements OnInit {
+export class VieworderstomeComponent implements OnInit {
   faSearch = faSearch;
-  suppliers = [];
+  users = [];
   categories=[];
-  filters={purchasedate:false,supplier:false,category:false,status:false};
+  filters={purchasedate:false,user:false,category:false,status:false};
   faPlus = faPlus;
   faMinus = faMinus;
   // Settings configuration
@@ -40,15 +41,16 @@ myTexts: IMultiSelectTexts= {
   defaultTitle: 'Select',
   allSelected: 'All selected',
 };
-constructor( private UserServ: UserService,private router:Router) { }
-orders:any = []
+  constructor( private SupplierServ: SupplierService,private router:Router,private UserSer: UserService) { }
+  orders:any = []
+
   ngOnInit(): void {
     this.ViewOrder();
-    this.suppliers = [
-      { id: 1, name: 'Supplier 1' },
-      { id: 2, name: 'Supplier 2' },
-      { id: 3, name: 'Supplier 3' },
-      { id: 4, name: 'Supplier 4' },
+    this.users = [
+      { id: 1, name: 'User 1' },
+      { id: 2, name: 'User 2' },
+      { id: 3, name: 'User 3' },
+      { id: 4, name: 'User 4' },
   ];
   this.categories = [
     { id: 1, name: 'Mechanical' },
@@ -56,17 +58,17 @@ orders:any = []
     { id: 3, name: 'Hardware' },
 ];
   }
-  viewproduct(id){
-this.router.navigateByUrl('viewproduct/'+id)
-  }
-  viewsupplier(id){
-    this.router.navigateByUrl('viewsupplier/'+id)
+  viewuser(id){
+    this.router.navigateByUrl('viewuser/'+id)
   }
   ViewOrder(){
-    this.UserServ.getmyorders().subscribe(res=>{this.orders =res
+    this.SupplierServ.getmyorders().subscribe(res=>{this.orders =res
     console.log(this.orders)})
   }
   togglefilter(type){
     this.filters[type] = !this.filters[type]
+      }
+      changestatus(status,orderid,productid){
+        this.UserSer.changeorderstatus(status,orderid,productid).subscribe(res=>this.ViewOrder());
       }
 }

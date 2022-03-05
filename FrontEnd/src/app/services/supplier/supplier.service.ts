@@ -6,6 +6,8 @@ import { environment } from "../../../environments/environment"
 })
 export class SupplierService {
   baseUrl: string = `${environment.baseUrl}/supplier`;
+  baseorderUrl: string = `${environment.baseUrl}/order`;
+
   supplier :any;
 
   constructor(private http: HttpClient) { }
@@ -65,5 +67,10 @@ export class SupplierService {
   // logo,
     
     });
+  }
+  getmyorders(){
+    const url = `${this.baseorderUrl}/myorderssupplier`;
+    return this.http.get(url)
+
   }
 }

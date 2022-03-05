@@ -39,9 +39,11 @@ db.once('open', function() {
 import { userController } from "./Backend/Controllers/UserController"
 import { supplierController } from "./Backend/Controllers/SupplierController"
 import { productController } from "./Backend/Controllers/ProductController"
+import { orderController } from "./BackEnd/Controllers/OrderController";
 import { companyController } from "./BackEnd/Controllers/CompanyController";
 import { companyAdminController } from "./BackEnd/Controllers/CompanyAdminController";
 import { ManagerController } from "./BackEnd/Controllers/ManagerController";
+
 // ROUTES FOR OUR API
 // =============================================================================
 
@@ -60,6 +62,7 @@ app.use('/api', router);
 app.use('/api/user', userController)
 app.use('/api/supplier', supplierController)
 app.use('/api/product', productController)
+app.use('/api/order', orderController)
 app.use('/api/company', companyController)
 app.use('/api/companyadmin', companyAdminController)
 app.use('/api/manager', ManagerController)

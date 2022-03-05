@@ -13,14 +13,14 @@
 
     <div class="row">
         <div class="col-md-4 filter">
-            <div (click)="togglefilter('supplier')" class="header d-flex align-items-center justify-content-between mb-4">
-                <h5>Supplier</h5>
-                <fa-icon *ngIf="filters.supplier" [icon]="faMinus"></fa-icon>
-                <fa-icon *ngIf="!filters.supplier" [icon]="faPlus"></fa-icon>
+            <div (click)="togglefilter('user')" class="header d-flex align-items-center justify-content-between mb-4">
+                <h5>User</h5>
+                <fa-icon *ngIf="filters.user" [icon]="faMinus"></fa-icon>
+                <fa-icon *ngIf="!filters.user" [icon]="faPlus"></fa-icon>
             </div>
-            <div *ngIf="filters.supplier" class="mb-4">
+            <div *ngIf="filters.user" class="mb-4">
 
-                <ngx-bootstrap-multiselect [options]="suppliers" [texts]="myTexts" [settings]="mySettings" [(ngModel)]="optionsModel"></ngx-bootstrap-multiselect>
+                <ngx-bootstrap-multiselect [options]="users" [texts]="myTexts" [settings]="mySettings" [(ngModel)]="optionsModel"></ngx-bootstrap-multiselect>
             </div>
 
             <div (click)="togglefilter('purchasedate')" class="header d-flex align-items-center justify-content-between mb-4">
@@ -89,11 +89,17 @@
                                         <div class="col-md-4 img-container">
                                             <img src="/assets/images/nails.png" />
                                         </div>
-                                        <div class="col-md-8">
+                                        <div class="col-md-8 text-left">
                                         <p class="card-text text-left text_link"  (click)="viewproduct(product.product._id)"><strong>Product Name:</strong> {{product.product.productName}}</p>
                                         <p class="card-text text-left "><strong>Product Status:</strong> {{product.status}}</p>
+                                        <button (click)="changestatus('Confirmed',order._id,product._id)"class=" btn btn-primary text-right mx-2"*ngIf = "product.status=='Pending'">Confirm Order</button> 
+                                        <button (click)="changestatus('Cancelled',order._id,product._id)"class=" btn btn-primary text-right mx-2"*ngIf = "product.status=='Pending'">Cancel Order</button>
+                                        <button (click)="changestatus('On Delivery',order._id,product._id)"class=" btn btn-primary text-right "*ngIf = "product.status=='Confirmed'">On Delivery</button>
+                                        <button (click)="changestatus('Delivered',order._id,product._id)"class=" btn btn-primary text-right "*ngIf = "product.status=='On Delivery'">Delivered</button> 
+ 
+
                                         <p class="card-text text-left "><strong>Date Of Purchase:</strong> {{product.dateOfPurchase}}</p>
-                                        <p class="card-text text-left text_link"style="text-underline"(click)="viewsupplier(product.supplier._id)"><strong>Supplier:</strong> {{product.supplier.firstname}} {{product.supplier.lastname}}</p>
+                                        <p class="card-text text-left text_link"style="text-underline"(click)="viewuser(order.user._id)"><strong>User:</strong> {{order.user.firstname}} {{order.user.lastname}}</p>
     
                                     </div>
                                     </div>

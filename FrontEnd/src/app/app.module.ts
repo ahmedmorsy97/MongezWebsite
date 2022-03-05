@@ -43,6 +43,7 @@ import { CreatemanagerComponent } from './pages/createmanager/createmanager.comp
 import { CreatecompanyadminComponent } from './pages/createcompanyadmin/createcompanyadmin.component';
 import { CreateadminComponent } from './pages/createadmin/createadmin.component';
 import { EditusermoneyComponent } from './pages/editusermoney/editusermoney.component';
+import { VieworderstomeComponent } from './pages/vieworderstome/vieworderstome.component';
 
 // export function createTranslateLoader(http: HttpClient) {
 
@@ -79,7 +80,8 @@ import { EditusermoneyComponent } from './pages/editusermoney/editusermoney.comp
     CreatemanagerComponent,
     CreatecompanyadminComponent,
     CreateadminComponent,
-    EditusermoneyComponent
+    EditusermoneyComponent,
+    VieworderstomeComponent
 
   ],
   imports: [

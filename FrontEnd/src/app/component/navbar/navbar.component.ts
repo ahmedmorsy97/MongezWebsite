@@ -370,6 +370,12 @@ this.level = this.currentuser.employeeLevel
         position: SimpleSidebarPosition.top
       },
       {
+        name: 'View Orders Sent to me',
+        icon: 'las la-shopping-bag',
+        routerLink: ['/vieworderstome'],
+        position: SimpleSidebarPosition.top
+      },
+      {
         name: 'Logout',
         icon: 'las la-external-link-alt',
         // url: 'https://secanis.ch',

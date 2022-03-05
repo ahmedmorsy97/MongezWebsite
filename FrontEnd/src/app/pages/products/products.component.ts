@@ -167,7 +167,7 @@ export class ProductsComponent implements OnInit {
     
       if(product.customerquantity<=product.quantity&& product.customerquantity>0){
         const price = this.getprice(product);
-      this.UserSer.AddtoCart(product._id,product.customerquantity,product.productName,price,product.productLogo).subscribe(
+      this.UserSer.AddtoCart(product._id,product.customerquantity,product.productName,price,product.productLogo,product.supplier).subscribe(
         res=>{
           alert("Product added to cart")
         },

@@ -25,13 +25,14 @@ router.post("/createorder", authenticateuser, (req, res) => {
 
     var neworder = new Order();
     neworder.products = req.body.products;
-    neworder.status = "pending";
+    neworder.status = "Pending";
     neworder.price = req.body.price;
     neworder.user = req.user._id;
-    neworder.manager = req.user.createdBy;
+    neworder.dateOfPurchase = req.body.dateOfPurchase;
+    // neworder.manager = req.user.createdBy;
     neworder.company = req.user.company;
 
-    neworder.save().then(res => {
+    neworder.save().then(orderes => {
             res.status(200).send({ order: neworder });
         })
         .catch((err) => {
@@ -53,25 +54,53 @@ router.patch("/changeorderinfo", authenticatesupplier, (req, res) => {
 
 
 router.get("/myordersemployee", authenticateuser, (req, res) => {
-    Order.find({ user: req.user._id }).then((orders) => {
-            res.status(200).send(orders)
+
+    Order.find({ user: req.user._id }).populate({ path: "products.product", select: "productName _id photolinks specs description" }).populate({ path: "products.supplier", select: "firstname lastname _id" }).exec((err, orders) => {
+
+            if (err) {
+                res.status(400).send({
+                    err: err.message ? err.message : err,
+                });
+            } else {
+                res.status(200).send(orders)
+            }
         })
-        .catch((err) => {
-            res.status(400).send({
-                err: err.message ? err.message : err,
-            });
-        });
+        // .then((orders) => {
+        //         res.status(200).send(orders)
+        //     })
+        //     .catch((err) => {
+        //         res.status(400).send({
+        //             err: err.message ? err.message : err,
+        //         });
+        //     });
 })
 router.get("/myorderssupplier", authenticatesupplier, (req, res) => { //NOT TESTED
-    Order.find({ "products.supplier": req.user._id }).then((products) => {
-            res.status(200).send(products)
+        Order.find({ "products.supplier": req.supplier._id }).populate({ path: "products.product", select: "productName _id photolinks specs description" }).populate({ path: "user", select: "firstname lastname _id" }).exec((err, orders) => {
+            if (err) {
+                res.status(400).send({
+                    err: err.message ? err.message : err,
+                });
+            } else {
+                const supplierorder = JSON.parse(JSON.stringify(orders)).map(order => {
+                    // console.log(order)
+                    // console.log(order.products.filter(product => product.supplier == req.supplier._id))
+                    return {
+                        ...order,
+                        products: order.products.filter(product => product.supplier == req.supplier._id)
+                    }
+                })
+                console.log(supplierorder)
+                res.status(200).send(supplierorder)
+            }
         })
-        .catch((err) => {
-            res.status(400).send({
-                err: err.message ? err.message : err,
-            });
-        });
-})
+
+    })
+    // .catch((err) => {
+    //     res.status(400).send({
+    //         err: err.message ? err.message : err,
+    //     });
+    // });
+    // })
 
 router.get("/viewmyemployeeorders", authenticatemanager, (req, res) => {
     Order.find({ manager: req.user._id }).then((orders) => {
@@ -128,8 +157,10 @@ router.get('/viewallordersofcompany', authenticateadmin, function(req, res) {
         res.json(Order);
     });
 })
-router.patch("/cancelallorder/:order_id", authenticateuser, (req, res) => { //NOT TESTED
-    Order.findOneAndUpdate({ _id: req.params.order_id, $or: { user: req.user._id, manager: req.user._id }, "products.status": "pending" }, { $set: { "products.status": "cancelled" } }, { new: true }).then(updatedorder => res.status(200).send({ updatedorder: updatedorder }))
+
+
+router.patch("/changetotalorderstatus/:order_id", authenticatesupplier, (req, res) => {
+    Order.findOneAndUpdate({ _id: req.params.order_id, "products.supplier": req.user._id, status: "Pending" }, { $set: { status: "Delivered" } }, { new: true }).then(updatedorder => res.status(200).send({ updatedorder: updatedorder }))
         .catch((err) => {
             res.status(400).send({
                 err: err.message ? err.message : err,
@@ -137,15 +168,14 @@ router.patch("/cancelallorder/:order_id", authenticateuser, (req, res) => { //NO
         });
 })
 
-router.patch("/changeorderstatus/:order_id", authenticatesupplier, (req, res) => {
-    Order.findOneAndUpdate({ _id: req.params.order_id, "products.supplier": req.user._id, status: "pending" }, { $set: { status: "cancelled" } }, { new: true }).then(updatedorder => res.status(200).send({ updatedorder: updatedorder }))
+router.patch("/changepartialorderstatus/:order_id", authenticatesupplier, (req, res) => {
+    Order.findOneAndUpdate({ _id: req.params.order_id, "products.supplier": req.supplier._id, "products.product": req.body.product._id }, { $set: { "products.$.status": req.body.status } }, { new: true }).then(updatedorder => res.status(200).send({ updatedorder: updatedorder }))
         .catch((err) => {
             res.status(400).send({
                 err: err.message ? err.message : err,
             });
         });
 })
-
 
 
 

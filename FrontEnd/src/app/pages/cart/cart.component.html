@@ -5,7 +5,7 @@
 
 <!-- <div class="row"> -->
 <!-- Admin can filter(Has filter div) NOT DONE -->
-<div *ngFor="let product of cart" (click)="viewProduct(product._id)" class="card mb-2">
+<div *ngFor="let product of cart"  class="card mb-2">
     <div class="card-body ">
         <div class="row">
             <div class="img-container col-md-4">
@@ -24,4 +24,4 @@
     <!-- </div> -->
 
 </div>
-<button (click)="checkout()" class="btn btn-primary w-50 mt-4">Place Order</button>
+<button [disabled]="loading" (click)="checkout()" class="btn btn-primary w-50 mt-4">Place Order</button>

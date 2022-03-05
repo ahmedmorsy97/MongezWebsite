@@ -17,6 +17,7 @@ import { ViewcompanyComponent } from './pages/viewcompany/viewcompany.component'
 import { ViewmyproductsComponent } from './pages/viewmyproducts/viewmyproducts.component';
 import { ViewmywalletComponent } from './pages/viewmywallet/viewmywallet.component';
 import { ViewordersComponent } from './pages/vieworders/vieworders.component';
+import { VieworderstomeComponent } from './pages/vieworderstome/vieworderstome.component';
 import { ViewproductComponent } from './pages/viewproduct/viewproduct.component';
 import { ViewsupplierComponent } from './pages/viewsupplier/viewsupplier.component';
 import { ViewsuppliersComponent } from './pages/viewsuppliers/viewsuppliers.component';
@@ -56,7 +57,7 @@ const routes: Routes = [
   { path: 'about',component: AboutComponent},
   { path: 'cart/:id',component: CartComponent},
   { path: 'payement',component: PayementComponent},
-
+  { path: 'vieworderstome',component: VieworderstomeComponent},
 ];
 
 @NgModule({

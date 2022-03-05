@@ -7,6 +7,7 @@ import { environment } from "../../../environments/environment"
 })
 export class UserService {
   baseUrl: string = `${environment.baseUrl}/user`;
+  baseorderUrl: string = `${environment.baseUrl}/order`;
   user :any;
   constructor(private http: HttpClient) { }
   
@@ -138,7 +139,7 @@ export class UserService {
     });
   }
 
-  AddtoCart(productid,quantity,name,price,logo){
+  AddtoCart(productid,quantity,name,price,logo,supplier){
     const url = `${this.baseUrl}/addtocart`;
 
     return this.http.patch(url, {
@@ -146,8 +147,41 @@ export class UserService {
     quantity,
     name,
     price,
-    logo
+    logo,
+    supplier
     
        });
   }
+
+  checkout(order){
+    const url = `${this.baseorderUrl}/createorder`;
+  return this.http.post(url,{...order,dateOfPurchase: new Date().toISOString()})
+  }
+  clearcart(){
+    const url = `${this.baseUrl}/updatemyinfo/`;
+    
+    return this.http.patch(url, {
+     cart:[]
+     // logo,
+       
+       });
+  }
+
+  getmyorders(){
+    const url = `${this.baseorderUrl}/myordersemployee`;
+    return this.http.get(url)
+
+  }
+
+  changeorderstatus(status,orderid,productid){
+    console.log("CHANGE ORDER to ",status)
+    const url = `${this.baseorderUrl}/changepartialorderstatus/`+orderid;
+    return this.http.patch(url, {
+      status,
+      product:productid
+      // logo,
+        
+        });
+  }
 }
+
