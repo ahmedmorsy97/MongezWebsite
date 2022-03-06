@@ -43,7 +43,7 @@
             <!-- HOW?? -->
             <label>Official Documents</label>
             <input class="mb-2" type="text" placeholder="Official Documents" />
-            <button (click)="saveInfo()" class="btn btn-primary w-100 mt-4">Edit Info</button>
+            <button *ngIf="viewedit==true" (click)="saveInfo()" class="btn btn-primary w-100 mt-4">Edit Info</button>
         </div>
 
         <div *ngIf="Supplier!=null && edit==true ">

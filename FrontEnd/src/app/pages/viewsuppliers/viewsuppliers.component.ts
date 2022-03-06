@@ -27,7 +27,7 @@ getSuppliers(){
     }
   )
 }
-viewSupplier(){
-
+viewSupplier(id){
+  this.router.navigateByUrl('/viewsupplier/'+id+"")
 }
 }

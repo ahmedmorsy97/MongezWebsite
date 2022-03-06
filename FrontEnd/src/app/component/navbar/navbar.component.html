@@ -42,7 +42,7 @@
             <button *ngIf="user!=null" (click)="ViewProfile()" class="btn btn-primary btn-lg ml-3 mr-3"><fa-icon [icon]="faUser"></fa-icon></button>
 
 
-            <button *ngIf="user!=null && [type]=='user' " (click)="viewCart()" class=" no-btn ml-3 mr-3 "> 
+            <button *ngIf="user!=null && [type]=='user' && level!='Admin' " (click)="viewCart()" class=" no-btn ml-3 mr-3 "> 
                 <svg height="24 " width="24 ">
                     <path clip-rule="evenodd " d="M5 5H3V3h4v10a1 1 0 001 1h13v2H7a2 2 0 01-2-2V5zm6 14a2 2 0 11-4 0 2 2 0 014 0zm8 2a2 2 0 100-4 2 2 0 000 4z " fill-rule="evenodd "></path>
                 </svg>

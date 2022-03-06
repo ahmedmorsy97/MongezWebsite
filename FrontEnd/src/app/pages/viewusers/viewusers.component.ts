@@ -23,6 +23,17 @@ export class ViewusersComponent implements OnInit {
     console.log(this.signedinuser.employeeLevel)
   }
 getUsers(){
+  this.signedinuser = JSON.parse(localStorage.getItem("currentuser")).user
+  if(this.signedinuser.employeeLevel == 'Admin' ){
+    this.UserSer.getallUsers().subscribe(
+      (res:any) => {
+       
+        this.users = res;
+  
+      }
+    )
+  }
+  else{
   this.UserSer.getUsers().subscribe(
     (res:any) => {
      
@@ -30,7 +41,10 @@ getUsers(){
 
     }
   )
+  }
 }
+
+
 
 editLimit(userid){
   const initialState = {
@@ -62,7 +76,7 @@ this.UserSer.delete(userid).subscribe(res=>{
   this.getUsers()
 })
 }
-viewUser(){
-
+viewUser(id){
+  this.router.navigateByUrl('/viewuser/'+id+"")
 }
 }

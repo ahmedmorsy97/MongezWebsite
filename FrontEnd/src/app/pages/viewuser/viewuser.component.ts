@@ -20,8 +20,8 @@ dateOfBirth="";
 nationalID="";
 wallet = "";
 limit = "";
-
-
+viewedit = true;
+loggedinuser:any
   constructor(private router: Router,private activerouter: ActivatedRoute, private UserSer: UserService) {
 
   }
@@ -29,8 +29,8 @@ limit = "";
     this.activerouter.paramMap.subscribe((res:any)=>{
       console.log(res)
     this.getUser(res.params.id);
-
     })
+    
   }
 saveInfo(id){
     this.edit = !this.edit;
@@ -51,6 +51,18 @@ saveInfo(id){
     }
   }
   getUser(id) {
+    this.loggedinuser = JSON.parse(localStorage.getItem("currentuser")).user
+    if(this.loggedinuser==null){
+      this.loggedinuser = JSON.parse(localStorage.getItem("currentuser")).supplier
+
+    }
+        console.log(this.loggedinuser)
+    if(this.loggedinuser._id==id){
+      this.viewedit = true;
+    }
+    else{
+      this.viewedit = false;
+    }
     this.UserSer.getUser(id).subscribe(
       (res:any) => {
         console.log(res);

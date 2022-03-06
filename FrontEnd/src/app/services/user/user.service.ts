@@ -16,6 +16,9 @@ export class UserService {
   }
 
   getUsers(){
+    return this.http.get(this.baseUrl+'/users');
+  }
+  getallUsers(){
     return this.http.get(this.baseUrl+'/allusers');
   }
   createUser(firstname,lastname,username,email,password,mobileNumber,dateOfBirth,nationalID,employeeLevel,limit,wallet,image){

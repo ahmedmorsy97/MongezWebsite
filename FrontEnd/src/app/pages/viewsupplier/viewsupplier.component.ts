@@ -18,6 +18,8 @@ address = "";
 mobileNumber="";
 dateOfBirth="";
 nationalID="";
+loggedinuser :any
+viewedit = true
 // companyName="";
 taxNumber ="";
   constructor(private router: Router, private activerouter: ActivatedRoute, private SupplierSer: SupplierService) { }
@@ -30,6 +32,18 @@ taxNumber ="";
     })
   }
   getSupplier(id) {
+    this.loggedinuser = JSON.parse(localStorage.getItem("currentuser")).user
+    if(this.loggedinuser==null){
+      this.loggedinuser = JSON.parse(localStorage.getItem("currentuser")).supplier
+
+    }
+    console.log(this.loggedinuser)
+    if(this.loggedinuser._id==id){
+      this.viewedit = true;
+    }
+    else{
+      this.viewedit = false;
+    }
     this.SupplierSer.getSupplier(id).subscribe(
       (res:any) => {
         console.log(res);

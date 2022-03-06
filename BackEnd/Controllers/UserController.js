@@ -153,8 +153,16 @@ router.post("/logout", authenticateuser, (req, res) => {
         });
     });
 })
-
 router.get('/allusers', authenticateuser, function(req, res) {
+
+    User.find(function(err, User) {
+        if (err)
+            res.send(err);
+        res.json(User);
+
+    });
+})
+router.get('/users', authenticateuser, function(req, res) {
 
     User.find({ company: req.user.company, isremoved: false, blocked: false }, function(err, User) {
         if (err)
@@ -194,7 +202,7 @@ router.patch('/updatemyinfo', authenticateuser, (req, res) => {
 
 router.patch('/addtocart', authenticateuser, (req, res) => {
     console.log(req.user._id)
-    User.findOneAndUpdate({ _id: req.user._id }, { $push: { cart: { product: req.body.productid, quantity: req.body.quantity, supplier: req.body.supplier,productName: req.body.name, productPrice: req.body.price, productLogo: req.body.logo } } }, { new: true }).then(updatedcart => res.status(200).send({ cart: updatedcart }))
+    User.findOneAndUpdate({ _id: req.user._id }, { $push: { cart: { product: req.body.productid, quantity: req.body.quantity, supplier: req.body.supplier, productName: req.body.name, productPrice: req.body.price, productLogo: req.body.logo } } }, { new: true }).then(updatedcart => res.status(200).send({ cart: updatedcart }))
 
 })
 router.patch('/addexistingtocart', authenticateuser, (req, res) => {

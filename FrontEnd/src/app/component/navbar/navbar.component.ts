@@ -75,12 +75,6 @@ this.level = this.currentuser.employeeLevel
           },
       
           {
-            name: 'View My Orders',
-            icon: 'las la-shopping-bag',
-            routerLink: ['/viewmyorders'],
-            position: SimpleSidebarPosition.top
-          },
-          {
             name: 'View Users',
             icon: 'las la-users',
             routerLink: ['/viewusers'],
@@ -98,18 +92,7 @@ this.level = this.currentuser.employeeLevel
             routerLink: ['/viewcompanies'],
             position: SimpleSidebarPosition.top
           },
-          {
-            name: 'Create Employee',
-            icon: 'las la-plus-circle',
-            routerLink: ['/createemployee'],
-            position: SimpleSidebarPosition.top
-          },
-          {
-            name: 'Create Manager',
-            icon: 'las la-plus-circle',
-            routerLink: ['/createmanager'],
-            position: SimpleSidebarPosition.top
-          },
+       
           {
             name: 'Create Company Admin',
             icon: 'las la-plus-circle',
@@ -268,7 +251,7 @@ this.level = this.currentuser.employeeLevel
           ];
         }
         if(this.level=="Employee"){
-          console.log("IN HERE BITCH")
+         
           this.sidebarItems = [
             {
               name: 'Welcome',

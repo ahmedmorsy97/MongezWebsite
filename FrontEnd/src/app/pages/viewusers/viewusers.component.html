@@ -13,7 +13,7 @@
 
     <!-- <div class="row"> -->
     <!-- Admin can filter(Has filter div) NOT DONE -->
-    <div *ngFor="let user of users" (click)="viewUser()" class="card mb-2">
+    <div *ngFor="let user of users" (click)="viewUser(user._id)" class="card mb-2">
         <div class="card-body ">
             <div class="row">
                 <div class="img-container col-md-4">
@@ -29,7 +29,7 @@
                     <h5 *ngIf="signedinuser.employeeLevel!='Employee'&&user.employeeLevel=='Employee'" class="card-title">User Limit: {{user.limit}}</h5>
 
                 </div>
-                <div *ngIf="user.employeeLevel=='Employee' && signedinuser.employeeLevel!='Employee'" class="col-12 d-flex justify-content-end flex-wrap">
+                <div *ngIf="user.employeeLevel=='Employee' && signedinuser.employeeLevel!='Employee'&& signedinuser.employeeLevel!='Admin'" class="col-12 d-flex justify-content-end flex-wrap">
                     <button (click)="deleteUser(user._id)" *ngIf="signedinuser.employeeLevel=='CompanyAdmin'" class="btn btn-primary mx-3">Delete</button>
                     <button (click)="increaseWallet(user._id)" class="btn btn-primary mx-3">Add Wallet</button>
                     <button (click)="editLimit(user._id)" class="btn btn-primary mx-3">Edit Limit</button>
