@@ -154,8 +154,10 @@ router.post("/logout", authenticateuser, (req, res) => {
     });
 })
 router.get('/allusers', authenticateuser, function(req, res) {
-
-    User.find({ $text: req.body.search || "" }, function(err, User) {
+    const filter = { $text: req.params.search };
+    if(!filter.$text) delete filter.$text;
+    
+    User.find(filter, function(err, User) {
         if (err)
             res.send(err);
         res.json(User);
@@ -163,8 +165,10 @@ router.get('/allusers', authenticateuser, function(req, res) {
     });
 })
 router.get('/users', authenticateuser, function(req, res) {
+    const filter = { company: req.user.company, isremoved: false, blocked: false, $text: req.params.search };
+    if(!filter.$text) delete filter.$text;
 
-    User.find({ company: req.user.company, isremoved: false, blocked: false, $text: req.body.search || "" }, function(err, User) {
+    User.find(filter, function(err, User) {
         if (err)
             res.send(err);
         res.json(User);

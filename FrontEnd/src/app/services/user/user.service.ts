@@ -18,11 +18,11 @@ export class UserService {
     return this.http.get(this.baseUrl+'/viewuser/'+ id);
   }
 
-  getUsers(){
-    return this.http.get(this.baseUrl+'/users');
+  getUsers(search = null){
+    return this.http.get(this.baseUrl+`/users${search ? `?search=${search}`: ''}`);
   }
-  getallUsers(){
-    return this.http.get(this.baseUrl+'/allusers');
+  getallUsers(search = null){
+    return this.http.get(this.baseUrl+`/allusers${search ? `?search=${search}`: ''}`);
   }
   createUser(firstname,lastname,username,email,password,mobileNumber,dateOfBirth,nationalID,employeeLevel,limit,wallet,image){
     const url = `${this.baseUrl}/registeremployee`;

@@ -12,10 +12,10 @@ import { EditusermoneyComponent } from '../editusermoney/editusermoney.component
 })
 export class ViewusersComponent implements OnInit {
   faSearch = faSearch;
-  users:any =[];
-  signedinuser : any
-  searchusername =""
-  constructor(private router: Router,private activerouter: ActivatedRoute, private UserSer: UserService,private modalService: BsModalService) {
+  users: any = [];
+  signedinuser: any
+  searchusername = ""
+  constructor(private router: Router, private activerouter: ActivatedRoute, private UserSer: UserService, private modalService: BsModalService) {
 
   }
   ngOnInit(): void {
@@ -23,63 +23,59 @@ export class ViewusersComponent implements OnInit {
     this.signedinuser = JSON.parse(localStorage.getItem("currentuser")).user
     console.log(this.signedinuser.employeeLevel)
   }
-getUsers(search=""){
-  this.signedinuser = JSON.parse(localStorage.getItem("currentuser")).user
-  if(this.signedinuser.employeeLevel == 'Admin' ){
-    this.UserSer.getallUsers().subscribe(
-      (res:any) => {
-       
-        this.users = res;
-  
-      }
-    )
-  }
-  else{
-  this.UserSer.getUsers().subscribe(
-    (res:any) => {
-     
-      this.users = res;
-
+  getUsers(search = null) {
+    this.signedinuser = JSON.parse(localStorage.getItem("currentuser")).user
+    if (this.signedinuser.employeeLevel == 'Admin') {
+      this.UserSer.getallUsers(search).subscribe(
+        (res: any) => {
+          this.users = res;
+        }
+      )
     }
-  )
+    else {
+      this.UserSer.getUsers(search).subscribe(
+        (res: any) => {
+          this.users = res;
+        }
+      )
+    }
   }
-}
 
-search(){
-  this.getUsers(this.searchusername)
-}
-
-editLimit(userid){
-  const initialState = {
-    title:"Edit Employee limit",
-    type:"Limit",
-    userid:userid
+  search() {
+    this.getUsers(this.searchusername)
   }
-  this.modalService.show(EditusermoneyComponent, {
-    animated: true,
-    initialState
-  }).content.render.subscribe(res=>this.getUsers())
 
-}
-increaseWallet(userid){
-  const initialState = {
-    title:"Add to Employee Wallet",
-    type:"Wallet",
-    userid:userid
+  editLimit(userid) {
+    const initialState = {
+      title: "Edit Employee limit",
+      type: "Limit",
+      userid: userid
+    }
+    this.modalService.show(EditusermoneyComponent, {
+      animated: true,
+      initialState
+    }).content.render.subscribe(res => this.getUsers())
+
   }
-  this.modalService.show(EditusermoneyComponent, {
-    animated: true,
-    initialState
-  }).content.render.subscribe(res=>this.getUsers())
+  increaseWallet(userid) {
+    const initialState = {
+      title: "Add to Employee Wallet",
+      type: "Wallet",
+      userid: userid
+    }
+    this.modalService.show(EditusermoneyComponent, {
+      animated: true,
+      initialState
+    }).content.render.subscribe(res => this.getUsers())
 
-}
-deleteUser(userid){
-this.UserSer.delete(userid).subscribe(res=>{
-  alert("Deleted Successfully")
-  this.getUsers()
-})
-}
-viewUser(id){
-  this.router.navigateByUrl('/viewuser/'+id+"")
-}
+  }
+  deleteUser(userid) {
+    this.UserSer.delete(userid).subscribe(res => {
+      alert("Deleted Successfully")
+      this.getUsers()
+    })
+  }
+  viewUser(id) {
+    this.router.navigateByUrl('/viewuser/' + id + "")
+  }
 }
