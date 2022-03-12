@@ -159,7 +159,7 @@ router.get('/allusers', authenticateuser, function(req, res) {
             $search: req.params.search
         } 
     };
-    if(!filter.$text) delete filter.$text;
+    if(!req.params.search) delete filter.$text;
     
     User.find(filter, function(err, User) {
         if (err)
@@ -177,7 +177,7 @@ router.get('/users', authenticateuser, function(req, res) {
             $search: req.params.search
         }  
     };
-    if(!filter.$text) delete filter.$text;
+    if(!req.params.search) delete filter.$text;
 
     User.find(filter, function(err, User) {
         if (err)
