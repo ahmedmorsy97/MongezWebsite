@@ -1,0 +1,19 @@
+<div class="modal-header">
+    <h2 class="modal-title pull-left mb-0">Restock Product</h2>
+    <button type="button" class="btn-close close pull-right" aria-label="Close" (click)="bsModalRef.hide()">
+        <span aria-hidden="true" class="visually-hidden">&times;</span>
+    </button>
+</div> 
+<div class="modal-body p-4">
+   
+    <p *ngIf="err" class="error">{{err}}</p>
+    <form #f="ngForm" (ngSubmit)="restock(f)" class="">
+        <label> New Stock Quanity</label>
+        <input class="mb-2" type="Number" placeholder="Enter new quanity" name="stock" [(ngModel)]="stocknumber"/>
+        
+        <button class="btn btn-primary w-100 mt-4" [disabled]="disabled" type="submit">Restock</button>
+    </form>
+</div>
+<!-- <div class="modal-footer">
+    <button type="button" class="btn btn-default" (click)="bsModalRef.hide()">Close</button>
+</div> -->

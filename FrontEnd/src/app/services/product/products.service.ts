@@ -41,4 +41,12 @@ export class ProductsService {
       
        });
   }
+
+  editproductamount(id,amount){
+    const url = `${this.baseUrl}/editmyproduct/`+id;    
+    return this.http.patch(url, {
+quantity:amount
+      
+       });
+  }
 }

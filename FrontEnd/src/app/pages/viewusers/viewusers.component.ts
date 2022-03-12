@@ -14,6 +14,7 @@ export class ViewusersComponent implements OnInit {
   faSearch = faSearch;
   users:any =[];
   signedinuser : any
+  searchusername =""
   constructor(private router: Router,private activerouter: ActivatedRoute, private UserSer: UserService,private modalService: BsModalService) {
 
   }
@@ -22,7 +23,7 @@ export class ViewusersComponent implements OnInit {
     this.signedinuser = JSON.parse(localStorage.getItem("currentuser")).user
     console.log(this.signedinuser.employeeLevel)
   }
-getUsers(){
+getUsers(search=""){
   this.signedinuser = JSON.parse(localStorage.getItem("currentuser")).user
   if(this.signedinuser.employeeLevel == 'Admin' ){
     this.UserSer.getallUsers().subscribe(
@@ -44,7 +45,9 @@ getUsers(){
   }
 }
 
-
+search(){
+  this.getUsers(this.searchusername)
+}
 
 editLimit(userid){
   const initialState = {

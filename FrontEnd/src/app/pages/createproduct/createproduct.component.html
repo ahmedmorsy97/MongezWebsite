@@ -47,7 +47,7 @@
         <!-- <input class="mb-2" type="text" placeholder="Category" name="category" [(ngModel)]="category" /> -->
 
         <label *ngIf="category && SubCategorydata[category]">SubCategory</label>
-        <select *ngIf="category && SubCategorydata[category]" class="mb-2" placeholder="SubCategory" name="subcategory" [(ngModel)]="Subcategory">
+        <select *ngIf="category && SubCategorydata[category]" class="mb-2" placeholder="SubCategory" name="subcategory" [(ngModel)]="subcategory">
             <option *ngFor="let option of SubCategorydata[category]" [ngValue]="option.value">
                 {{option.name}}
             </option>

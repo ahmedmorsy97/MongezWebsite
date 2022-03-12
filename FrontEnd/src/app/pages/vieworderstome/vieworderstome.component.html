@@ -92,10 +92,10 @@
                                         <div class="col-md-8 text-left">
                                         <p class="card-text text-left text_link"  (click)="viewproduct(product.product._id)"><strong>Product Name:</strong> {{product.product.productName}}</p>
                                         <p class="card-text text-left "><strong>Product Status:</strong> {{product.status}}</p>
-                                        <button (click)="changestatus('Confirmed',order._id,product._id)"class=" btn btn-primary text-right mx-2"*ngIf = "product.status=='Pending'">Confirm Order</button> 
-                                        <button (click)="changestatus('Cancelled',order._id,product._id)"class=" btn btn-primary text-right mx-2"*ngIf = "product.status=='Pending'">Cancel Order</button>
-                                        <button (click)="changestatus('On Delivery',order._id,product._id)"class=" btn btn-primary text-right "*ngIf = "product.status=='Confirmed'">On Delivery</button>
-                                        <button (click)="changestatus('Delivered',order._id,product._id)"class=" btn btn-primary text-right "*ngIf = "product.status=='On Delivery'">Delivered</button> 
+                                        <button (click)="changestatus('Confirmed',order._id,product.product._id)"class=" btn btn-primary text-right mx-2"*ngIf = "product.status=='Pending'">Confirm Order</button> 
+                                        <button (click)="changestatus('Cancelled',order._id,product.product._id)"class=" btn btn-primary text-right mx-2"*ngIf = "product.status=='Pending'">Cancel Order</button>
+                                        <button (click)="changestatus('On Delivery',order._id,product.product._id)"class=" btn btn-primary text-right "*ngIf = "product.status=='Confirmed'">On Delivery</button>
+                                        <button (click)="changestatus('Delivered',order._id,product.product._id)"class=" btn btn-primary text-right "*ngIf = "product.status=='On Delivery'">Delivered</button> 
  
 
                                         <p class="card-text text-left "><strong>Date Of Purchase:</strong> {{product.dateOfPurchase}}</p>

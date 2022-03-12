@@ -23,7 +23,7 @@ export class NavbarComponent implements OnInit {
   level= ""
 currentuser = null
   type = "";
-  sidebarItems: SimpleSidebarItem[];
+  sidebarItems: SimpleSidebarItem[] =[];
   adminsidebarItems: SimpleSidebarItem[];
   companyadminsidebarItems: SimpleSidebarItem[];
   managersidebarItems: SimpleSidebarItem[];
@@ -46,6 +46,7 @@ currentuser = null
     this.authServ.authState.subscribe(
       state => {
         this.user = this.authServ.checkUser();
+        this.initSideNav();
       }
     )
    
@@ -54,8 +55,9 @@ currentuser = null
   }
 
   initSideNav() {
-    
-    if(this.type=="user"){
+    console.log("INNN")
+    if(this.type=="user" && JSON.parse(this.user)?.user ){
+      
 this.currentuser = JSON.parse(this.user).user
 this.level = this.currentuser.employeeLevel
       if(this.level=="Admin"){
@@ -304,7 +306,7 @@ this.level = this.currentuser.employeeLevel
         }
    
   }
-  else{
+  else if(JSON.parse(this.user)?.supplier){
     const userdata = JSON.parse(this.user);
     this.sidebarItems = [
       {
@@ -370,7 +372,7 @@ this.level = this.currentuser.employeeLevel
   }
     // required, configure items
    
-  
+  console.log(this.sidebarItems)
     this.ngSimpleSidebarService.addItems(this.sidebarItems);
     
 

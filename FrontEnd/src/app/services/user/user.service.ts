@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { environment } from "../../../environments/environment"
+import { Observable, Subject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -8,6 +9,8 @@ import { environment } from "../../../environments/environment"
 export class UserService {
   baseUrl: string = `${environment.baseUrl}/user`;
   baseorderUrl: string = `${environment.baseUrl}/order`;
+  baseproductUrl: string = `${environment.baseUrl}/product`;
+
   user :any;
   constructor(private http: HttpClient) { }
   
@@ -104,6 +107,15 @@ export class UserService {
  
        });
   }
+
+  setmywallet(amount){
+    const url = `${this.baseUrl}/setmywallet`;
+   
+    return this.http.patch(url, {
+ amount
+ 
+       });
+  }
   delete(userid){
    
     const url = `${this.baseUrl}/removeEmployee/`+userid;    
@@ -185,6 +197,23 @@ export class UserService {
       // logo,
         
         });
+  }
+  decreaseproductquantity(products){
+    const url = `${this.baseproductUrl}/decreaseproductsquantity`;
+    return this.http.patch(url, {
+      products
+        
+        });
+
+  }
+  decreasewalletandproductquantity(orderprice,products): Subject<any>{
+   const subject = new Subject();
+     this.setmywallet(orderprice).subscribe(res=>{
+       this.decreaseproductquantity(products).subscribe(res=>{
+         subject.next(res)
+       });
+    });
+    return subject
   }
 }
 

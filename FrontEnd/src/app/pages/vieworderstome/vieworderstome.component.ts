@@ -68,6 +68,8 @@ myTexts: IMultiSelectTexts= {
   togglefilter(type){
     this.filters[type] = !this.filters[type]
       }
+
+      
       changestatus(status,orderid,productid){
         this.UserSer.changeorderstatus(status,orderid,productid).subscribe(res=>this.ViewOrder());
       }

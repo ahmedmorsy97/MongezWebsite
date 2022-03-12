@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { faSearch } from '@fortawesome/free-solid-svg-icons';
+import { element } from 'protractor';
 import { ProductsService } from 'src/app/services/product/products.service';
 import { UserService } from 'src/app/services/user/user.service';
 
@@ -47,10 +48,15 @@ constructor(private router: Router,private activerouter: ActivatedRoute, private
       price: products.map(element=>element.priceatPurchase).reduce((a,b)=>a + b)
     }
     this.loading = true
-      this.UserSer.checkout(order).subscribe( res =>{
-        this.UserSer.clearcart().subscribe(orderres=>{
-          this.router.navigateByUrl('viewmyorders')
+      this.UserSer.checkout(order).subscribe( (res:any) =>{
+        this.UserSer.decreasewalletandproductquantity(-order.price,order.products.map(element=>({quantity: -element.quantity,product:element.product}))).subscribe(res=>{
+          console.log(res)
+          this.UserSer.clearcart().subscribe(orderres=>{
+
+            this.router.navigateByUrl('viewmyorders')
+          })
         })
+      
       },
       err =>{
       this.err = err?.error?.err || "Something went wrong";

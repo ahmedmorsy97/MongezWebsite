@@ -155,7 +155,7 @@ router.post("/logout", authenticateuser, (req, res) => {
 })
 router.get('/allusers', authenticateuser, function(req, res) {
 
-    User.find(function(err, User) {
+    User.find({ $text: req.body.search || "" }, function(err, User) {
         if (err)
             res.send(err);
         res.json(User);
@@ -164,7 +164,7 @@ router.get('/allusers', authenticateuser, function(req, res) {
 })
 router.get('/users', authenticateuser, function(req, res) {
 
-    User.find({ company: req.user.company, isremoved: false, blocked: false }, function(err, User) {
+    User.find({ company: req.user.company, isremoved: false, blocked: false, $text: req.body.search || "" }, function(err, User) {
         if (err)
             res.send(err);
         res.json(User);
@@ -201,9 +201,11 @@ router.patch('/updatemyinfo', authenticateuser, (req, res) => {
 
 
 router.patch('/addtocart', authenticateuser, (req, res) => {
-    console.log(req.user._id)
-    User.findOneAndUpdate({ _id: req.user._id }, { $push: { cart: { product: req.body.productid, quantity: req.body.quantity, supplier: req.body.supplier, productName: req.body.name, productPrice: req.body.price, productLogo: req.body.logo } } }, { new: true }).then(updatedcart => res.status(200).send({ cart: updatedcart }))
-
+    if (!(req.user.cart.map(element => element.product).includes(req.body.productid))) {
+        User.findOneAndUpdate({ _id: req.user._id }, { $push: { cart: { product: req.body.productid, quantity: req.body.quantity, supplier: req.body.supplier, productName: req.body.name, productPrice: req.body.price, productLogo: req.body.logo } } }, { new: true }).then(updatedcart => res.status(200).send({ cart: updatedcart }))
+    } else {
+        User.findOneAndUpdate({ _id: req.user._id, "cart.product": req.body.productid }, { $inc: { "cart.$.quantity": req.body.quantity } }, { new: true }).then(updatedcart => res.status(200).send({ user: updatedcart }))
+    }
 })
 router.patch('/addexistingtocart', authenticateuser, (req, res) => {
     User.findOneAndUpdate({ _id: req.user._id, "cart.product": req.body.productid }, { $inc: { "cart.$.quantity": req.body.quantity } }, { new: true }).then(updatedcart => res.status(200).send({ user: updatedcart }))
@@ -242,19 +244,21 @@ router.patch('/removeEmployee/:employee_id', authenticateCompanyadmin, (req, res
     User.findOneAndUpdate({ _id: req.params.employee_id, company: req.user.company }, { $set: { isremoved: true } }, { new: true }).then(updateduser => res.status(200).send({ updateduser: updateduser }))
 })
 
-
-//Logout done 
-//Register done
-//login done
-//View my Info done
-//Edit my Info done 
-//View Products and sort or filter them according to price or location done
-//Add to cart  done 
-//View Supplier Info done tested
-//View Order info and status done tested
-//Rate supplier done tested
-//Manager sets employee wallet money done not tested
-//Manager sets limit for each employee done not tested
+router.patch('/setmywallet', authenticateuser, (req, res) => {
+        User.findOneAndUpdate({ _id: req.user._id }, { $inc: { wallet: req.body.amount } }, { new: true }).then(updateduser => res.status(200).send({ updateduser: updateduser }))
+    })
+    //Logout done 
+    //Register done
+    //login done
+    //View my Info done
+    //Edit my Info done 
+    //View Products and sort or filter them according to price or location done
+    //Add to cart  done 
+    //View Supplier Info done tested
+    //View Order info and status done tested
+    //Rate supplier done tested
+    //Manager sets employee wallet money done not tested
+    //Manager sets limit for each employee done not tested
 
 //Send order to supplier done not tested
 //Cancel Order if possible done not tested

@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { authenticateadmin, authenticatesupplier } from "../../MiddleWare";
+import { authenticateadmin, authenticatesupplier, authenticateuser } from "../../MiddleWare";
 import { Product } from "../Models/Product";
 const router = Router();
 
@@ -78,14 +78,40 @@ router.get('/viewproduct/:product_id', (req, res) => {
             });
         });;
 })
-router.patch("/editmyproduct", authenticatesupplier, (req, res) => {
-    Product.findOneAndUpdate({ _id: req.body._id, supplier: req.supplier._id }, { $set: req.body }, { new: true }).then(updatedproduct => res.status(200).send({ updatedproduct: updatedproduct }))
+router.patch("/editmyproduct/:productid", authenticatesupplier, (req, res) => {
+    Product.findOneAndUpdate({ _id: req.params.productid, supplier: req.supplier._id }, { $set: req.body }, { new: true }).then(updatedproduct => res.status(200).send({ updatedproduct: updatedproduct }))
         .catch((err) => {
             res.status(400).send({
                 err: err.message ? err.message : err,
             });
         });
 
+})
+
+router.patch("/decreaseproductsquantity", authenticateuser, (req, res) => {
+    const products = []
+    const promise = new Promise((resolve, reject) => {
+        console.log(req.body.products)
+        req.body.products.forEach((product, index) => {
+            Product.findOneAndUpdate({ _id: product.product }, { $inc: { quantity: product.quantity } }, { new: true }).then(res => {
+                if (index == req.body.products.length - 1) {
+                    resolve()
+                }
+            }).catch(err => {
+                reject(err)
+            })
+        })
+    })
+
+    promise.then(promiseres => {
+        res.status(200).send({
+            products
+        })
+    }).catch((err) => {
+        res.status(400).send({
+            err: err.message ? err.message : err,
+        });
+    });
 
 })
 router.patch("/editsupplierproduct/:product_id", authenticateadmin, (req, res) => {
