@@ -1,6 +1,6 @@
 <div class="container">
     <h3 class="text-center">My Products</h3>
-    <div class="search mb-4">
+    <!-- <div class="search mb-4">
         <div class="d-flex">
             <div class="w-100">
                 <input placeholder="Search by product name" type="search" id="form1" class="form-control text-center" />
@@ -8,35 +8,35 @@
             <button type="button" class="btn no-btn">
                 <fa-icon [icon]="faSearch"></fa-icon>
             </button>
-        </div>
-    </div>
+        </div> -->
+</div>
 
-    <!-- <div class="row"> -->
-    <!-- Admin can filter(Has filter div) NOT DONE -->
-    <div *ngFor="let product of products" class="card mb-2">
-        <div class="card-body ">
-            <div class="row">
-                <div class="img-container col-md-4">
-                    <img src="/assets/images/employee.jpg">
-                </div>
-                <div class="info  col-md-8">
-                    <h5 class="card-title">Product Name: {{product?.productName}}</h5>
-                    <h5 class="card-title">Quanity: {{product.quantity}}</h5>
-
-                </div>
-                <div class="col-12 d-flex justify-content-end flex-wrap">
-                    <button (click)="restock(product._id)" class="btn btn-primary mx-3">Restock Product</button>
-                    <button (click)="viewProduct(product._id)" class="btn btn-primary mx-3">View Product</button>
-                    <button (click)="deleteProduct(product._id)" class="btn btn-primary mx-3">Delete Product</button>
-                   
-
-                </div>
+<!-- <div class="row"> -->
+<!-- Admin can filter(Has filter div) NOT DONE -->
+<div *ngFor="let product of products" class="card mb-2">
+    <div class="card-body ">
+        <div class="row">
+            <div class="img-container col-md-4">
+                <img src="/assets/images/employee.jpg">
             </div>
+            <div class="info  col-md-8">
+                <h5 class="card-title">Product Name: {{product?.productName}}</h5>
+                <h5 class="card-title">Quanity: {{product.quantity}}</h5>
+
+            </div>
+            <div class="col-12 d-flex justify-content-end flex-wrap">
+                <button (click)="restock(product._id)" class="btn btn-primary mx-3">Restock Product</button>
+                <button (click)="viewProduct(product._id)" class="btn btn-primary mx-3">View Product</button>
+                <button (click)="deleteProduct(product._id)" class="btn btn-primary mx-3">Delete Product</button>
 
 
+            </div>
         </div>
-
-        <!-- </div> -->
 
 
     </div>
+
+    <!-- </div> -->
+
+
+</div>

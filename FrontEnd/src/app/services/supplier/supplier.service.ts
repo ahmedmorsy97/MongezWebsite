@@ -15,8 +15,8 @@ export class SupplierService {
   getSupplier(id: string) {
     return this.http.get(this.baseUrl+'/viewsupplier/'+id);
   }
-  getSuppliers(){
-    return this.http.get(this.baseUrl+'/allsuppliers');
+  getSuppliers(search){
+    return this.http.get(this.baseUrl+`/allsuppliers${search ? `?search=${search}`: ''}`);
   }
 
 

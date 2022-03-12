@@ -1,6 +1,6 @@
 <div class="container">
     <h3 class="text-center">Your Orders</h3>
-    <div class="search mb-4">
+    <!-- <div class="search mb-4">
         <div class="d-flex">
             <div class="w-100">
                 <input placeholder="What do you need?" type="search" id="form1" class="form-control text-center" />
@@ -8,106 +8,106 @@
             <button type="button" class="btn no-btn">
                 <fa-icon [icon]="faSearch"></fa-icon>
             </button>
+        </div> -->
+</div>
+
+<div class="row">
+    <div class="col-md-4 filter">
+        <div (click)="togglefilter('supplier')" class="header d-flex align-items-center justify-content-between mb-4">
+            <h5>Supplier</h5>
+            <fa-icon *ngIf="filters.supplier" [icon]="faMinus"></fa-icon>
+            <fa-icon *ngIf="!filters.supplier" [icon]="faPlus"></fa-icon>
         </div>
-    </div>
+        <div *ngIf="filters.supplier" class="mb-4">
 
-    <div class="row">
-        <div class="col-md-4 filter">
-            <div (click)="togglefilter('supplier')" class="header d-flex align-items-center justify-content-between mb-4">
-                <h5>Supplier</h5>
-                <fa-icon *ngIf="filters.supplier" [icon]="faMinus"></fa-icon>
-                <fa-icon *ngIf="!filters.supplier" [icon]="faPlus"></fa-icon>
+            <ngx-bootstrap-multiselect [options]="suppliers" [texts]="myTexts" [settings]="mySettings" [(ngModel)]="optionsModel"></ngx-bootstrap-multiselect>
+        </div>
+
+        <div (click)="togglefilter('purchasedate')" class="header d-flex align-items-center justify-content-between mb-4">
+
+            <h5>Purchase Date</h5>
+            <fa-icon *ngIf="filters.purchasedate" [icon]="faMinus"></fa-icon>
+            <fa-icon *ngIf="!filters.purchasedate" [icon]="faPlus"></fa-icon>
+            <div *ngIf="filters.purchasedate" class="mt-4 mb-2">
+                <label>From</label>
+                <input class="mb-2" type="date" placeholder="From" />
+
+                <label>To</label>
+                <input class="mb-2" type="date" placeholder="To" />
             </div>
-            <div *ngIf="filters.supplier" class="mb-4">
+        </div>
 
-                <ngx-bootstrap-multiselect [options]="suppliers" [texts]="myTexts" [settings]="mySettings" [(ngModel)]="optionsModel"></ngx-bootstrap-multiselect>
-            </div>
+        <div (click)="togglefilter('category')" class="header d-flex align-items-center justify-content-between mb-4">
+            <h5>Category</h5>
+            <fa-icon *ngIf="filters.category" [icon]="faMinus"></fa-icon>
+            <fa-icon *ngIf="!filters.category" [icon]="faPlus"></fa-icon>
+        </div>
+        <div *ngIf="filters.category" class="info">
 
-            <div (click)="togglefilter('purchasedate')" class="header d-flex align-items-center justify-content-between mb-4">
-
-                <h5>Purchase Date</h5>
-                <fa-icon *ngIf="filters.purchasedate" [icon]="faMinus"></fa-icon>
-                <fa-icon *ngIf="!filters.purchasedate" [icon]="faPlus"></fa-icon>
-                <div *ngIf="filters.purchasedate" class="mt-4 mb-2">
-                    <label>From</label>
-                    <input class="mb-2" type="date" placeholder="From" />
-
-                    <label>To</label>
-                    <input class="mb-2" type="date" placeholder="To" />
-                </div>
-            </div>
-
-            <div (click)="togglefilter('category')" class="header d-flex align-items-center justify-content-between mb-4">
-                <h5>Category</h5>
-                <fa-icon *ngIf="filters.category" [icon]="faMinus"></fa-icon>
-                <fa-icon *ngIf="!filters.category" [icon]="faPlus"></fa-icon>
-            </div>
-            <div *ngIf="filters.category" class="info">
-
-                <ngx-bootstrap-multiselect [options]="categories" [texts]="myTexts" [settings]="mySettings" [(ngModel)]="optionsModel"></ngx-bootstrap-multiselect>
-            </div>
-            <div (click)="togglefilter('status')" class="header d-flex align-items-center justify-content-between mb-4">
-                <h5>Status</h5>
-                <fa-icon *ngIf="filters.category" [icon]="faMinus"></fa-icon>
-                <fa-icon *ngIf="!filters.category" [icon]="faPlus"></fa-icon>
-            </div>
-            <div *ngIf="filters.status" class="mb-2">
-                <div class="mb-4">
-                    <input class="form-check-input " type="checkbox" value="" id="Ondelivery">
-                    <label class="form-check-label" for="Ondelivery">
+            <ngx-bootstrap-multiselect [options]="categories" [texts]="myTexts" [settings]="mySettings" [(ngModel)]="optionsModel"></ngx-bootstrap-multiselect>
+        </div>
+        <div (click)="togglefilter('status')" class="header d-flex align-items-center justify-content-between mb-4">
+            <h5>Status</h5>
+            <fa-icon *ngIf="filters.category" [icon]="faMinus"></fa-icon>
+            <fa-icon *ngIf="!filters.category" [icon]="faPlus"></fa-icon>
+        </div>
+        <div *ngIf="filters.status" class="mb-2">
+            <div class="mb-4">
+                <input class="form-check-input " type="checkbox" value="" id="Ondelivery">
+                <label class="form-check-label" for="Ondelivery">
                       On Delivery
                     </label>
-                </div>
-                <div class="mb-4">
-                    <input class="form-check-input" type="checkbox" value="" id="Delivered">
-                    <label class="form-check-label" for="Delivered">
+            </div>
+            <div class="mb-4">
+                <input class="form-check-input" type="checkbox" value="" id="Delivered">
+                <label class="form-check-label" for="Delivered">
                           Delivered
                         </label>
-                </div>
-                <div class="mb-4">
-                    <input class="form-check-input" type="checkbox" value="" id="Cancelled">
-                    <label class="form-check-label" for="Cancelled">
+            </div>
+            <div class="mb-4">
+                <input class="form-check-input" type="checkbox" value="" id="Cancelled">
+                <label class="form-check-label" for="Cancelled">
                               Cancelled
                             </label>
-                </div>
             </div>
-            <button class="btn btn-primary w-100 mt-4">Apply Filter</button>
-            <button class="btn btn-primary w-100 mt-3">Clear Filter</button>
         </div>
+        <button class="btn btn-primary w-100 mt-4">Apply Filter</button>
+        <button class="btn btn-primary w-100 mt-3">Clear Filter</button>
+    </div>
 
 
-        <div  class="col-md-8">
-            <div  *ngFor = "let order of orders" class="card  mb-4 orders text-center">
-                <ngb-accordion #acc="ngbAccordion">
-                    <ngb-panel id="toggle-1" title="Order#: {{order.ordernumber}}">
-                        <ng-template ngbPanelContent>
-                            <div class="product">
-                                
-                                   
-                                    <div *ngFor = "let product of order.products" class="col-md-12">
-                                        <div class="row">
-                                        <div class="col-md-4 img-container">
-                                            <img src="/assets/images/nails.png" />
-                                        </div>
-                                        <div class="col-md-8">
-                                        <p class="card-text text-left text_link"  (click)="viewproduct(product.product._id)"><strong>Product Name:</strong> {{product.product.productName}}</p>
+    <div class="col-md-8">
+        <div *ngFor="let order of orders" class="card  mb-4 orders text-center">
+            <ngb-accordion #acc="ngbAccordion">
+                <ngb-panel id="toggle-1" title="Order#: {{order.ordernumber}}">
+                    <ng-template ngbPanelContent>
+                        <div class="product">
+
+
+                            <div *ngFor="let product of order.products" class="col-md-12">
+                                <div class="row">
+                                    <div class="col-md-4 img-container">
+                                        <img src="/assets/images/nails.png" />
+                                    </div>
+                                    <div class="col-md-8">
+                                        <p class="card-text text-left text_link" (click)="viewproduct(product.product._id)"><strong>Product Name:</strong> {{product.product.productName}}</p>
                                         <p class="card-text text-left "><strong>Product Status:</strong> {{product.status}}</p>
                                         <p class="card-text text-left "><strong>Date Of Purchase:</strong> {{product.dateOfPurchase}}</p>
-                                        <p class="card-text text-left text_link"style="text-underline"(click)="viewsupplier(product.supplier._id)"><strong>Supplier:</strong> {{product.supplier.firstname}} {{product.supplier.lastname}}</p>
-    
-                                    </div>
+                                        <p class="card-text text-left text_link" style="text-underline" (click)="viewsupplier(product.supplier._id)"><strong>Supplier:</strong> {{product.supplier.firstname}} {{product.supplier.lastname}}</p>
+
                                     </div>
                                 </div>
-                          
-
                             </div>
-                        </ng-template>
-                    </ngb-panel>
 
-                </ngb-accordion>
 
-                <hr/>
+                        </div>
+                    </ng-template>
+                </ngb-panel>
 
-            </div>
+            </ngb-accordion>
+
+            <hr/>
 
         </div>
+
+    </div>

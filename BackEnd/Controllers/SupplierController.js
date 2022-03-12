@@ -103,8 +103,14 @@ router.get('/viewsupplier/:supplier_id', (req, res) => {
             });
         });;
 })
-router.get('/allsuppliers', function(req, res) {
-    Supplier.find(function(err, Supplier) {
+router.get('/allsuppliers', authenticateuser, function(req, res) {
+    const filter = {
+        $text: {
+            $search: req.query.search
+        }
+    };
+    if (!req.query.search) delete filter.$text;
+    Supplier.find(filter, function(err, Supplier) {
         if (err)
             res.send(err);
         res.json(Supplier);

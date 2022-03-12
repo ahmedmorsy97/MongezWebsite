@@ -12,16 +12,25 @@ export class HomeComponent implements OnInit {
   categories=categories;
   mechanichalsubcategories=Mechanicalsubcategories;
   electricalsubcategories = Electricalsubcategories;
+  user = null;
+  type = "";
 
   constructor(private router:Router,private auth: AuthService) { 
 
   }
 
   ngOnInit(): void {
+    this.user = this.auth.checkUser();
+    this.type = localStorage.getItem("type")
     console.log(this.router.url);
     if(this.router.url.indexOf('logout')!=-1){
      this.auth.logout(localStorage.getItem("type"));
   }
+  this.auth.authState.subscribe(
+    state => {
+      this.user = this.auth.checkUser();
+      this.type = localStorage.getItem("type")
+    })
 }
   GoToProducts(){
    this.router.navigateByUrl('/products')

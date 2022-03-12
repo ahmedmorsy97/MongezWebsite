@@ -12,13 +12,14 @@ export class ViewcompaniesComponent implements OnInit {
 companies :any=[]
 companychosen :any
 faSearch = faSearch;
+companyusername = "";
   constructor(private router: Router,private activerouter: ActivatedRoute, private CompanySer: CompanyService) { }
 
   ngOnInit(): void {
 this.getCompanies()
   }
-  getCompanies(){
-    this.CompanySer.getCompanies().subscribe(
+  getCompanies(search=null){
+    this.CompanySer.getCompanies(search).subscribe(
       (res:any) => {
         console.log(res);
         this.companies = res;
@@ -27,6 +28,10 @@ this.getCompanies()
     )
   
   
+  }
+
+  search(){
+    this.getCompanies(this.companyusername);
   }
   viewCompany(id:string){
     this.router.navigateByUrl('/viewcompany/'+id+"")

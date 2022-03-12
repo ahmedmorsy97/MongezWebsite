@@ -66,5 +66,6 @@ const orderSchema = mongoose.Schema({
         default: true
     }
 });
+orderSchema.index({ "$**": "text" });
 orderSchema.plugin(AutoIncrement, { inc_field: "ordernumber" });
 export const Order = mongoose.model('Order', orderSchema);

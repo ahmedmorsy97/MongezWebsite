@@ -27,13 +27,13 @@
             <button *ngIf="user!=null" (click)="toggleSideNav()" class="btn btn-primary btn-lg ml-3 mr-4"><fa-icon [icon]="faBars"></fa-icon></button>
             <div class="logo">
                 <img (click)="GoToHome()" src="/assets/images/logo.png" alt="logo" /> </div>
-            <a href="">Start Shopping</a>
-            <div class="search ml-3 mr-3">
-                <div class="d-flex">
+            <a *ngIf="user!=null && type=='user' " href="products">Start Shopping</a>
+            <div [ngStyle]="{opacity:user!=null && type=='user'?1:0}" class="search ml-3 mr-3">
+                <div *ngIf="user!=null && type=='user' "  class="d-flex">
                     <div class="w-100">
-                        <input placeholder="What do you need?" type="search" id="form1" class="form-control" />
+                        <input placeholder="What do you need?" type="search" id="form1" class="form-control" [(ngModel)]= "productname"/>
                     </div>
-                    <button type="button" class="btn no-btn">
+                    <button (click)="search()"type="button" class="btn no-btn">
                         <fa-icon [icon]="faSearch"></fa-icon>
                     </button>
                 </div>

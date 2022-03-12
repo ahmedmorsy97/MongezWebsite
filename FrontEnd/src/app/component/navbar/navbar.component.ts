@@ -21,6 +21,7 @@ export class NavbarComponent implements OnInit {
   modalRef?: BsModalRef;
   user = null;
   level= ""
+  productname=""
 currentuser = null
   type = "";
   sidebarItems: SimpleSidebarItem[] =[];
@@ -46,6 +47,7 @@ currentuser = null
     this.authServ.authState.subscribe(
       state => {
         this.user = this.authServ.checkUser();
+        this.type = localStorage.getItem("type")
         this.initSideNav();
       }
     )
@@ -445,6 +447,9 @@ this.level = this.currentuser.employeeLevel
     const userdata = JSON.parse(this.user);
     this.router.navigateByUrl('/cart/'+userdata.user._id) 
     }
+  }
+  search(){
+    this.router.navigateByUrl('/products?search='+this.productname)
   }
   Login() {
     const initialState = {

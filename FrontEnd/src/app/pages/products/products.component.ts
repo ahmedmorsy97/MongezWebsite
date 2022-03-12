@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { categories, Mechanicalsubcategories, Electricalsubcategories } from '../../Utilities/utilities'
 import { faPlus, faMinus } from '@fortawesome/free-solid-svg-icons';
 import { IMultiSelectOption, IMultiSelectSettings, IMultiSelectTexts } from 'ngx-bootstrap-multiselect';
@@ -43,7 +43,7 @@ export class ProductsComponent implements OnInit {
     limit: 9
   }
 
-  constructor(private router: Router, private ProductSer: ProductsService,private UserSer: UserService) {
+  constructor(private router: Router,private ActiveRoute: ActivatedRoute, private ProductSer: ProductsService,private UserSer: UserService) {
 
   }
   // Settings configuration
@@ -68,7 +68,7 @@ export class ProductsComponent implements OnInit {
     searchEmptyResult: 'Nothing found...',
     searchNoRenderText: 'Type in search box to see results...',
     defaultTitle: 'Select Suppliers',
-    allSelected: 'All selected',
+    allSelected: 'All sected',
   };
 
   filterParsed:any = {};
@@ -99,6 +99,10 @@ export class ProductsComponent implements OnInit {
     ];
 
     this.getProducts();
+    this.ActiveRoute.queryParams.subscribe(res=>{
+      console.log(res)
+      res.search && this.getProducts(this.filterParsed,res.search)
+    })
   }
 
   applyFilter() {
@@ -137,12 +141,13 @@ export class ProductsComponent implements OnInit {
     }
   }
 
-  getProducts(filters = null) {
+  getProducts(filters = null,search=null) {
     const queryBody = {...(filters || this.filterParsed), category: this.category, Subcategory: this.subcategory};
     if(!queryBody.category) delete queryBody.category;
     if(!queryBody.Subcategory) delete queryBody.Subcategory;
 
     this.ProductSer.getProducts({
+      search,
       queryBody,
       page: this.fetchInfo.page,
       limit: this.fetchInfo.limit

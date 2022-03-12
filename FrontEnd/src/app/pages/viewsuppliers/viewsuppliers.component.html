@@ -3,9 +3,9 @@
     <div class="search mb-4">
         <div class="d-flex">
             <div class="w-100">
-                <input placeholder="Search by username" type="search" id="form1" class="form-control text-center" />
+                <input placeholder="Search by username" type="search" id="form1" class="form-control text-center" [(ngModel)]="supplierusername" />
             </div>
-            <button type="button" class="btn no-btn">
+            <button (click)="search()"type="button" class="btn no-btn">
                 <fa-icon [icon]="faSearch"></fa-icon>
             </button>
         </div>

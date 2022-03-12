@@ -1,4 +1,4 @@
-import { authenticateadmin, authenticateCompanyadmin, authenticatemanager } from "../../MiddleWare";
+import { authenticateadmin, authenticateCompanyadmin, authenticatemanager, authenticateuser } from "../../MiddleWare";
 import { Company } from "../Models/Company";
 import { Router } from "express";
 
@@ -26,15 +26,23 @@ router.post("/createcompany", authenticateadmin, (req, res) => {
         });
 })
 
-router.get('/allcompanies', function(req, res) {
-    Company.find(function(err, Company) {
+router.get('/allcompanies', authenticateuser, function(req, res) {
+
+    const filter = {
+        $text: {
+            $search: req.query.search
+        }
+    };
+    if (!req.query.search) delete filter.$text;
+
+    Company.find(filter, function(err, Company) {
         if (err)
             res.send(err);
         res.json(Company);
     });
 })
 
-router.get('/viewcompany/:company_id', (req, res) => {
+router.get('/viewcompany/:company_id', authenticateuser, (req, res) => {
     Company.findById(req.params.company_id).then(company => {
             if (!company) {
                 throw { err: "No company with this id" }
