@@ -3,9 +3,9 @@
     <div class="search mb-4">
         <div class="d-flex">
             <div class="w-100">
-                <input placeholder="Search by username" type="search" id="form1" class="form-control text-center" [(ngModel)]="searchusername"/>
+                <input placeholder="Search by username" type="search" id="form1" class="form-control text-center" [(ngModel)]="searchusername" />
             </div>
-            <button (click)="search()"type="button" class="btn no-btn">
+            <button (click)="search()" type="button" class="btn no-btn">
                 <fa-icon [icon]="faSearch"></fa-icon>
             </button>
         </div>
@@ -32,7 +32,7 @@
                 <div *ngIf="user.employeeLevel=='Employee' && signedinuser.employeeLevel!='Employee'&& signedinuser.employeeLevel!='Admin'" class="col-12 d-flex justify-content-end flex-wrap">
                     <button (click)="deleteUser(user._id)" *ngIf="signedinuser.employeeLevel=='CompanyAdmin'" class="btn btn-primary mx-3">Delete</button>
                     <button (click)="increaseWallet(user._id)" class="btn btn-primary mx-3">Add Wallet</button>
-                    <button (click)="editLimit(user._id)" class="btn btn-primary mx-3">Edit Limit</button>
+                    <!-- <button (click)="editLimit(user._id)" class="btn btn-primary mx-3">Edit Limit</button> -->
                 </div>
             </div>
 
