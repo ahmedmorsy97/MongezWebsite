@@ -18,8 +18,28 @@ export class ViewusersComponent implements OnInit {
   signedinuser: any;
   searchusername = "";
   
+  roles: IMultiSelectOption[] = [
+    {
+      id: "Admin",
+      name: "Admin"
+    },
+    {
+      id: "CompanyAdmin",
+      name: "Company Admin"
+    },
+    {
+      id: "Manager",
+      name: "Manager"
+    },
+    {
+      id: "Employee",
+      name: "Employee"
+    }
+  ];
   companies: IMultiSelectOption[];
+
   selectedCompanies: any = null;
+  selectedRoles: any = null;
 
   constructor(
     private router: Router, 
@@ -55,6 +75,32 @@ export class ViewusersComponent implements OnInit {
     allSelected: 'All sected',
   };
 
+  
+  // Settings configuration
+  mySettingsRoles: IMultiSelectSettings = {
+    enableSearch: true,
+    showCheckAll: true,
+    showUncheckAll: true,
+    maintainSelectionOrderInTitle: true,
+    checkedStyle: 'fontawesome',
+    buttonClasses: 'btn btn-primary',
+    dynamicTitleMaxItems: 3,
+    displayAllSelectedText: true
+  };
+
+  // Text configuration
+  myTextsRoles: IMultiSelectTexts = {
+    checkAll: 'Select all',
+    uncheckAll: 'Unselect all',
+    checked: 'item selected',
+    checkedPlural: 'items selected',
+    searchPlaceholder: 'Find',
+    searchEmptyResult: 'Nothing found...',
+    searchNoRenderText: 'Type in search box to see results...',
+    defaultTitle: 'Select Role/s',
+    allSelected: 'All sected',
+  };
+
 
   ngOnInit(): void {
     this.getUsers();
@@ -77,9 +123,14 @@ export class ViewusersComponent implements OnInit {
   onChangeCompanies(e) {}
 
   applyFilter(e) {
-    const query = this.selectedCompanies?.length > 0 && {
+    const query = {
+      employeeLevel: {
+        $in: this.selectedRoles?.map(role => role) || null,
+      },
       $or: this.selectedCompanies?.map(company => ({ company })) || null,
     }
+    if(!query.employeeLevel?.$in || query.employeeLevel?.$in?.length == 0) delete query.employeeLevel;
+    if(!this.selectedCompanies || this.selectedCompanies?.length == 0) delete query.$or;
     this.getUsers(this.searchusername, query || null);
   }
 

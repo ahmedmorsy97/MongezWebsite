@@ -68,45 +68,45 @@
         </div>
 
         <div class="col-md-8">
-            <div *ngFor="let order of orders" class="card  mb-4 orders text-center">
-                <ngb-accordion #acc="ngbAccordion">
-                    <ngb-panel id="toggle-1" title="Order#: {{order.ordernumber}}">
-                        <ng-template ngbPanelContent>
-                            <div class="product">
+            <ng-container *ngFor="let order of orders">
+                <div class="card  mb-4 orders text-center">
+                    <ngb-accordion #acc="ngbAccordion">
+                        <ngb-panel id="toggle-1" title="Order#: {{order.ordernumber}}">
+                            <ng-template ngbPanelContent>
+                                <div class="product">
 
 
-                                <div *ngFor="let product of order.products" class="col-md-12">
-                                    <div class="row">
-                                        <div class="col-md-4 img-container">
-                                            <img src="/assets/images/nails.png" />
-                                        </div>
-                                        <div class="col-md-8">
-                                            <p class="card-text text-left text_link"
-                                                (click)="viewproduct(product.product._id)"><strong>Product
-                                                    Name:</strong> {{product.product.productName}}</p>
-                                            <p class="card-text text-left "><strong>Product Status:</strong>
-                                                {{product.status}}</p>
-                                            <p class="card-text text-left "><strong>Date Of Purchase:</strong>
-                                                {{product.dateOfPurchase}}</p>
-                                            <p class="card-text text-left text_link" style="text-underline"
-                                                (click)="viewsupplier(product.supplier._id)"><strong>Supplier:</strong>
-                                                {{product.supplier.firstname}} {{product.supplier.lastname}}</p>
+                                    <div *ngFor="let product of order.products" class="col-md-12">
+                                        <div class="row">
+                                            <div class="col-md-4 img-container">
+                                                <img src="/assets/images/nails.png" />
+                                            </div>
+                                            <div class="col-md-8">
+                                                <p class="card-text text-left text_link"
+                                                    (click)="viewproduct(product.product._id)"><strong>Product
+                                                        Name:</strong> {{product.product.productName}}</p>
+                                                <p class="card-text text-left "><strong>Product Status:</strong>
+                                                    {{product.status}}</p>
+                                                <p class="card-text text-left "><strong>Date Of Purchase:</strong>
+                                                    {{product.dateOfPurchase}}</p>
+                                                <p class="card-text text-left text_link" style="text-underline"
+                                                    (click)="viewsupplier(product.supplier._id)"><strong>Supplier:</strong>
+                                                    {{product.supplier.firstname}} {{product.supplier.lastname}}</p>
 
+                                            </div>
                                         </div>
                                     </div>
+
+
                                 </div>
+                            </ng-template>
+                        </ngb-panel>
 
+                    </ngb-accordion>
 
-                            </div>
-                        </ng-template>
-                    </ngb-panel>
-
-                </ngb-accordion>
-
+                </div>
                 <hr />
-
-            </div>
-
+            </ng-container>
         </div>
 
     </div>

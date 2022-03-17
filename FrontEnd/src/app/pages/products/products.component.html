@@ -38,7 +38,7 @@
 
             </div>
 
-            <div class="filter">
+            <div class="filter" *ngIf="suppliers?.length > 0">
                 <div (click)="togglefilter('supplier')" class="header d-flex align-items-center justify-content-between">
                     <h5>Supplier</h5>
                     <fa-icon *ngIf="filters.supplier" [icon]="faMinus"></fa-icon>

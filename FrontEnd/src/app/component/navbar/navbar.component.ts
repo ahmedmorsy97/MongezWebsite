@@ -324,26 +324,24 @@ export class NavbarComponent implements OnInit {
           routerLink: ['/about'],
           position: SimpleSidebarPosition.top
         },
-
-        {
-          name: 'View Users',
-          icon: 'las la-users',
-          routerLink: ['/viewusers'],
-          position: SimpleSidebarPosition.top
-        },
-        {
-          name: 'View Suppliers',
-          icon: 'las la-users',
-          routerLink: ['/viewsuppliers'],
-          position: SimpleSidebarPosition.top
-        },
-        {
-          name: 'View Companies',
-          icon: 'las la-building',
-          routerLink: ['/viewcompanies'],
-          position: SimpleSidebarPosition.top
-        },
-
+        // {
+        //   name: 'View Users',
+        //   icon: 'las la-users',
+        //   routerLink: ['/viewusers'],
+        //   position: SimpleSidebarPosition.top
+        // },
+        // {
+        //   name: 'View Suppliers',
+        //   icon: 'las la-users',
+        //   routerLink: ['/viewsuppliers'],
+        //   position: SimpleSidebarPosition.top
+        // },
+        // {
+        //   name: 'View Companies',
+        //   icon: 'las la-building',
+        //   routerLink: ['/viewcompanies'],
+        //   position: SimpleSidebarPosition.top
+        // },
         {
           name: 'Create Product',
           icon: 'las la-plus-circle',

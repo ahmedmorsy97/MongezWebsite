@@ -77,55 +77,55 @@
         </div>
 
         <div class="col-md-8">
-            <div *ngFor="let order of orders" class="card  mb-4 orders text-center">
-                <ngb-accordion #acc="ngbAccordion">
-                    <ngb-panel id="toggle-1" title="Order#: {{order.ordernumber}}">
-                        <ng-template ngbPanelContent>
-                            <div class="product">
+            <ng-container *ngFor="let order of orders">
+                <div class="card  mb-4 orders text-center">
+                    <ngb-accordion #acc="ngbAccordion">
+                        <ngb-panel id="toggle-1" title="Order#: {{order.ordernumber}}">
+                            <ng-template ngbPanelContent>
+                                <div class="product">
 
 
-                                <div *ngFor="let product of order.products" class="col-md-12">
-                                    <div class="row">
-                                        <div class="col-md-4 img-container">
-                                            <img src="/assets/images/nails.png" />
-                                        </div>
-                                        <div class="col-md-8 text-left">
-                                            <p class="card-text text-left text_link"
-                                                (click)="viewproduct(product.product._id)"><strong>Product
-                                                    Name:</strong> {{product.product.productName}}</p>
-                                            <p class="card-text text-left "><strong>Product Status:</strong>
-                                                {{product.status}}</p>
-                                            <button (click)="changestatus('Confirmed',order._id,product.product._id)"
-                                                class=" btn btn-primary text-right mx-2"
-                                                *ngIf="product.status=='Pending'">Confirm Order</button>
-                                            <button (click)="changestatus('Cancelled',order._id,product.product._id)"
-                                                class=" btn btn-primary text-right mx-2"
-                                                *ngIf="product.status=='Pending'">Cancel Order</button>
-                                            <button (click)="changestatus('On Delivery',order._id,product.product._id)"
-                                                class=" btn btn-primary text-right "
-                                                *ngIf="product.status=='Confirmed'">On Delivery</button>
-                                            <button (click)="changestatus('Delivered',order._id,product.product._id)"
-                                                class=" btn btn-primary text-right "
-                                                *ngIf="product.status=='On Delivery'">Delivered</button>
+                                    <div *ngFor="let product of order.products" class="col-md-12">
+                                        <div class="row">
+                                            <div class="col-md-4 img-container">
+                                                <img src="/assets/images/nails.png" />
+                                            </div>
+                                            <div class="col-md-8 text-left">
+                                                <p class="card-text text-left text_link"
+                                                    (click)="viewproduct(product.product._id)"><strong>Product
+                                                        Name:</strong> {{product.product.productName}}</p>
+                                                <p class="card-text text-left "><strong>Product Status:</strong>
+                                                    {{product.status}}</p>
+                                                <button (click)="changestatus('Confirmed',order._id,product.product._id)"
+                                                    class=" btn btn-primary text-right mx-2"
+                                                    *ngIf="product.status=='Pending'">Confirm Order</button>
+                                                <button (click)="changestatus('Cancelled',order._id,product.product._id)"
+                                                    class=" btn btn-primary text-right mx-2"
+                                                    *ngIf="product.status=='Pending'">Cancel Order</button>
+                                                <button (click)="changestatus('On Delivery',order._id,product.product._id)"
+                                                    class=" btn btn-primary text-right "
+                                                    *ngIf="product.status=='Confirmed'">On Delivery</button>
+                                                <button (click)="changestatus('Delivered',order._id,product.product._id)"
+                                                    class=" btn btn-primary text-right "
+                                                    *ngIf="product.status=='On Delivery'">Delivered</button>
 
 
-                                            <p class="card-text text-left "><strong>Date Of Purchase:</strong>
-                                                {{product.dateOfPurchase}}</p>
-                                            <p class="card-text text-left text_link" (click)="viewuser(order.user._id)"><strong>User:</strong> {{order.user.firstname}} {{order.user.lastname}}</p>
+                                                <p class="card-text text-left "><strong>Date Of Purchase:</strong>
+                                                    {{product.dateOfPurchase}}</p>
+                                                <p class="card-text text-left text_link" (click)="viewuser(order.user._id)"><strong>User:</strong> {{order.user.firstname}} {{order.user.lastname}}</p>
 
+                                            </div>
                                         </div>
                                     </div>
+
+
                                 </div>
+                            </ng-template>
+                        </ngb-panel>
 
-
-                            </div>
-                        </ng-template>
-                    </ngb-panel>
-
-                </ngb-accordion>
-
+                    </ngb-accordion>
+                </div>
                 <hr />
-
-            </div>
+            </ng-container>
 
         </div>

@@ -104,7 +104,6 @@ export class ProductsComponent implements OnInit {
       this.subcategory = url[2];
     }
 
-    this.getSuppliers();
     this.getProducts();
     this.ActiveRoute.queryParams.subscribe(res => {
       // console.log(res)
@@ -120,18 +119,21 @@ export class ProductsComponent implements OnInit {
         this.type = localStorage.getItem("type");
       }
     )
+    this.getSuppliers();
   }
 
   getSuppliers() {
-    this.SupplierSer.getSuppliers(null).subscribe(
-      (res: any) => {
-        // console.log(res);
-        this.suppliers = res?.map?.(el => ({
-          id: el._id,
-          name: `${el.firstname} ${el.lastname}`
-        }))
-      }
-    )
+    if(this.user) {
+      this.SupplierSer.getSuppliers(null).subscribe(
+        (res: any) => {
+          // console.log(res);
+          this.suppliers = res?.map?.(el => ({
+            id: el._id,
+            name: `${el.firstname} ${el.lastname}`
+          }))
+        }
+      )
+    }
   }
 
   applyFilter() {
