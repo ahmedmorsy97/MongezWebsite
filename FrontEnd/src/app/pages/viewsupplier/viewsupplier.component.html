@@ -1,4 +1,4 @@
-<div class="container">
+<div class="container pb-5">
     <div class="row">
         <div class=" img-container  col-md-2 mb-5">
             <img src="/assets/images/supplier.jpg" alt="Avatar">
@@ -23,26 +23,25 @@
             <label>Address</label>
             <input class="mb-2" type="text" value={{Supplier.address}} readonly />
 
-
             <label>Mobile Number </label>
             <input class="mb-2" type="tel" value={{Supplier.mobileNumber}} readonly />
 
-            <label>Date Of Birth</label>
-            <input class="mb-2" type="date" value={{Supplier.dateOfBirth}} readonly/>
+            <label *ngIf="loggedinuser?.employeeLevel == 'Admin' || viewedit == true">Date Of Birth</label>
+            <input *ngIf="loggedinuser?.employeeLevel == 'Admin' || viewedit == true" class="mb-2" type="date" value={{Supplier.dateOfBirth}} readonly/>
 
-            <label>National ID</label>
-            <input class="mb-2" type="text" value={{Supplier.nationalID}} readonly />
+            <label *ngIf="loggedinuser?.employeeLevel == 'Admin' || viewedit == true">National ID</label>
+            <input *ngIf="loggedinuser?.employeeLevel == 'Admin' || viewedit == true" class="mb-2" type="text" value={{Supplier.nationalID}} readonly />
 
             <label>Company Name</label>
             <input class="mb-2" type="text" value={{Supplier.companyName}} readonly />
 
 
-            <label>Tax Number</label>
-            <input class="mb-2" type="text" value={{Supplier.taxNumber}} readonly />
+            <label *ngIf="loggedinuser?.employeeLevel == 'Admin' || viewedit == true">Tax Number</label>
+            <input *ngIf="loggedinuser?.employeeLevel == 'Admin' || viewedit == true" class="mb-2" type="text" value={{Supplier.taxNumber}} readonly />
 
-            <!-- HOW?? -->
-            <label>Official Documents</label>
-            <input class="mb-2" type="text" placeholder="Official Documents" />
+            <label *ngIf="loggedinuser?.employeeLevel == 'Admin' || viewedit == true">Official Documents</label>
+            <input *ngIf="loggedinuser?.employeeLevel == 'Admin' || viewedit == true" class="mb-2" type="text" placeholder="Official Documents" readonly />
+
             <button *ngIf="viewedit==true" (click)="saveInfo()" class="btn btn-primary w-100 mt-4">Edit Info</button>
         </div>
 

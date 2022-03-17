@@ -13,68 +13,68 @@
 
     <div class="row">
         <div class="col-md-4 filter">
-            <div (click)="togglefilter('user')" class="header d-flex align-items-center justify-content-between mb-4">
-                <h5>User</h5>
-                <fa-icon *ngIf="filters.user" [icon]="faMinus"></fa-icon>
-                <fa-icon *ngIf="!filters.user" [icon]="faPlus"></fa-icon>
-            </div>
-            <div *ngIf="filters.user" class="mb-4">
-
-                <ngx-bootstrap-multiselect [options]="users" [texts]="myTexts" [settings]="mySettings" [(ngModel)]="optionsModel"></ngx-bootstrap-multiselect>
-            </div>
-
-            <div (click)="togglefilter('purchasedate')" class="header d-flex align-items-center justify-content-between mb-4">
-
+            <div (click)="togglefilter('purchasedate')"
+                class="header d-flex align-items-center justify-content-between mb-2">
                 <h5>Purchase Date</h5>
                 <fa-icon *ngIf="filters.purchasedate" [icon]="faMinus"></fa-icon>
                 <fa-icon *ngIf="!filters.purchasedate" [icon]="faPlus"></fa-icon>
-                <div *ngIf="filters.purchasedate" class="mt-4 mb-2">
-                    <label>From</label>
-                    <input class="mb-2" type="date" placeholder="From" />
-
-                    <label>To</label>
-                    <input class="mb-2" type="date" placeholder="To" />
+            </div>
+            <div *ngIf="filters.purchasedate" class="mb-4 flex-col">
+                <div class="d-flex align-items-center justify-content-between">
+                    <label class="mr-2">From</label>
+                    <input class="mb-2" type="date" placeholder="From" [(ngModel)]="filterData.date.from" />
+                </div>
+                <div class="d-flex align-items-center justify-content-between">
+                    <label class="mr-2">To</label>
+                    <input class="mb-2" type="date" placeholder="To" [(ngModel)]="filterData.date.to" />
                 </div>
             </div>
 
-            <div (click)="togglefilter('category')" class="header d-flex align-items-center justify-content-between mb-4">
-                <h5>Category</h5>
-                <fa-icon *ngIf="filters.category" [icon]="faMinus"></fa-icon>
-                <fa-icon *ngIf="!filters.category" [icon]="faPlus"></fa-icon>
+            <div (click)="togglefilter('product')"
+                class="header d-flex align-items-center justify-content-between mb-2">
+                <h5>Product</h5>
+                <fa-icon *ngIf="filters.product" [icon]="faMinus"></fa-icon>
+                <fa-icon *ngIf="!filters.product" [icon]="faPlus"></fa-icon>
             </div>
-            <div *ngIf="filters.category" class="info">
-
-                <ngx-bootstrap-multiselect [options]="categories" [texts]="myTexts" [settings]="mySettings" [(ngModel)]="optionsModel"></ngx-bootstrap-multiselect>
+            <div *ngIf="filters.product" class="info mb-4">
+                <ngx-bootstrap-multiselect [options]="products" [texts]="myTexts" [settings]="mySettings"
+                    [(ngModel)]="filterData.products"></ngx-bootstrap-multiselect>
             </div>
-            <div (click)="togglefilter('status')" class="header d-flex align-items-center justify-content-between mb-4">
+            <div (click)="togglefilter('status')" class="header d-flex align-items-center justify-content-between mb-2">
                 <h5>Status</h5>
-                <fa-icon *ngIf="filters.category" [icon]="faMinus"></fa-icon>
-                <fa-icon *ngIf="!filters.category" [icon]="faPlus"></fa-icon>
+                <fa-icon *ngIf="filters.status" [icon]="faMinus"></fa-icon>
+                <fa-icon *ngIf="!filters.status" [icon]="faPlus"></fa-icon>
             </div>
-            <div *ngIf="filters.status" class="mb-2">
-                <div class="mb-4">
-                    <input class="form-check-input " type="checkbox" value="" id="Ondelivery">
-                    <label class="form-check-label" for="Ondelivery">
-                      On Delivery
-                    </label>
+            <div *ngIf="filters.status" class="mb-2 pl-4">
+                <div class="mb-2">
+                    <input class="form-check-input " type="checkbox" value="" id="pending"
+                        [(ngModel)]="filterData.status.Pending">
+                    <label class="form-check-label" for="pending"> Pending </label>
                 </div>
-                <div class="mb-4">
-                    <input class="form-check-input" type="checkbox" value="" id="Delivered">
-                    <label class="form-check-label" for="Delivered">
-                          Delivered
-                        </label>
+                <div class="mb-2">
+                    <input class="form-check-input " type="checkbox" value="" id="Ondelivery"
+                        [(ngModel)]="filterData.status['On Delivery']">
+                    <label class="form-check-label" for="Ondelivery"> On Delivery </label>
                 </div>
-                <div class="mb-4">
-                    <input class="form-check-input" type="checkbox" value="" id="Cancelled">
-                    <label class="form-check-label" for="Cancelled">
-                              Cancelled
-                            </label>
+                <div class="mb-2">
+                    <input class="form-check-input" type="checkbox" value="" id="Delivered"
+                        [(ngModel)]="filterData.status.Delivered">
+                    <label class="form-check-label" for="Delivered"> Delivered </label>
+                </div>
+                <div class="mb-2">
+                    <input class="form-check-input" type="checkbox" value="" id="Cancelled"
+                        [(ngModel)]="filterData.status.Cancelled">
+                    <label class="form-check-label" for="Cancelled"> Cancelled </label>
+                </div>
+                <div class="mb-2">
+                    <input class="form-check-input" type="checkbox" value="" id="Confirmed"
+                        [(ngModel)]="filterData.status.Confirmed">
+                    <label class="form-check-label" for="Confirmed"> Confirmed </label>
                 </div>
             </div>
-            <button class="btn btn-primary w-100 mt-4">Apply Filter</button>
-            <button class="btn btn-primary w-100 mt-3">Clear Filter</button>
+            <button class="btn btn-primary w-100 mt-4" (click)="applyFilter()">Apply Filter</button>
+            <button class="btn btn-primary w-100 mt-3" (click)="clearFilter()">Clear Filter</button>
         </div>
-
 
         <div class="col-md-8">
             <div *ngFor="let order of orders" class="card  mb-4 orders text-center">
@@ -90,16 +90,28 @@
                                             <img src="/assets/images/nails.png" />
                                         </div>
                                         <div class="col-md-8 text-left">
-                                            <p class="card-text text-left text_link" (click)="viewproduct(product.product._id)"><strong>Product Name:</strong> {{product.product.productName}}</p>
-                                            <p class="card-text text-left "><strong>Product Status:</strong> {{product.status}}</p>
-                                            <button (click)="changestatus('Confirmed',order._id,product.product._id)" class=" btn btn-primary text-right mx-2" *ngIf="product.status=='Pending'">Confirm Order</button>
-                                            <button (click)="changestatus('Cancelled',order._id,product.product._id)" class=" btn btn-primary text-right mx-2" *ngIf="product.status=='Pending'">Cancel Order</button>
-                                            <button (click)="changestatus('On Delivery',order._id,product.product._id)" class=" btn btn-primary text-right " *ngIf="product.status=='Confirmed'">On Delivery</button>
-                                            <button (click)="changestatus('Delivered',order._id,product.product._id)" class=" btn btn-primary text-right " *ngIf="product.status=='On Delivery'">Delivered</button>
+                                            <p class="card-text text-left text_link"
+                                                (click)="viewproduct(product.product._id)"><strong>Product
+                                                    Name:</strong> {{product.product.productName}}</p>
+                                            <p class="card-text text-left "><strong>Product Status:</strong>
+                                                {{product.status}}</p>
+                                            <button (click)="changestatus('Confirmed',order._id,product.product._id)"
+                                                class=" btn btn-primary text-right mx-2"
+                                                *ngIf="product.status=='Pending'">Confirm Order</button>
+                                            <button (click)="changestatus('Cancelled',order._id,product.product._id)"
+                                                class=" btn btn-primary text-right mx-2"
+                                                *ngIf="product.status=='Pending'">Cancel Order</button>
+                                            <button (click)="changestatus('On Delivery',order._id,product.product._id)"
+                                                class=" btn btn-primary text-right "
+                                                *ngIf="product.status=='Confirmed'">On Delivery</button>
+                                            <button (click)="changestatus('Delivered',order._id,product.product._id)"
+                                                class=" btn btn-primary text-right "
+                                                *ngIf="product.status=='On Delivery'">Delivered</button>
 
 
-                                            <p class="card-text text-left "><strong>Date Of Purchase:</strong> {{product.dateOfPurchase}}</p>
-                                            <p class="card-text text-left text_link" style="text-underline" (click)="viewuser(order.user._id)"><strong>User:</strong> {{order.user.firstname}} {{order.user.lastname}}</p>
+                                            <p class="card-text text-left "><strong>Date Of Purchase:</strong>
+                                                {{product.dateOfPurchase}}</p>
+                                            <p class="card-text text-left text_link" (click)="viewuser(order.user._id)"><strong>User:</strong> {{order.user.firstname}} {{order.user.lastname}}</p>
 
                                         </div>
                                     </div>
@@ -112,7 +124,7 @@
 
                 </ngb-accordion>
 
-                <hr/>
+                <hr />
 
             </div>
 

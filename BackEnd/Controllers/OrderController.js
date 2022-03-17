@@ -56,8 +56,8 @@ router.patch("/changeorderinfo", authenticatesupplier, (req, res) => {
 
 
 router.get("/myordersemployee", authenticateuser, (req, res) => {
-
-    Order.find({ user: req.user._id }).populate({ path: "products.product", select: "productName _id photolinks specs description" }).populate({ path: "products.supplier", select: "firstname lastname _id" }).exec((err, orders) => {
+    const query = req.query.query ? req.query.query: '{}';
+    Order.find({ user: req.user._id, ...(JSON.parse(query)) }).populate({ path: "products.product", select: "productName _id photolinks specs description" }).populate({ path: "products.supplier", select: "firstname lastname _id" }).exec((err, orders) => {
 
             if (err) {
                 res.status(400).send({
@@ -77,25 +77,25 @@ router.get("/myordersemployee", authenticateuser, (req, res) => {
         //     });
 })
 router.get("/myorderssupplier", authenticatesupplier, (req, res) => { //NOT TESTED
-        Order.find({ "products.supplier": req.supplier._id }).populate({ path: "products.product", select: "productName _id photolinks specs description" }).populate({ path: "user", select: "firstname lastname _id" }).exec((err, orders) => {
-            if (err) {
-                res.status(400).send({
-                    err: err.message ? err.message : err,
-                });
-            } else {
-                const supplierorder = JSON.parse(JSON.stringify(orders)).map(order => {
-                    // console.log(order)
-                    // console.log(order.products.filter(product => product.supplier == req.supplier._id))
-                    return {
-                        ...order,
-                        products: order.products.filter(product => product.supplier == req.supplier._id)
-                    }
-                })
-                console.log(supplierorder)
-                res.status(200).send(supplierorder)
-            }
+    const query = req.query.query ? req.query.query: '{}';
+    Order.find({ "products.supplier": req.supplier._id, ...(JSON.parse(query))}).populate({ path: "products.product", select: "productName _id photolinks specs description" }).populate({ path: "user", select: "firstname lastname _id" }).exec((err, orders) => {
+        if (err) {
+            res.status(400).send({
+                err: err.message ? err.message : err,
+            });
+        } else {
+            const supplierorder = JSON.parse(JSON.stringify(orders)).map(order => {
+                // console.log(order)
+                // console.log(order.products.filter(product => product.supplier == req.supplier._id))
+                return {
+                 ...order,
+                 products: order.products.filter(product => product.supplier == req.supplier._id)
+                }
+            })
+            // console.log(supplierorder)
+            res.status(200).send(supplierorder)
+        }
         })
-
     })
     // .catch((err) => {
     //     res.status(400).send({

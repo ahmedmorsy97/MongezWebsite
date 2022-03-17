@@ -27,7 +27,7 @@ export class CreatecompanyadminComponent implements OnInit {
   
     ngOnInit(): void {
     this.companyServ.getCompanies().subscribe((res:any)=>{
-      console.log(res);
+      // console.log(res);
       this.companies = res;
     });
     }
@@ -35,7 +35,7 @@ export class CreatecompanyadminComponent implements OnInit {
   createUser(){
     this.UserServ.createCompanyAdmin(this.firstname,this.lastname,this.username,this.email,this.password,this.mobileNumber,this.dateOfBirth,this.nationalID,"CompanyAdmin",this.image,this.company).subscribe(
       (res: any) => {
-      console.log(res)
+      // console.log(res)
       this.router.navigateByUrl('')
       }, err => {
         this.err = err?.error?.err || "Something went wrong";

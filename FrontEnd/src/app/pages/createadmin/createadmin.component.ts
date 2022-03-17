@@ -27,7 +27,7 @@ export class CreateadminComponent implements OnInit {
   createUser(){
     this.UserServ.createAdmin(this.firstname,this.lastname,this.username,this.email,this.password,this.mobileNumber,this.dateOfBirth,this.nationalID,"Admin",this.image).subscribe(
       (res: any) => {
-      console.log(res)
+      // console.log(res)
       this.router.navigateByUrl('')
       }, err => {
         this.err = err?.error?.err || "Something went wrong";

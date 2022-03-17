@@ -7,8 +7,8 @@
         <h5>
             Save time and money with Mongez’s online store and fast delivery
         </h5>
-        <div class="mt-5 mb-5 pt-5">
-            <button *ngIf="user!=null && type=='user' " (click)="GoToProducts()" class="btn btn-primary btn-lg mt-5">Shop Now</button>
+        <div class="mt-5 mb-5 pt-5" *ngIf="type != 'supplier'">
+            <button (click)="GoToProducts()" class="btn btn-primary btn-lg mt-5">Shop Now</button>
         </div>
     </div>
     <div class="col-md-5">
@@ -16,8 +16,8 @@
 
     </div>
 </div>
-<div class="container">
-    <div  *ngIf="user!=null && type=='user' " class="categories mt-5 text-center">
+<div class="container" *ngIf="type != 'supplier'">
+    <div class="categories mt-5 text-center">
         <h3>
             Order in Minutes & Get Same-Day Delivery
         </h3>
@@ -32,10 +32,10 @@
         </p>
         <app-categories [categories]="categories"></app-categories>
         <div class="mb-5">
-            <button *ngIf="user!=null && type=='user' " (click)="GoToProducts()" class=" btn btn-primary btn-lg">Shop Now</button>
+            <button (click)="GoToProducts()" class=" btn btn-primary btn-lg">Shop Now</button>
         </div>
     </div>
-    <div  *ngIf="user!=null && type=='user' " class=" row bigdeals">
+    <div class="row bigdeals" *ngIf="type != 'supplier'">
         <div class="col-md-7">
             <div class="mt-5 ml-5">
                 <h1>
@@ -45,7 +45,7 @@
                 <h5>
                     No matter the size of your projects, our expert team has you covered, without the expensive price tag.
                 </h5>
-                <button  *ngIf="user!=null && type=='user' " class="btn btn-primary btn-lg mt-5">Create Bid</button>
+                <button class="btn btn-primary btn-lg mt-5" [disabled]="true">Create Bid (Comming Soon)</button>
             </div>
         </div>
         <div class="col-md-5 ">

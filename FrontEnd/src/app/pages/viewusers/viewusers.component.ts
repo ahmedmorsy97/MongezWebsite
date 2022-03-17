@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { faSearch } from '@fortawesome/free-solid-svg-icons';
+import { IMultiSelectOption, IMultiSelectSettings, IMultiSelectTexts } from 'ngx-bootstrap-multiselect';
 import { BsModalService } from 'ngx-bootstrap/modal';
+import { CompanyService } from 'src/app/services/company/company.service';
 import { UserService } from 'src/app/services/user/user.service';
 import { EditusermoneyComponent } from '../editusermoney/editusermoney.component';
 
@@ -13,20 +15,79 @@ import { EditusermoneyComponent } from '../editusermoney/editusermoney.component
 export class ViewusersComponent implements OnInit {
   faSearch = faSearch;
   users: any = [];
-  signedinuser: any
-  searchusername = ""
-  constructor(private router: Router, private activerouter: ActivatedRoute, private UserSer: UserService, private modalService: BsModalService) {
+  signedinuser: any;
+  searchusername = "";
+  
+  companies: IMultiSelectOption[];
+  selectedCompanies: any = null;
 
+  constructor(
+    private router: Router, 
+    private UserSer: UserService, 
+    private CompanySer: CompanyService, 
+    private modalService: BsModalService,
+    private activerouter: ActivatedRoute, 
+  ) {
   }
+
+  // Settings configuration
+  mySettings: IMultiSelectSettings = {
+    enableSearch: true,
+    showCheckAll: true,
+    showUncheckAll: true,
+    maintainSelectionOrderInTitle: true,
+    checkedStyle: 'fontawesome',
+    buttonClasses: 'btn btn-primary',
+    dynamicTitleMaxItems: 3,
+    displayAllSelectedText: true
+  };
+
+  // Text configuration
+  myTexts: IMultiSelectTexts = {
+    checkAll: 'Select all',
+    uncheckAll: 'Unselect all',
+    checked: 'item selected',
+    checkedPlural: 'items selected',
+    searchPlaceholder: 'Find',
+    searchEmptyResult: 'Nothing found...',
+    searchNoRenderText: 'Type in search box to see results...',
+    defaultTitle: 'Select Company/ies',
+    allSelected: 'All sected',
+  };
+
+
   ngOnInit(): void {
     this.getUsers();
-    this.signedinuser = JSON.parse(localStorage.getItem("currentuser")).user
-    console.log(this.signedinuser.employeeLevel)
+    this.getCompanies();
+    this.signedinuser = JSON.parse(localStorage.getItem("currentuser")).user;
+    // console.log(this.signedinuser.employeeLevel)
   }
-  getUsers(search = null) {
-    this.signedinuser = JSON.parse(localStorage.getItem("currentuser")).user
-    if (this.signedinuser.employeeLevel == 'Admin') {
-      this.UserSer.getallUsers(search).subscribe(
+
+  getCompanies() {
+    this.CompanySer.getCompanies(null).subscribe(
+      (res: any) => {
+        this.companies = res?.map?.(el => ({
+          id: el._id,
+          name: `${el.name}`
+        }))
+      }
+    )
+  }
+
+  onChangeCompanies(e) {}
+
+  applyFilter(e) {
+    const query = this.selectedCompanies?.length > 0 && {
+      $or: this.selectedCompanies?.map(company => ({ company })) || null,
+    }
+    this.getUsers(this.searchusername, query || null);
+  }
+
+  getUsers(search = null, query = null) {
+    this.signedinuser = JSON.parse(localStorage.getItem("currentuser")).user;
+    
+    if (this.signedinuser?.employeeLevel == 'Admin') {
+      this.UserSer.getallUsers(search, query).subscribe(
         (res: any) => {
           this.users = res;
         }

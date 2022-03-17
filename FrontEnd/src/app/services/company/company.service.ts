@@ -31,31 +31,18 @@ export class CompanyService {
   }
 
   updateInfo( id,name,email,address,companyNumber,taxNumber){
-    const url = `${this.baseUrl}/updateCompany/`+id;
-    this.company= this.http.get(this.baseUrl+'/viewcompany/'+id);
-    if(name=="")
-    name = this.company.name;
-    if(email=="")
-    email = this.company.email;
-    if(address=="")
-    address = this.company.address;
-    if(companyNumber=="")
-    companyNumber = this.company.companynumber;
-    if(taxNumber=="")
-    taxNumber = this.company.taxNumber;
-    // if(logo=="")
-    // logo = this.company.logo;
-
-    return this.http.patch(url, {
+    const url = `${this.baseUrl}/updatebyCompanyadmin`;
+    const info = {
       name,
       email,
       address,
       companyNumber,
-      taxNumber,
-      // logo,
-    
-    });
+      taxNumber
+    }
+    Object.keys(info).forEach(el => {
+      if(!info[el] || info[el]?.trim?.()?.length == 0) delete info[el];
+    })
 
-
+    return this.http.patch(url, info);
   }
 }

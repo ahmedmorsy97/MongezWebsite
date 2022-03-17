@@ -56,11 +56,11 @@ const companySchema = new mongoose.Schema({
         type: Boolean,
         default: true
     },
-    TaxNumber: {
+    taxNumber: {
         type: String,
         required: false
     },
-    OfficialDocuments: {
+    officialDocuments: {
         type: String,
         required: false
     },

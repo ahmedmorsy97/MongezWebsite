@@ -1,4 +1,4 @@
-<div class="container">
+<div class="container pb-5">
     <div class="row">
         <div class=" img-container  col-md-2 mb-5">
             <img src="/assets/images/orascom.png" alt="Avatar">
@@ -16,14 +16,13 @@
             <label>Address</label>
             <input class="mb-2" type="text" value={{Company.address}} readonly />
 
-            <label>Company Number</label>
-            <input class="mb-2" type="tel" value={{Company.companyNumber}} readonly />
+            <label *ngIf="loggedinuser?.employeeLevel == 'Admin' || (!supplier && loggedinuser.company == Company?._id)">Company Number</label>
+            <input *ngIf="loggedinuser?.employeeLevel == 'Admin' || (!supplier && loggedinuser.company == Company?._id)" class="mb-2" type="tel" value={{Company.companyNumber}} readonly />
 
-            <label>Tax Number</label>
-            <input class="mb-2" type="text" value={{Company.TaxNumber}} readonly />
+            <label *ngIf="loggedinuser?.employeeLevel == 'Admin' || (!supplier && loggedinuser.company == Company?._id)">Tax Number</label>
+            <input *ngIf="loggedinuser?.employeeLevel == 'Admin' || (!supplier && loggedinuser.company == Company?._id)" class="mb-2" type="text" value={{Company.taxNumber}} readonly />
 
-
-            <button (click)="saveInfo()" class="btn btn-primary w-100 mt-4">Edit Info</button>
+            <button *ngIf="(!supplier && loggedinuser?.employeeLevel == 'CompanyAdmin' && loggedinuser.company == Company?._id)" (click)="saveInfo()" class="btn btn-primary w-100 mt-4">Edit Info</button>
         </div>
 
         <div *ngIf="Company!=null && edit==true">
@@ -40,7 +39,7 @@
             <input class="mb-2" type="tel" placeholder={{Company.companyNumber}} name="companyNumber" [(ngModel)]="companyNumber" />
 
             <label>Tax Number</label>
-            <input class="mb-2" type="text" placeholder={{Company.TaxNumber}} name="taxNumber" [(ngModel)]="taxNumber" />
+            <input class="mb-2" type="text" placeholder={{Company.taxNumber}} name="taxNumber" [(ngModel)]="taxNumber" />
 
 
             <button (click)="saveInfo(2)" class="btn btn-primary w-100 mt-4">Update Info</button>

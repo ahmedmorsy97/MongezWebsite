@@ -21,9 +21,9 @@ this.getCompanies()
   getCompanies(search=null){
     this.CompanySer.getCompanies(search).subscribe(
       (res:any) => {
-        console.log(res);
         this.companies = res;
-        console.log("USERS",this.companies)
+        // console.log(res);
+        // console.log("USERS",this.companies)
       }
     )
   

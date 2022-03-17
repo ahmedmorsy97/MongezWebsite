@@ -58,7 +58,7 @@ router.get('/viewcompany/:company_id', authenticateuser, (req, res) => {
 })
 
 router.patch('/updatebyCompanyadmin', authenticateCompanyadmin, (req, res) => {
-    Company.findOneAndUpdate({ admins: { $in: req.user._id } }, { $set: req.body }, { new: true }).then(updatedcompany => res.status(200).send({ company: updatedcompany }))
+    Company.findOneAndUpdate({ _id: req.user.company }, { $set: req.body }, { new: true }).then(updatedcompany => res.status(200).send({ company: updatedcompany }))
 })
 router.patch('blockcompany/:company_id', authenticateadmin, (req, res) => {
     Company.findOneAndUpdate({ _id: req.params.company_id }, { $set: { blocked: true } }, { new: true }).then(updateduser => res.status(200).send({ updateduser: updateduser }))

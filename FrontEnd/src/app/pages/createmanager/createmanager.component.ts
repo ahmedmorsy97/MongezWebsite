@@ -28,7 +28,7 @@ export class CreatemanagerComponent implements OnInit {
   createUser(){
     this.UserServ.createManager(this.firstname,this.lastname,this.username,this.email,this.password,this.mobileNumber,this.dateOfBirth,this.nationalID,"Manager",this.image).subscribe(
       (res: any) => {
-      console.log(res)
+      // console.log(res)
       this.router.navigateByUrl('')
       }, err => {
         this.err = err?.error?.err || "Something went wrong";

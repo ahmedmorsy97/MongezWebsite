@@ -11,44 +11,47 @@ import { ProductsService } from 'src/app/services/product/products.service';
   styleUrls: ['./viewmyproducts.component.scss']
 })
 export class ViewmyproductsComponent implements OnInit {
-  products :any=[]
+  products: any = []
   faSearch = faSearch;
-  supplier:any
-  constructor(private router: Router,private activerouter: ActivatedRoute, private ProductSer: ProductsService, private ModalServ:BsModalService) { }
+  supplier: any
+  constructor(private router: Router, private activerouter: ActivatedRoute, private ProductSer: ProductsService, private ModalServ: BsModalService) { }
 
   ngOnInit(): void {
-    this.activerouter.paramMap.subscribe((res:any)=>{
-      console.log(res)
-    this.getmyProducts();
+    this.activerouter.paramMap.subscribe((res: any) => {
+      // console.log(res)
+      this.getmyProducts();
 
     })
   }
-  getmyProducts(){
+  getmyProducts() {
     this.ProductSer.getmyProducts().subscribe(
-      (res:any) => {
-        console.log(res);
+      (res: any) => {
+        // console.log(res);
         this.products = res;
-        console.log("Products",this.products)
+        // console.log("Products", this.products)
       }
     )
-  
-  
+
+
   }
-  viewProduct(id:string){
-    this.router.navigateByUrl('/viewproduct/'+id+"")
-   
+  viewProduct(id: string) {
+    this.router.navigateByUrl('/viewproduct/' + id + "")
+
   }
 
-  deleteProduct(id){
-    this.ProductSer.removeproduct(id).subscribe(res=>{
+  deleteProduct(id) {
+    this.ProductSer.removeproduct(id).subscribe(res => {
       alert("Product Successfully Deleted")
       this.getmyProducts();
     })
   }
-  restock(id){
-    this.ModalServ.show(RestockComponent,{initialState:{
-      id
-    }}).content.sucess.subscribe(res=>{
+  restock(id, stocknumber) {
+    this.ModalServ.show(RestockComponent, {
+      initialState: {
+        id,
+        stocknumber
+      }
+    }).content.sucess.subscribe(res => {
       alert("Product Restocked Successfully")
       this.getmyProducts();
     })

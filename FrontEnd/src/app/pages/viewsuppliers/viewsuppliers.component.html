@@ -16,22 +16,15 @@
     <div *ngFor="let supplier of suppliers" (click)="viewSupplier(supplier._id)" class="card mb-2">
         <div class="card-body ">
             <div class="row">
-                <div class="img-container col-md-4">
+                <div class="img-container col-md-3">
                     <img src="/assets/images/employee.jpg" alt="Avatar">
                 </div>
-                <div class="info  col-md-8">
+                <div class="info col-md-9">
                     <h5 class="card-title">Name: {{supplier.firstname}} {{supplier.lastname}}</h5>
                     <h5 class="card-title">Username: {{supplier.username}}</h5>
                     <h5 class="card-title">Email: {{supplier.email}}</h5>
                     <h5 class="card-title">Mobile Number: {{supplier.mobileNumber}}</h5>
-
                 </div>
             </div>
-
-
         </div>
-
-        <!-- </div> -->
-
-
     </div>

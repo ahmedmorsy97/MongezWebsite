@@ -18,8 +18,8 @@ export class ProductsService {
   }
   createProduct(supplier:any,productName,description,specs,priceRange,quantity,category,photoLinks,Subcategory){
     const url = `${this.baseUrl}/create`;
-    console.log("supplier")
-    console.log(supplier)
+    // console.log("supplier")
+    // console.log(supplier)
     return this.http.post(url, {
       supplier,
       productName,

@@ -13,10 +13,10 @@
 
                 <div *ngIf="filters.price" class="info">
                     <label>From</label>
-                    <input class="mb-2" type="number" placeholder="From Price" name="price_from" [(ngModel)]="filterData.price.from" />
+                    <input class="mb-2" type="number" placeholder="From Price" name="price_from" [(ngModel)]="filterData['priceRange.priceofRange'].from" />
 
                     <label>To</label>
-                    <input class="mb-2" type="number" placeholder="To Price" name="price_to" [(ngModel)]="filterData.price.to" />
+                    <input class="mb-2" type="number" placeholder="To Price" name="price_to" [(ngModel)]="filterData['priceRange.priceofRange'].to" />
 
                 </div>
 
@@ -47,7 +47,6 @@
                 <div *ngIf="filters.supplier" class="info">
                     <ngx-bootstrap-multiselect [options]="suppliers" [texts]="myTexts" [settings]="mySettings" name="suppliers" [(ngModel)]="filterData.supplier"></ngx-bootstrap-multiselect>
                 </div>
-
 
             </div>
 
@@ -97,7 +96,7 @@
                         <img src="/assets/images/nails.png" />
                     </div>
                     <div (click)="ViewProduct(product._id)">
-                        <h5 class=" card-title ">{{product.productName}}</h5>
+                        <h5 class="card-title ">{{product.productName}}</h5>
                         <h6 class="card-subtitle mb-2 text-muted ">{{product.specs}}</h6>
                         <p class="card-text "><b>{{getprice(product)}} EGP/Product</b></p>
                         <p class="card-text ">Rating</p>
@@ -107,7 +106,7 @@
                         <input type="number" min="1 " [max]="product.quanity" [(ngModel)]="product.customerquantity" />
                         <button (click)="incrementQuanity(product) " class=" plus ">  <fa-icon [icon]="faPlus "></fa-icon></button>
                     </div>
-                    <button (click)="addToCart(product) " class="btn btn-primary w-100 ">Add to cart</button>
+                    <button (click)="addToCart(product)"  *ngIf="user != null && type == 'user' && user?.user?.employeeLevel != 'Admin'" class="btn btn-primary w-100 ">Add to cart</button>
                 </div>
             </div>
 

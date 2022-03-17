@@ -23,7 +23,7 @@ export class CreatecompanyComponent implements OnInit {
   createCompany(){
     this.CompanyServ.createCompany(this.name,this.email,this.address,this.number,this.taxNumber,this.logo).subscribe(
       (res: any) => {
-      console.log(res)
+      // console.log(res)
       this.router.navigateByUrl('')
       }, err => {
         this.err = err?.error?.err || "Something went wrong";

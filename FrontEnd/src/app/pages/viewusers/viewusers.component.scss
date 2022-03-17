@@ -1,8 +1,13 @@
 .img-container {
     width: 100%;
     height: 100%;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
     img {
-        width: 50%;
+        width: 70%;
         border-radius: 50%;
         border-style: solid;
         border-width: 2px;
@@ -16,6 +21,7 @@
     input {
         border: none;
         align-self: center;
+        height: 100%;
     }
 }
 
@@ -66,6 +72,11 @@ button {
     }
 }
 
+button.btn-primary {
+    border-radius: 8px;
+    font-size: 16px;
+}
+
 input,
 select {
     width: 100%;
@@ -77,5 +88,16 @@ select {
         &.ng-invalid {
             border: 1px solid rgba(185, 40, 40, 0.384);
         }
+    }
+}
+
+.f_info {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    flex-wrap: wrap;
+
+    button {
+        margin: 10px 0;
     }
 }

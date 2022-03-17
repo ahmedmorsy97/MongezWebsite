@@ -120,6 +120,27 @@ router.post("/registermanager", authenticateCompanyadmin, (req, res) => {
 
 
 
+router.post("/register", (req, res) => {
+
+    var newuser = new User(); // create a new instance of the User model
+    newuser.username = req.body.username;
+    newuser.email = req.body.email;
+    newuser.mobileNumber = req.body.mobileNumber;
+    newuser.dateOfBirth = req.body.dateOfBirth;
+    newuser.firstname = req.body.firstname;
+    newuser.lastname = req.body.lastname;
+    newuser.password = req.body.password;
+    newuser.imageURL = req.body.imageURL;
+    newuser.nationalID = req.body.nationalID;
+    newuser.employeeLevel = "Admin";
+    newuser.createdBy = null;
+    newuser.save().then(user => res.status(200).send(user))
+        .catch((err) => {
+            res.status(400).send({
+                err: err.message ? err.message : err,
+            });
+        });
+})
 
 
 router.post("/registerAdmin", authenticateadmin, (req, res) => {
@@ -154,10 +175,12 @@ router.post("/logout", authenticateuser, (req, res) => {
     });
 })
 router.get('/allusers', authenticateuser, function(req, res) {
+    const query = req.query.query ? JSON.parse(req.query.query) : {};
     const filter = {
         $text: {
             $search: req.query.search
-        }
+        },
+        ...query
     };
     if (!req.query.search) delete filter.$text;
 

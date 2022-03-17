@@ -8,48 +8,58 @@ import { ActivatedRoute, Router } from '@angular/router';
   styleUrls: ['./viewcompany.component.scss']
 })
 export class ViewcompanyComponent implements OnInit {
-Company = {}
-edit = false;
-name = "";
-email = "";
-address = "";
-companynumber = "";
-taxNumber="";
-logo="";
-  constructor(private router: Router, private activerouter: ActivatedRoute,private CompanySer: CompanyService) { }
+  Company = {}
+  edit = false;
+  name = "";
+  email = "";
+  address = "";
+  companynumber = "";
+  taxNumber = "";
+  logo = "";
+  loggedinuser: any;
+  supplier: boolean = false;
+
+  constructor(
+    private router: Router, 
+    private activerouter: ActivatedRoute, 
+    private CompanySer: CompanyService
+  ) { }
 
   ngOnInit(): void {
-    this.activerouter.paramMap.subscribe((res:any)=>{
-      console.log(res)
-    this.getCompany(res.params.id);
+    this.loggedinuser = JSON.parse(localStorage.getItem("currentuser")).user;
+    if (this.loggedinuser == null) {
+      this.supplier = true;
+      this.loggedinuser = JSON.parse(localStorage.getItem("currentuser")).supplier
+    }
 
+    this.activerouter.paramMap.subscribe((res: any) => {
+      // console.log(res)
+      this.getCompany(res.params.id);
     })
   }
 
-  saveInfo(id){
+  saveInfo(id) {
     this.edit = !this.edit;
-    console.log(this.edit);
-    if(this.edit!=true){
+    // console.log(this.edit);
+    if (this.edit != true) {
 
-      this.activerouter.paramMap.subscribe((res:any)=>{
-        console.log(res)
-       this.CompanySer.updateInfo(res.params.id,this.name,this.email,this.address,this.companynumber,this.taxNumber).subscribe(
-        (res:any) => {
-            console.log(res);
+      this.activerouter.paramMap.subscribe((res: any) => {
+        // console.log(res)
+        this.CompanySer.updateInfo(res.params.id, this.name, this.email, this.address, this.companynumber, this.taxNumber).subscribe(
+          (res: any) => {
+            // console.log(res);
             this.Company = res;
             this.router.navigateByUrl('viewcompanies') // In implementation navigation goes to users page
-  
           }
-      )
-  
+        )
       })
     }
   }
 
   getCompany(id) {
     this.CompanySer.getCompany(id).subscribe(
-      (res:any) => {
-        console.log(res);
+      (res: any) => {
+        // console.log(res);
         this.Company = res;
       }
     )

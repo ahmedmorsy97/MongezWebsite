@@ -29,7 +29,7 @@ export class CreatesupplierComponent implements OnInit {
   createSupplier(){
     this.SupplierServ.createSupplier(this.firstname,this.lastname,this.username,this.email,this.password,this.mobileNumber,this.dateOfBirth,this.nationalID,this.companyName,this.taxNumber,this.image,this.address).subscribe(
       (res: any) => {
-      console.log(res)
+      // console.log(res)
       this.router.navigateByUrl('')
       }, err => {
         this.err = err?.error?.err || "Something went wrong";

@@ -21,7 +21,7 @@ export class SupplierService {
 
 
   createSupplier(firstname,lastname,username,email,password,mobileNumber,dateOfBirth,nationalID,companyName,taxNumber,image,address){
-    const url = `${this.baseUrl}/registerSupplier`;
+    const url = `${this.baseUrl}/register`;
     return this.http.post(url, {
       firstname,
       lastname,
@@ -68,8 +68,8 @@ export class SupplierService {
     
     });
   }
-  getmyorders(){
-    const url = `${this.baseorderUrl}/myorderssupplier`;
+  getmyorders(query = null){
+    const url = `${this.baseorderUrl}/myorderssupplier${query ? `?query=${JSON.stringify(query)}` : ''}`;
     return this.http.get(url)
 
   }

@@ -1,27 +1,28 @@
 <div class="container">
-
     <div class="row">
         <div class="col-md-6">
             <div class="img-container">
                 <img src="/assets/images/nails.png" />
             </div>
-
         </div>
         <div class="col-md-6 description">
-            <h3>Product Name</h3>
-            <h6>{{product.productName}}</h6>
-            <h3>Product Specs</h3>
-            <h6 class=" mb-2 text-muted"> {{product.specs}}</h6>
-            <h3>Description</h3>
-            <h6 class=" mb-5 text-muted">{{product.description}}</h6>
-            <h3>Price</h3>
-            <h6 class=" mb-5 text-muted">{{product.price}}</h6>
-            <div class="quanity mb-2 mt-3">
-                <button class=" minus">  <fa-icon [icon]="faMinus"></fa-icon></button>
-                <input type="number" min="1" value="0" />
-                <button class=" plus">  <fa-icon [icon]="faPlus"></fa-icon></button>
+            <h6 class="text-muted mt-3">Product Name</h6>
+            <h3>{{product?.productName}}</h3>
+            <h6 class="text-muted mt-3">Product Specs</h6>
+            <h4 class="mb-2"> {{product?.specs}}</h4>
+            <h6 class="text-muted mt-3">Description</h6>
+            <h3 class="mb-5">{{product?.description}}</h3>
+            <h6 class="text-muted mt-3">Price</h6>
+            <h3 class="mb-3">{{getprice()}} EGP/Product</h3>
+            <div class="quanity mb-2" *ngIf="product">
+                <button class="minus" (click)="decrementQuanity(product)">
+                    <fa-icon [icon]="faMinus"></fa-icon>
+                </button>
+                <input type="number" min="1" value="0" [(ngModel)]="product.customerquantity" />
+                <button class="plus" (click)="incrementQuanity(product)">
+                    <fa-icon [icon]="faPlus"></fa-icon>
+                </button>
             </div>
-            <button (click)="addtoCart(product._id)" class="btn btn-primary w-100 mb-5">Add to cart</button>
-            <!-- Missing quanity when adding to cart -->
+            <button (click)="addtoCart(product)" *ngIf="user!=null && [type]=='user' && user?.user?.employeeLevel != 'Admin'" class="btn btn-primary w-100 mb-5">Add to cart</button>
         </div>
     </div>

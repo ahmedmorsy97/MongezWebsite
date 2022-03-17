@@ -1,4 +1,4 @@
-<div class="container">
+<div class="container pb-5">
     <div class="row">
         <div class=" img-container  col-md-2 mb-5">
             <img src="/assets/images/employee.jpg" alt="Avatar">
@@ -24,13 +24,12 @@
                 <input class="mb-2" type="tel" value={{User.mobileNumber}} readonly />
 
                 <label>Date of birth</label>
-                <input class="mb-2" type="date" value={{User.dateOfBirth}} readonly />
+                <input class="mb-2" type="text" value="{{User.dateOfBirth | date: 'MM/dd/yyyy'}}" readonly />
 
                 <label>National ID</label>
                 <input class="mb-2" type="text" value={{User.nationalID}} readonly />
 
-
-                <div *ngIf="User.employeeLevel=='Employee'">
+                <div *ngIf="User.employeeLevel=='Employee' && !supplier && loggedinuser.company == User.company">
                     <label>Level</label>
                     <input class="mb-2" type="text" value={{User.employeeLevel}} readonly />
 
@@ -42,14 +41,16 @@
                 </div>
 
 
-                <button *ngIf="viewedit==true" (click)="saveInfo()" class="btn btn-primary w-100 mt-4">Edit Info</button>
+                <button *ngIf="viewedit==true" (click)="saveInfo()" class="btn btn-primary w-100 mt-4">Edit
+                    Info</button>
             </div>
 
 
 
             <div *ngIf="User!=null && edit==true ">
                 <label>First Name</label>
-                <input class="mb-2" type="text" placeholder={{User.firstname}} name="firstname" [(ngModel)]="firstname" />
+                <input class="mb-2" type="text" placeholder={{User.firstname}} name="firstname"
+                    [(ngModel)]="firstname" />
 
                 <label>Last Name</label>
                 <input class="mb-2" type="text" placeholder={{User.lastname}} name="lastname" [(ngModel)]="lastname" />
@@ -61,13 +62,16 @@
                 <input class="mb-2" type="email" placeholder={{User.email}} name="email" [(ngModel)]="email" />
 
                 <label>Enter New Password</label>
-                <input class="mb-2" type="password" placeholder={{User.password}} name="password" [(ngModel)]="password" />
+                <input class="mb-2" type="password" placeholder={{User.password}} name="password"
+                    [(ngModel)]="password" />
 
                 <label>Mobile Number </label>
-                <input class="mb-2" type="tel" placeholder={{User.mobileNumber}} name="mobileNumber" [(ngModel)]="mobileNumber" />
+                <input class="mb-2" type="tel" placeholder={{User.mobileNumber}} name="mobileNumber"
+                    [(ngModel)]="mobileNumber" />
 
                 <label>Date of birth</label>
-                <input class="mb-2" type="date" placeholder={{User.dateOfBirth}} name="dateOfBirth" [(ngModel)]="dateOfBirth" />
+                <input class="mb-2" type="date" placeholder={{User.dateOfBirth}} name="dateOfBirth"
+                    [(ngModel)]="dateOfBirth" />
                 <!-- Visible to manager and admins only -->
 
 
@@ -75,13 +79,8 @@
             </div>
             <!-- HOW? -->
             <!-- <label>Personal Image</label>
-        <input class="mb-2" type="text" placeholder="Personal Image" /> -->
-
+            <input class="mb-2" type="text" placeholder="Personal Image" /> -->
             <!--  -->
-
-
-
-
 
         </form>
     </div>

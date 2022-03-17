@@ -7,32 +7,32 @@ import { Router } from '@angular/router';
   styleUrls: ['./createuser.component.scss']
 })
 export class CreateuserComponent implements OnInit {
-firstname="";
-lastname="";
-username="";
-email="";
-password="";
-mobileNumber="";
-dateOfBirth="";
-nationalID="";
-employeeLevel="";
-limit=0;
-wallet=0;
-image="";
-err: string = null;
-  constructor( private UserServ: UserService,private router:Router) { }
+  firstname = "";
+  lastname = "";
+  username = "";
+  email = "";
+  password = "";
+  mobileNumber = "";
+  dateOfBirth = "";
+  nationalID = "";
+  employeeLevel = "";
+  limit = 0;
+  wallet = 0;
+  image = "";
+  err: string = null;
+  constructor(private UserServ: UserService, private router: Router) { }
 
   ngOnInit(): void {
   }
-createUser(){
-  this.UserServ.createUser(this.firstname,this.lastname,this.username,this.email,this.password,this.mobileNumber,this.dateOfBirth,this.nationalID,"Employee",this.limit,this.wallet,this.image).subscribe(
-    (res: any) => {
-    console.log(res)
-    this.router.navigateByUrl('')
-    }, err => {
-      this.err = err?.error?.err || "Something went wrong";
-    }
-  )
+  createUser() {
+    this.UserServ.createUser(this.firstname, this.lastname, this.username, this.email, this.password, this.mobileNumber, this.dateOfBirth, this.nationalID, "Employee", this.limit, this.wallet, this.image).subscribe(
+      (res: any) => {
+        // console.log(res)
+        this.router.navigateByUrl('')
+      }, err => {
+        this.err = err?.error?.err || "Something went wrong";
+      }
+    )
 
-}
+  }
 }

@@ -16,10 +16,10 @@
     <div *ngFor="let company of companies" (click)="viewCompany(company._id)" class="card mb-2">
         <div class="card-body ">
             <div class="row">
-                <div class="img-container col-md-4">
+                <div class="img-container col-md-3">
                     <img src="/assets/images/employee.jpg" alt="Avatar">
                 </div>
-                <div class="info  col-md-8">
+                <div class="info col-md-9">
                     <h5 class="card-title">Name: {{company.name}}</h5>
                     <h5 class="card-title">Email: {{company.email}}</h5>
                     <h5 class="card-title">Mobile Number: {{company.companyNumber}}</h5>

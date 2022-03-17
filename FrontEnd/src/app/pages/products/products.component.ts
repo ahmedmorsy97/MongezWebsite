@@ -6,6 +6,8 @@ import { IMultiSelectOption, IMultiSelectSettings, IMultiSelectTexts } from 'ngx
 import { ProductsService } from 'src/app/services/product/products.service';
 import { UserService } from 'src/app/services/user/user.service';
 import { PropertyRead } from '@angular/compiler';
+import { AuthService } from 'src/app/services/auth/auth.service';
+import { SupplierService } from 'src/app/services/supplier/supplier.service';
 @Component({
   selector: 'app-products',
   templateUrl: './products.component.html',
@@ -25,7 +27,7 @@ export class ProductsComponent implements OnInit {
   currentproductRate = 0;
   filters = { price: false, description: false, supplier: false, productrating: false, supplierrating: false };
   filterData = {
-    price: {
+    ["priceRange.priceofRange"]: {
       from: null,
       to: null
     },
@@ -43,9 +45,19 @@ export class ProductsComponent implements OnInit {
     limit: 9
   }
 
-  constructor(private router: Router,private ActiveRoute: ActivatedRoute, private ProductSer: ProductsService,private UserSer: UserService) {
+  user = null;
+  type = "";
 
+  constructor(
+    private router: Router,
+    private auth: AuthService,
+    private ActiveRoute: ActivatedRoute,
+    private ProductSer: ProductsService,
+    private UserSer: UserService,
+    private SupplierSer: SupplierService
+  ) {
   }
+
   // Settings configuration
   mySettings: IMultiSelectSettings = {
     enableSearch: true,
@@ -71,7 +83,7 @@ export class ProductsComponent implements OnInit {
     allSelected: 'All sected',
   };
 
-  filterParsed:any = {};
+  filterParsed: any = {};
 
   ngOnInit(): void {
     const url = this.router.url.replace("/products", "").split("/");
@@ -91,37 +103,54 @@ export class ProductsComponent implements OnInit {
       this.category = url[1];
       this.subcategory = url[2];
     }
-    this.suppliers = [
-      { id: 1, name: 'Supplier 1' },
-      { id: 2, name: 'Supplier 2' },
-      { id: 3, name: 'Supplier 3' },
-      { id: 4, name: 'Supplier 4' },
-    ];
 
+    this.getSuppliers();
     this.getProducts();
-    this.ActiveRoute.queryParams.subscribe(res=>{
-      console.log(res)
-      res.search && this.getProducts(this.filterParsed,res.search)
-    })
+    this.ActiveRoute.queryParams.subscribe(res => {
+      // console.log(res)
+      res.search && this.getProducts(this.filterParsed, res.search)
+    });
+
+    this.user = this.auth.checkUser() ? JSON.parse(this.auth.checkUser()) : null;
+    this.type = localStorage.getItem("type");
+
+    this.auth.authState.subscribe(
+      state => {
+        this.user = this.auth.checkUser() ? JSON.parse(this.auth.checkUser()) : null;
+        this.type = localStorage.getItem("type");
+      }
+    )
+  }
+
+  getSuppliers() {
+    this.SupplierSer.getSuppliers(null).subscribe(
+      (res: any) => {
+        // console.log(res);
+        this.suppliers = res?.map?.(el => ({
+          id: el._id,
+          name: `${el.firstname} ${el.lastname}`
+        }))
+      }
+    )
   }
 
   applyFilter() {
     // console.log(this.filterData);
     this.filterParsed = {
-      price: this.filterData.price.from && this.filterData.price.to && {
-          $gte: this.filterData.price.from || null,
-          $lte: this.filterData.price.to || null
+      ["priceRange.priceofRange"]: this.filterData["priceRange.priceofRange"].from && this.filterData["priceRange.priceofRange"].to && {
+        $gte: this.filterData["priceRange.priceofRange"].from || null,
+        $lte: this.filterData["priceRange.priceofRange"].to || null
       },
       description: this.filterData.description && {
         $regex: this.filterData.description,
         $options: "i"
       },
-      $or: this.filterData.supplier?.map( supplier => ({supplier})) || null,
+      $or: this.filterData.supplier?.map(supplier => ({ supplier })) || null,
       rating: this.filterData.productrating || null
     }
 
-    Object.keys(this.filterParsed).forEach( el => {
-      if(!this.filterParsed[el]) delete this.filterParsed[el]
+    Object.keys(this.filterParsed).forEach(el => {
+      if (!this.filterParsed[el]) delete this.filterParsed[el]
     })
 
     // console.log(this.filterParsed);
@@ -130,7 +159,7 @@ export class ProductsComponent implements OnInit {
 
   clearFilter() {
     this.filterData = {
-      price: {
+      ["priceRange.priceofRange"]: {
         from: null,
         to: null
       },
@@ -139,12 +168,13 @@ export class ProductsComponent implements OnInit {
       productrating: null,
       supplierrating: null,
     }
+    this.applyFilter();
   }
 
-  getProducts(filters = null,search=null) {
-    const queryBody = {...(filters || this.filterParsed), category: this.category, Subcategory: this.subcategory};
-    if(!queryBody.category) delete queryBody.category;
-    if(!queryBody.Subcategory) delete queryBody.Subcategory;
+  getProducts(filters = null, search = null) {
+    const queryBody = { ...(filters || this.filterParsed), category: this.category, Subcategory: this.subcategory };
+    if (!queryBody.category) delete queryBody.category;
+    if (!queryBody.Subcategory) delete queryBody.Subcategory;
 
     this.ProductSer.getProducts({
       search,
@@ -152,73 +182,72 @@ export class ProductsComponent implements OnInit {
       page: this.fetchInfo.page,
       limit: this.fetchInfo.limit
     }).subscribe(
-      (res:any) => {
-        console.log(res);
-        this.products = res.products.map(element=>({...element,customerquantity:1})); // Add this attribute to the object product
+      (res: any) => {
+        // console.log(res);
+        this.products = res.products.map(element => ({ ...element, customerquantity: 1 })); // Add this attribute to the object product
       }
     )
   }
 
   ViewProduct(id) {
-    this.router.navigateByUrl('/viewproduct/'+id)
+    this.router.navigateByUrl('/viewproduct/' + id)
   }
   togglefilter(type) {
     this.filters[type] = !this.filters[type]
   }
   onChange() {
-    console.log(this.optionsModel);
+    // console.log(this.optionsModel);
   }
-  addToCart(product){
-    
-      if(product.customerquantity<=product.quantity&& product.customerquantity>0){
-        const price = this.getprice(product);
-      this.UserSer.AddtoCart(product._id,product.customerquantity,product.productName,price,product.productLogo,product.supplier).subscribe(
-        res=>{
+  addToCart(product) {
+    if (product.customerquantity <= product.quantity && product.customerquantity > 0) {
+      const price = this.getprice(product);
+      this.UserSer.AddtoCart(product._id, product.customerquantity, product.productName, price, product.productLogo, product.supplier).subscribe(
+        res => {
           alert("Product added to cart")
         },
-        err=>{
+        err => {
           alert("Something went wrong")
         }
       );
-      }
-    if(product.customerquantity>product.quantity){
+    }
+    if (product.customerquantity > product.quantity) {
       alert("You've exceeded the available quanity fro this product")
     }
-    
-    if(product.customerquantity<=0){
+
+    if (product.customerquantity <= 0) {
       alert("You can't order for 0 or less")
     }
   }
-  incrementQuanity(product){
-    if(!product.customerquantity){
+  incrementQuanity(product) {
+    if (!product.customerquantity) {
       product.customerquantity = 0;
     }
-    if( product.customerquantity<product.quantity)
-    product.customerquantity+=1;
+    if (product.customerquantity < product.quantity)
+      product.customerquantity += 1;
   }
 
-  decrementQuanity(product){
-    if(!product.customerquantity){
+  decrementQuanity(product) {
+    if (!product.customerquantity) {
       product.customerquantity = 0;
     }
-    if(product.customerquantity>0)
-    product.customerquantity-=1;
+    if (product.customerquantity > 0)
+      product.customerquantity -= 1;
   }
-  getprice(product){
+  getprice(product) {
     let price = 0;
-    product.priceRange.forEach((element,index) => {
-      if(index==product.priceRange.length-1 && product.customerquantity>=element.minquantity ){
+    product.priceRange.forEach((element, index) => {
+      if (index == product.priceRange.length - 1 && product.customerquantity >= element.minquantity) {
         price = element.priceofRange;
         return price;
       }
-      else{
-        if(product.customerquantity>=element.minquantity && product.customerquantity<=element.maxquantity ){
-        price = element.priceofRange;
-        return price;
+      else {
+        if (product.customerquantity >= element.minquantity && product.customerquantity <= element.maxquantity) {
+          price = element.priceofRange;
+          return price;
+        }
       }
-    }
     });
-    if(price==0&& product.priceRange.length>0){
+    if (price == 0 && product.priceRange.length > 0) {
       price = product.priceRange[0].priceofRange;
     }
     return price;

@@ -11,28 +11,27 @@ import { ProductsService } from 'src/app/services/product/products.service';
 })
 export class RestockComponent implements OnInit {
 
-@Input() id = null;
+  @Input() id = null;
+  @Input() stocknumber: number = 0;
+  @Output() sucess: EventEmitter<any> = new EventEmitter<any>();
+  
   err: string = null;
   disabled: boolean = false;
-  stocknumber: Number = 0;
- @Output() sucess: EventEmitter<any>=new EventEmitter<any>()
-
 
   constructor(public bsModalRef: BsModalRef, private productServ: ProductsService) { }
 
   ngOnInit(): void {
+    
   }
-
- 
 
   restock(f: NgForm) {
     for (const control in f.controls) {
       f.controls[control].markAsDirty();
       f.controls[control].markAsTouched();
     }
-    if(f.valid) {
+    if (f.valid) {
       this.disabled = true;
-      this.productServ.editproductamount(this.id,this.stocknumber).subscribe(
+      this.productServ.editproductamount(this.id, this.stocknumber).subscribe(
         (res: any) => {
           this.disabled = false;
           this.sucess.emit("Success")

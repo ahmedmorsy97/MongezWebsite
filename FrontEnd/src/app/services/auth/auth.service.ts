@@ -34,9 +34,8 @@ export class AuthService {
   }
 
   logout(type) {
-
     const url = `${this.baseUrl}/${type}/logout`;
-    console.log(url)
+    // console.log(url)
     return this.http.post(url, {}).subscribe(res=>{
       localStorage.removeItem("currentuser");
       localStorage.removeItem("type");

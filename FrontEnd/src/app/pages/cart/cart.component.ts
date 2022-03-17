@@ -22,13 +22,13 @@ constructor(private router: Router,private activerouter: ActivatedRoute, private
 
   ngOnInit(): void {
     this.activerouter.paramMap.subscribe((res:any)=>{
-      console.log(res)
+      // console.log(res)
     this.UserSer.getUser(res.params.id).subscribe(
       (res: any) => {
-      console.log(res)
       this.cart = res.cart
-      console.log("cart")
-      console.log(this.cart)
+      // console.log(res)
+      // console.log("cart")
+      // console.log(this.cart)
       }, err => {
         this.err = err?.error?.err || "Something went wrong";
       }
@@ -50,9 +50,8 @@ constructor(private router: Router,private activerouter: ActivatedRoute, private
     this.loading = true
       this.UserSer.checkout(order).subscribe( (res:any) =>{
         this.UserSer.decreasewalletandproductquantity(-order.price,order.products.map(element=>({quantity: -element.quantity,product:element.product}))).subscribe(res=>{
-          console.log(res)
+          // console.log(res)
           this.UserSer.clearcart().subscribe(orderres=>{
-
             this.router.navigateByUrl('viewmyorders')
           })
         })
