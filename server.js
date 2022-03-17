@@ -51,13 +51,12 @@ import { ManagerController } from "./BackEnd/Controllers/ManagerController";
 var router = express.Router();
 
 // middleware to use for all requests
-router.use(function(req, res, next) {
-    // do logging
-    console.log('Something is happening.');
-    next();
-});
+// router.use(function(req, res, next) {
+//     // do logging
+//     console.log('Something is happening.');
+//     next();
+// });
 
-// REGISTER OUR ROUTES -------------------------------
 app.use('/api', router);
 app.use('/api/user', userController)
 app.use('/api/supplier', supplierController)
@@ -66,7 +65,11 @@ app.use('/api/order', orderController)
 app.use('/api/company', companyController)
 app.use('/api/companyadmin', companyAdminController)
 app.use('/api/manager', ManagerController)
-    // START THE SERVER
-    // =============================================================================
+
+// START THE SERVER
+// =============================================================================
+
+app.use(express.static(path.join(__dirname, "Frontend/dist/FrontEnd")));
+
 app.listen(port);
 console.log('Magic happens on port ' + port);
