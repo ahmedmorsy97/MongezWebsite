@@ -23,7 +23,7 @@ const port = process.env.PORT || 5000;
 const app = express();
 const server = http.createServer(app);
 
-app.use(express.static(publicPath));
+// app.use(express.static(publicPath));
 
 app.use(json());
 app.use(
@@ -55,7 +55,7 @@ app.use('/api/manager', ManagerController)
 // START THE SERVER
 // =============================================================================
 
-app.use(express.static(path.join(__dirname, "FrontEnd/dist/FrontEnd")));
+// app.use(express.static(path.join(__dirname, "FrontEnd/dist/FrontEnd")));
 
 server.listen(port, () => {
     console.log('Magic happens on port ' + port);
