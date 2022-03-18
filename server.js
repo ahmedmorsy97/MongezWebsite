@@ -2,24 +2,31 @@
 // =============================================================================
 
 // call the packages we need
-var express = require('express');
-var bodyParser = require('body-parser');
-var app = express();
-var cors = require('cors');
-// log requests to the console
+import { path } from "path";
+import express from "express";
+import cors from "cors";
 
-// configure body parser
-app.use(bodyParser.urlencoded({ extended: true }));
-app.use(bodyParser.json());
+const app = express();
 
+app.use(json());
+app.use(
+  urlencoded({
+    extended: false,
+  })
+);
 
-app.use(cors());
+app.use(
+  cors({
+    credentials: true,
+    origin: true,
+  })
+);
 
 var port = process.env.PORT || 8080; // set our port
 
 // DATABASE SETUP
 var mongoose = require('mongoose');
-mongoose.connect('mongodb://localhost:27017/myapp'); // connect to our database
+mongoose.connect(`${process.env.NODE_ENV}` === "production" ? `mongodb+srv://${process.env.db_user}:${process.env.db_pass}@mongez.0leai.mongodb.net/mongezdb?retryWrites=true&w=majority`: 'mongodb://localhost:27017/myapp'); // connect to our database
 
 // Handle the connection event
 var db = mongoose.connection;
@@ -43,7 +50,6 @@ import { orderController } from "./BackEnd/Controllers/OrderController";
 import { companyController } from "./BackEnd/Controllers/CompanyController";
 import { companyAdminController } from "./BackEnd/Controllers/CompanyAdminController";
 import { ManagerController } from "./BackEnd/Controllers/ManagerController";
-
 // ROUTES FOR OUR API
 // =============================================================================
 
