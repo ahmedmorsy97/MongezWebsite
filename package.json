@@ -10,9 +10,10 @@
     "scripts": {
         "test": "mocha **/*.test.js",
         "test-watch": "nodemon --exec \"npm test\"",
-        "start": "nodemon -r esm",
+        "start": "node -r esm .",
         "server": "nodemon -r esm",
-        "dev": "nodemon -r esm"
+        "dev": "nodemon -r esm",
+        "heroku-postbuild": "cd FrontEnd; ng build --prod" 
     },
     "repository": {
         "type": "git",
