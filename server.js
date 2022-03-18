@@ -57,6 +57,10 @@ app.use('/api/manager', ManagerController)
 
 // app.use(express.static(path.join(__dirname, "FrontEnd/dist/FrontEnd")));
 
+app.get('/*', (req, res, next) => {
+  res.sendFile(path.join(__dirname, "FrontEnd/dist/FrontEnd"))
+});
+
 server.listen(port, () => {
     console.log('Magic happens on port ' + port);
 });
