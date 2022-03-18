@@ -56,7 +56,7 @@ app.use('/api/manager', ManagerController)
 // START THE SERVER
 // =============================================================================
 
-app.use(express.static(path.join(__dirname, "Frontend/dist/FrontEnd")));
+app.use(express.static(path.join(__dirname, "FrontEnd/dist/FrontEnd")));
 
 app.listen(port, () => {
     console.log('Magic happens on port ' + port);
