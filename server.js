@@ -25,8 +25,6 @@ const server = http.createServer(app);
 
 app.use(express.static(publicPath));
 
-app.use(cookieParser("CookiesSecret@1234"));
-
 app.use(json());
 app.use(
   urlencoded({
