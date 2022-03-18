@@ -6,7 +6,7 @@
     "scripts": {
         "test": "mocha **/*.test.js",
         "test-watch": "nodemon --exec \"npm test\"",
-        "start": "nodemon --max-old-space-size=100 -r esm",
+        "start": "nodemon -r esm",
         "server": "nodemon -r esm",
         "dev": "nodemon -r esm"
     },
