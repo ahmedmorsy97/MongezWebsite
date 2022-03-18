@@ -1,6 +1,7 @@
 // BASE SETUP
 // =============================================================================
-// Db setup
+// "heroku-postbuild": "npm install -g @angular/cli && cd FrontEnd; npm install && ng build --prod" 
+
 import "./BackEnd/config/DBConnection";
 
 // call the packages we need
