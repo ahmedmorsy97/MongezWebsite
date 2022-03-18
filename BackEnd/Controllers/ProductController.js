@@ -3,7 +3,7 @@ import { authenticateadmin, authenticatesupplier, authenticateuser } from "../..
 import { Product } from "../Models/Product";
 const router = Router();
 
-router.post("/getall", (req, res) => { // Gets all products
+router.post("/getall", async (req, res) => { // Gets all products
     const { queryBody, search, page, sort, limit } = req.body;
     const skip = limit * (page - 1);
     if (search) queryBody.$text = { $search: search };
@@ -11,7 +11,7 @@ router.post("/getall", (req, res) => { // Gets all products
         .sort(sort)
         .skip(skip)
         .limit(limit)
-        .then(async(products) => {
+        .then(async (products) => {
             const count = await Product.countDocuments({ isremoved: false, ...queryBody })
                 .sort(sort);
             const pages = Math.ceil(count / limit);
