@@ -39,6 +39,11 @@ app.use(
   })
 );
 
+
+app.get("/api", (req, res) => {
+  res.send("<h1>Welcome to Mongez app</h1>");
+});
+
 app.use('/api/user', userController)
 app.use('/api/supplier', supplierController)
 app.use('/api/product', productController)
