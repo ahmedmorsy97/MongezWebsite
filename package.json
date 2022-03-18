@@ -13,7 +13,7 @@
         "start": "node -r esm .",
         "server": "nodemon -r esm",
         "dev": "nodemon -r esm",
-        "heroku-postbuild": "cd FrontEnd; ng build --prod" 
+        "heroku-postbuild": "cd FrontEnd;npm run ng build --prod" 
     },
     "repository": {
         "type": "git",
