@@ -1,4 +1,4 @@
-const { authenticateCompanyadmin, authenticateadmin, authenticatemanager } = require("../../MiddleWare");
+import { authenticateCompanyadmin, authenticateadmin, authenticatemanager } from "../../MiddleWare";
 import { Company } from "../Models/Company";
 import { Router } from "express";
 const router = Router();
