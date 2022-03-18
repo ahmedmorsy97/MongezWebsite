@@ -12,8 +12,7 @@
         "test-watch": "nodemon --exec \"npm test\"",
         "start": "node -r esm .",
         "server": "nodemon -r esm",
-        "dev": "nodemon -r esm",
-        "heroku-postbuild": "npm install -g @angular/cli && cd FrontEnd; npm install && ng build --prod" 
+        "dev": "nodemon -r esm"
     },
     "repository": {
         "type": "git",
