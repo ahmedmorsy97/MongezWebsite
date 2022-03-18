@@ -2,8 +2,8 @@
 // =============================================================================
 
 // call the packages we need
-import { path } from "path";
-import express from "express";
+import path from "path";
+import express, { json, urlencoded } from "express";
 import cors from "cors";
 
 const app = express();
@@ -36,12 +36,6 @@ db.once('open', function() {
     console.log("DB connection alive");
 });
 
-//Models lives here
-
-// var Users = require('./BackEnd/Models/User');
-// var Suppliers = require('./BackEnd/Models/Supplier');
-// var Companys = require('./BackEnd/Models/Company');
-
 //Controllers lives here
 import { userController } from "./Backend/Controllers/UserController"
 import { supplierController } from "./Backend/Controllers/SupplierController"
@@ -50,20 +44,7 @@ import { orderController } from "./BackEnd/Controllers/OrderController";
 import { companyController } from "./BackEnd/Controllers/CompanyController";
 import { companyAdminController } from "./BackEnd/Controllers/CompanyAdminController";
 import { ManagerController } from "./BackEnd/Controllers/ManagerController";
-// ROUTES FOR OUR API
-// =============================================================================
 
-// create our router
-var router = express.Router();
-
-// middleware to use for all requests
-// router.use(function(req, res, next) {
-//     // do logging
-//     console.log('Something is happening.');
-//     next();
-// });
-
-app.use('/api', router);
 app.use('/api/user', userController)
 app.use('/api/supplier', supplierController)
 app.use('/api/product', productController)
@@ -77,5 +58,6 @@ app.use('/api/manager', ManagerController)
 
 app.use(express.static(path.join(__dirname, "Frontend/dist/FrontEnd")));
 
-app.listen(port);
-console.log('Magic happens on port ' + port);
+app.listen(port, () => {
+    console.log('Magic happens on port ' + port);
+});
