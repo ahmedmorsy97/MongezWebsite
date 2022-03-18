@@ -19,7 +19,7 @@ import { companyAdminController } from "./BackEnd/Controllers/CompanyAdminContro
 import { ManagerController } from "./BackEnd/Controllers/ManagerController";
 
 const publicPath = path.join(__dirname, "FrontEnd");
-const port = process.env.PORT || 5000;
+const port = process.env.PORT || 4000;
 const app = express();
 const server = http.createServer(app);
 
@@ -60,6 +60,8 @@ app.use(express.static(path.join(__dirname, "FrontEnd/dist/FrontEnd")));
 // app.get('/*', (req, res, next) => {
 //   res.sendFile(path.join(__dirname, "FrontEnd/dist/FrontEnd"))
 // });
+
+app.set('port', ( process.env.PORT || 4000 ));
 
 server.listen(port, () => {
     console.log('Magic happens on port ' + port);
