@@ -1,12 +1,31 @@
 // BASE SETUP
 // =============================================================================
+// Db setup
+import "./BackEnd/config/DBConnection";
 
 // call the packages we need
-import path from "path";
 import express, { json, urlencoded } from "express";
+import path from "path";
+import http from "http";
 import cors from "cors";
 
+//Controllers lives here
+import { userController } from "./Backend/Controllers/UserController"
+import { supplierController } from "./Backend/Controllers/SupplierController"
+import { productController } from "./Backend/Controllers/ProductController"
+import { orderController } from "./BackEnd/Controllers/OrderController";
+import { companyController } from "./BackEnd/Controllers/CompanyController";
+import { companyAdminController } from "./BackEnd/Controllers/CompanyAdminController";
+import { ManagerController } from "./BackEnd/Controllers/ManagerController";
+
+const publicPath = path.join(__dirname, "FrontEnd");
+const port = process.env.PORT || 5000;
 const app = express();
+const server = http.createServer(app);
+
+app.use(express.static(publicPath));
+
+app.use(cookieParser("CookiesSecret@1234"));
 
 app.use(json());
 app.use(
@@ -22,29 +41,6 @@ app.use(
   })
 );
 
-var port = process.env.PORT || 8080; // set our port
-
-// DATABASE SETUP
-var mongoose = require('mongoose');
-mongoose.connect(`${process.env.NODE_ENV}` === "production" ? `mongodb+srv://${process.env.db_user}:${process.env.db_pass}@mongez.0leai.mongodb.net/mongezdb?retryWrites=true&w=majority`: 'mongodb://localhost:27017/myapp'); // connect to our database
-
-// Handle the connection event
-var db = mongoose.connection;
-db.on('error', console.error.bind(console, 'connection error:'));
-
-db.once('open', function() {
-    console.log("DB connection alive");
-});
-
-//Controllers lives here
-import { userController } from "./Backend/Controllers/UserController"
-import { supplierController } from "./Backend/Controllers/SupplierController"
-import { productController } from "./Backend/Controllers/ProductController"
-import { orderController } from "./BackEnd/Controllers/OrderController";
-import { companyController } from "./BackEnd/Controllers/CompanyController";
-import { companyAdminController } from "./BackEnd/Controllers/CompanyAdminController";
-import { ManagerController } from "./BackEnd/Controllers/ManagerController";
-
 app.use('/api/user', userController)
 app.use('/api/supplier', supplierController)
 app.use('/api/product', productController)
@@ -58,6 +54,6 @@ app.use('/api/manager', ManagerController)
 
 app.use(express.static(path.join(__dirname, "FrontEnd/dist/FrontEnd")));
 
-app.listen(port, () => {
+server.listen(port, () => {
     console.log('Magic happens on port ' + port);
 });
