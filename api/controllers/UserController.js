@@ -1,6 +1,6 @@
 import { response, Router } from "express";
 import { authenticateadmin, authenticateCompanyadmin, authenticateCompanyadminorManager, authenticatemanager, authenticateuser } from "../middleWare";
-import { User } from "..model/User";
+import { User } from "../models/User";
 
 const router = Router();
 //Login 

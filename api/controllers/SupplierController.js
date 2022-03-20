@@ -1,5 +1,5 @@
 import { authenticateadmin, authenticatesupplier, authenticateuser } from "../middleWare";
-import { Supplier } from "..model/Supplier";
+import { Supplier } from "../models/Supplier";
 import { Router } from "express";
 const router = Router();
 

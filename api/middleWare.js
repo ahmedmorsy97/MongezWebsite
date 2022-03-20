@@ -1,5 +1,5 @@
-import { Supplier } from ".apimodel/Supplier";
-import { User } from ".apimodel/User";
+import { Supplier } from "./models/Supplier";
+import { User } from "./models/User";
 
 export const authenticateuser = (req, res, next) => {
     const token = req.headers.authorization.split("Bearer ")[1];

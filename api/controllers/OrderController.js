@@ -1,6 +1,6 @@
 import { Router } from "express";
 import { authenticateadmin, authenticatemanager, authenticatesupplier, authenticateuser } from "../middleWare";
-import { Order } from "..model/Order";
+import { Order } from "../models/Order";
 const router = Router();
 
 // router.post("/createbulkorder", authenticateuser, (req, res) => {

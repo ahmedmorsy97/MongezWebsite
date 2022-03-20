@@ -14,9 +14,9 @@ import http from "http";
 import cors from "cors";
 
 //controllers lives here
-import { userController } from ".api/controllers/UserController"
-import { supplierController } from ".api/controllers/SupplierController"
-import { productController } from ".api/controllers/ProductController"
+import { userController } from "./api/controllers/UserController"
+import { supplierController } from "./api/controllers/SupplierController"
+import { productController } from "./api/controllers/ProductController"
 import { orderController } from "./api/controllers/OrderController";
 import { companyController } from "./api/controllers/CompanyController";
 import { companyAdminController } from "./api/controllers/CompanyAdminController";
