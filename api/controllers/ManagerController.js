@@ -1,6 +1,6 @@
 import { Router } from "express";
-import { authenticatemanager } from "../../MiddleWare";
-import { Company } from "../Models/Company";
+import { authenticatemanager } from "../middleWare";
+import { Company } from "..model/Company";
 const router = Router();
 
 router.patch('/addemployee/:employee_id', authenticatemanager, (req, res) => {

@@ -5,7 +5,7 @@
   // },
 // =============================================================================
 
-import "./BackEnd/config/DBConnection";
+import "./api/config/dbconnection";
 
 // call the packages we need
 import express, { json, urlencoded } from "express";
@@ -13,14 +13,14 @@ import path from "path";
 import http from "http";
 import cors from "cors";
 
-//Controllers lives here
-import { userController } from "./Backend/Controllers/UserController"
-import { supplierController } from "./Backend/Controllers/SupplierController"
-import { productController } from "./Backend/Controllers/ProductController"
-import { orderController } from "./BackEnd/Controllers/OrderController";
-import { companyController } from "./BackEnd/Controllers/CompanyController";
-import { companyAdminController } from "./BackEnd/Controllers/CompanyAdminController";
-import { ManagerController } from "./BackEnd/Controllers/ManagerController";
+//controllers lives here
+import { userController } from ".api/controllers/UserController"
+import { supplierController } from ".api/controllers/SupplierController"
+import { productController } from ".api/controllers/ProductController"
+import { orderController } from "./api/controllers/OrderController";
+import { companyController } from "./api/controllers/CompanyController";
+import { companyAdminController } from "./api/controllers/CompanyAdminController";
+import { ManagerController } from "./api/controllers/ManagerController";
 
 const publicPath = path.join(__dirname, "FrontEnd");
 const port = process.env.PORT || 8080;

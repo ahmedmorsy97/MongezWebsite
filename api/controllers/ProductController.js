@@ -1,6 +1,6 @@
 import { Router } from "express";
-import { authenticateadmin, authenticatesupplier, authenticateuser } from "../../MiddleWare";
-import { Product } from "../Models/Product";
+import { authenticateadmin, authenticatesupplier, authenticateuser } from "../middleWare";
+import { Product } from "../models/Product";
 const router = Router();
 
 router.post("/getall", async (req, res) => { // Gets all products
