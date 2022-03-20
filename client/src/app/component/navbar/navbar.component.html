@@ -27,7 +27,7 @@
             <button *ngIf="user!=null" (click)="toggleSideNav()" class="btn btn-primary btn-lg ml-3 mr-4"><fa-icon [icon]="faBars"></fa-icon></button>
             <div class="logo">
                 <img (click)="GoToHome()" src="/assets/images/logo.png" alt="logo" /> </div>
-            <a *ngIf="type != 'supplier'" href="products">Start Shopping</a>
+            <a *ngIf="type != 'supplier'" [routerLink]="['/products']">Start Shopping</a>
             <div class="search ml-3 mr-3" [ngStyle]="{opacity: type != 'supplier' ? 1 : 0}">
                 <div class="d-flex">
                     <div class="w-100">
